@@ -1,0 +1,29 @@
+{
+  "name": "tempalteui",
+  "version": "1.0.0",
+  "description": "RTL Persian Student Portal UI",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run watch:css",
+    "build": "npm run build:css",
+    "build:css": "sass ./wwwroot/scss/admin.scss ./wwwroot/css/admin-compiled.css --no-source-map && npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/admin.css --minify && node -e \"const fs=require('fs');fs.appendFileSync('wwwroot/css/admin.css', fs.readFileSync('wwwroot/css/admin-compiled.css'));fs.unlinkSync('wwwroot/css/admin-compiled.css');\"",
+    "watch:css": "npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/admin.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rtl",
+    "persian",
+    "tailwind",
+    "student-portal"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "postcss-scss": "^4.0.4",
+    "sass": "^1.99.0",
+    "tailwindcss": "^3.4.19"
+  }
+}

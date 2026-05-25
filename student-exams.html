@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>آزمون‌های دانشجو — ریاضی 2</title>
+  <link rel="stylesheet" href="/wwwroot/css/admin.css">
+  <style>
+    .page { padding: 1.25rem; font-family: var(--font-primary); background: var(--bg-secondary); min-height:100vh; }
+    .page-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem }
+    .exam-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap:1rem; }
+    .exam-card { background:var(--bg-primary); border:1px solid var(--border-color); border-radius:0.625rem; padding:1rem; box-shadow:var(--shadow); }
+    .exam-card h3{ margin:0 0 0.25rem 0; font-size:1rem }
+    .exam-meta { display:flex; gap:0.5rem; flex-wrap:wrap; color:var(--text-secondary); font-size:0.875rem; margin-bottom:0.5rem }
+    .exam-row { display:flex; align-items:center; justify-content:space-between; gap:0.5rem }
+    .exam-info { color:var(--text-primary); font-size:0.95rem }
+    .exam-type { font-weight:700; font-size:0.85rem; padding:0.25rem 0.5rem; border-radius:0.375rem; background:var(--badge-primary-bg); color:var(--badge-primary-color); display:inline-block }
+    .exam-status { font-weight:600; font-size:0.9rem }
+    .muted { color:var(--text-muted); font-size:0.85rem }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="page-header">
+      <div>
+        <h1 style="margin:0; font-size:1.25rem">آزمون‌های دانشجو — ریاضی 2</h1>
+        <div class="muted">لیست آزمون‌های مربوط به درس ریاضی 2</div>
+      </div>
+      <div>
+        <label class="muted">نمایش:</label>
+        <select id="filterType">
+          <option value="all">همه</option>
+          <option value="mcq-nn">چهار گزینه‌ای (بدون منفی)</option>
+          <option value="mcq-nm">چهار گزینه‌ای (با منفی)</option>
+          <option value="mcq-img">چهار گزینه‌ای تصویری</option>
+          <option value="essay-img">تشریحی تصویری</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="exam-grid" id="examGrid">
+      <!-- cards rendered by JS -->
+    </div>
+  </div>
+
+  <script>
+    // Sample data — replace with server data as needed
+    const EXAMS = [
+      { id:1, type:'mcq-nn', title:'آزمون میانترم 1', topic:'ریاضیات — مباحث لگاریتم', date:'1405-03-12 10:00', duration:'60 دقیقه', questions:40, status:'شرکت در آزمون' },
+      { id:2, type:'mcq-nm', title:'آزمون پایانی', topic:'ریاضیات — فصل مشتق', date:'1405-04-25 14:00', duration:'120 دقیقه', questions:50, status:'زمان آزمون فرا نرسیده است' },
+      { id:3, type:'mcq-img', title:'آزمون تصویری 1', topic:'ریاضیات — هندسه تصویری', date:'1405-02-20 09:30', duration:'45 دقیقه', questions:30, status:'اتمام آزمون' },
+      { id:4, type:'essay-img', title:'آزمون تشریحی نمونه', topic:'ریاضیات — اثبات‌ها', date:'1405-05-10 11:00', duration:'90 دقیقه', questions:10, status:'عدم شرکت' }
+    ];
+
+    const TYPE_LABEL = {
+      'mcq-nn':'چهار گزینه‌ای (بدون منفی)',
+      'mcq-nm':'چهار گزینه‌ای (با منفی)',
+      'mcq-img':'چهار گزینه‌ای تصویری',
+      'essay-img':'تشریحی تصویری'
+    };
+
+    const GRID = document.getElementById('examGrid');
+    const filter = document.getElementById('filterType');
+
+    function render() {
+      const t = filter.value;
+      GRID.innerHTML = '';
+      const list = EXAMS.filter(e => t==='all' ? true : e.type===t);
+      list.forEach(ex => GRID.appendChild(cardFor(ex)));
+    }
+
+    function cardFor(ex) {
+      const el = document.createElement('div'); el.className='exam-card';
+      el.innerHTML = `
+        <div class="exam-row">
+          <div class="exam-type">${TYPE_LABEL[ex.type] || 'سایر'}</div>
+          <div class="exam-status">${ex.status}</div>
+        </div>
+        <h3 class="exam-info">${ex.title}</h3>
+        <div class="exam-meta">
+          <div>موضوع: <strong>${ex.topic}</strong></div>
+          <div>زمان: <strong>${ex.date}</strong></div>
+          <div>مدت: <strong>${ex.duration}</strong></div>
+          <div>سوالات: <strong>${ex.questions}</strong></div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:0.5rem">
+          ${buttonHtml(ex)}
+        </div>
+      `;
+      return el;
+    }
+
+    function buttonHtml(ex) {
+      const active = ex.status === 'شرکت در آزمون';
+      if (active) {
+        return `<button class="btn btn-fill-primary" onclick="startExam(${ex.id})">ورود به آزمون</button>`;
+      }
+      // non-clickable variants
+      let label = ex.status === 'اتمام آزمون' ? 'آزمون به پایان رسیده' : (ex.status === 'عدم شرکت' ? 'شرکت نکرده‌اید' : 'زمان آزمون فرا نرسیده');
+      return `<button class="btn btn-ghost" disabled>${label}</button>`;
+    }
+
+    function startExam(id) {
+      const ex = EXAMS.find(e=>e.id===id);
+      if (!ex) return;
+      alert('شروع آزمون: ' + ex.title + '\n(در این نسخه نمونه، پیوند واقعی وجود ندارد)');
+    }
+
+    filter.addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>

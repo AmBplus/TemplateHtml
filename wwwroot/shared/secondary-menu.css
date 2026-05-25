@@ -1,0 +1,158 @@
+
+.multi-level-menu {
+    position: relative;
+}
+
+.menu-item {
+    position: relative;
+    list-style: none !important;
+}
+
+.menu-button .arrow-icon {
+    transition: transform 0.2s ease;
+}
+
+/* پل هوایی - اصل 35 تا 38 */
+.menu-item .submenu {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+
+/* پل شفاف برای منوی عمودی */
+.menu-item .submenu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 0;
+    left: 0;
+    height: 12px;
+    background: transparent;
+}
+
+.menu-item:hover > .submenu {
+    visibility: visible;
+    opacity: 1;
+}
+.menu-item:hover > .menu-button .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* ========================================
+   منوهای سطح دوم و سوم (کناری) - RTL اصلاح شد
+   ======================================== */
+.submenu-parent {
+    position: relative;
+}
+
+/* در RTL، منوی سطح سوم به راست باز می‌شود */
+.submenu-parent .submenu-level2 {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+    position: absolute;
+    right: 100%;    /* سمت راست آیتم والد */
+    left: auto;
+    top: 0;
+    margin-right: 4px;  /* فاصله از والد */
+    min-width: 220px;
+}
+
+/* پل شفاف برای اتصال به منوی سطح سوم (در سمت راست) */
+.submenu-parent .submenu-level2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    left: auto;
+    width: 12px;
+    height: 100%;
+    background: transparent;
+}
+
+.submenu-parent:hover > .submenu-level2 {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* چرخاندن آیکون برای منوهای کناری */
+.submenu-parent:hover > button svg:last-child {
+    transform: rotate(180deg);
+}
+.submenu-parent > button svg:last-child {
+    transition: transform 0.2s ease;
+}
+
+/* حذف کامل اسکرول */
+.submenu, 
+.submenu-level2 {
+    max-height: none;
+    overflow-y: visible;
+    overflow: visible !important;
+}
+
+.submenu a, 
+.submenu button {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 16px;
+    padding-left: 16px;
+    font-size: 0.875rem;
+    min-width: 220px;
+    transition: all 0.2s ease;
+}
+
+/* افکت ساده هنگام هاور - فقط تغییر رنگ پس‌زمینه */
+.submenu a:hover,
+.submenu button:hover {
+    background: var(--bg-secondary);
+}
+
+/* آیکون‌ها کمی فاصله بگیرند */
+.submenu a svg,
+.submenu button svg {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+/* سایه و حاشیه بهتر برای کادر منو */
+.submenu > div,
+.submenu-level2 > div {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Badge پیام‌ها بهتر شود */
+.submenu .badge {
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: auto;
+}
+
+/* اسکرول فقط در صورت نیاز */
+.submenu {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* اسکرول‌بار نازک و زیبا */
+.submenu::-webkit-scrollbar {
+    width: 4px;
+}
+.submenu::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+.submenu::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.menu-item, 
+.submenu-parent {
+    overflow: visible !important;
+}

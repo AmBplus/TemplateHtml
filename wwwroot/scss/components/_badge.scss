@@ -1,0 +1,186 @@
+// ============================================================================
+// BADGE COMPONENT
+// Small status descriptors — similar to Bootstrap badges
+// ============================================================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-1;
+  padding: $badge-padding-y $badge-padding-x;
+  font-size: $text-xs;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  border-radius: $radius-full;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: background-color $transition-theme, color $transition-theme;
+  direction: rtl;
+
+  // Dot indicator inside badge
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  // Close button inside badge
+  .badge-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: $radius-full;
+    background: color-mix(in srgb, currentColor 15%, transparent);
+    margin-right: $spacing-1;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: 10px;
+
+    &:hover {
+      background: color-mix(in srgb, currentColor 30%, transparent);
+    }
+  }
+}
+
+// ---- Color Variants ----
+.badge-primary {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+
+.badge-secondary {
+  background: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+  color: var(--text-secondary);
+}
+
+.badge-success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badge-danger {
+  background: var(--color-danger-bg);
+  color: var(--badge-danger-text, var(--color-danger));
+}
+
+.badge-warning {
+  background: var(--color-warning-bg);
+  color: var(--badge-warning-text, var(--color-warning));
+}
+
+.badge-info {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+.badge-accent {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  color: var(--color-accent);
+}
+
+.badge-pink {
+  background: var(--color-pink-bg);
+  color: var(--color-pink);
+}
+
+.badge-indigo {
+  background: var(--color-indigo-bg);
+  color: var(--color-indigo);
+}
+
+.badge-cyan {
+  background: var(--color-cyan-bg);
+  color: var(--color-cyan);
+}
+
+.badge-purple {
+  background: var(--color-purple-bg);
+  color: var(--color-purple);
+}
+
+// ---- Solid Badges ----
+.badge-solid-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.badge-solid-success {
+  background: var(--color-success);
+  color: #FFFFFF;
+}
+
+.badge-solid-danger {
+  background: var(--color-danger);
+  color: #FFFFFF;
+}
+
+.badge-solid-warning {
+  background: var(--color-warning);
+  color: #FFFFFF;
+}
+
+.badge-solid-info {
+  background: var(--color-info);
+  color: #FFFFFF;
+}
+
+// ---- Outline Badges ----
+.badge-outline-primary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.badge-outline-success {
+  background: transparent;
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+.badge-outline-danger {
+  background: transparent;
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+}
+
+.badge-outline-warning {
+  background: transparent;
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}
+
+.badge-outline-info {
+  background: transparent;
+  color: var(--color-info);
+  border: 1px solid var(--color-info);
+}
+
+// ---- Sizes ----
+.badge-sm {
+  padding: $badge-padding-y-sm $badge-padding-x-sm;
+  font-size: 10px;
+}
+
+.badge-lg {
+  padding: $spacing-1 $spacing-3;
+  font-size: $text-sm;
+}
+
+// ---- Pill Badge (more rounded) ----
+.badge-pill {
+  border-radius: $radius-full;
+  padding-inline: $spacing-4;
+}
+
+// ---- Square Badge ----
+.badge-square {
+  border-radius: $radius-sm;
+}

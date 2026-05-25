@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پنل مدیریت — سیستم طراحی کامپوننت</title>
+
+  <!-- Vazirmatn font from local npm package (@fontsource/vazirmatn) -->
+  <link rel="stylesheet" href="/wwwroot/fonts/vazirmatn-font-face.css" />
+
+  <!-- Component System CSS (SCSS compiled) -->
+
+  <!-- Admin Panel Styles -->
+  <link rel="stylesheet" href="/wwwroot/css/admin.css" />
+
+  <style>
+    /* ===== Admin-specific layout & theme switcher ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+      direction: rtl;
+      background: var(--bg-secondary);
+      font-family: var(--font-primary);
+    }
+
+    /* ===== Sidebar ===== */
+    .admin-sidebar {
+      width: 250px;
+      background: var(--bg-primary);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      z-index: 50;
+      transition: background-color 350ms ease, border-color 350ms ease, transform 300ms ease;
+    }
+
+    .admin-sidebar-header {
+      padding: 1.25rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: border-color 350ms ease;
+    }
+
+    .admin-sidebar-logo {
+      width: 2.25rem; height: 2.25rem;
+      background: var(--color-primary);
+      border-radius: 0.625rem;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .admin-sidebar-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+    .admin-sidebar-subtitle { font-size: 0.6875rem; color: var(--text-secondary); font-weight: 400; }
+
+    .admin-sidebar-nav { flex: 1; overflow-y: auto; padding: 0.75rem; }
+    .admin-sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .admin-sidebar-nav::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 9999px; }
+
+    .admin-nav-label {
+      padding: 0.75rem 0.5rem 0.375rem;
+      font-size: 0.6875rem; font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .admin-nav-item {
+      display: flex; align-items: center; gap: 0.625rem;
+      padding: 0.5rem 0.75rem; border-radius: 0.625rem;
+      font-size: 0.8125rem; font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer; text-decoration: none; border: none; background: none;
+      width: 100%; text-align: right; font-family: var(--font-primary);
+      margin-bottom: 2px; transition: all 150ms ease;
+    }
+    .admin-nav-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+    .admin-nav-item.active { background: var(--btn-primary-bg); color: var(--btn-primary-color); font-weight: 600; }
+    .admin-nav-item .nav-icon { width: 1.25rem; height: 1.25rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+
+    .admin-sidebar-footer { padding: 0.75rem; border-top: 1px solid var(--border-color); transition: border-color 350ms ease; }
+
+    .user-card {
+      display: flex; align-items: center; gap: 0.625rem;
+      padding: 0.625rem; border-radius: 0.75rem;
+      background: var(--bg-secondary); transition: background-color 350ms ease;
+    }
+    .user-card-avatar {
+      width: 2.25rem; height: 2.25rem; border-radius: 0.625rem;
+      background: var(--color-primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.75rem; flex-shrink: 0;
+    }
+    .user-card-name { font-size: 0.8125rem; font-weight: 600; color: var(--text-primary); }
+    .user-card-role { font-size: 0.6875rem; color: var(--text-secondary); }
+
+    /* ===== Main ===== */
+    .admin-main { flex: 1; margin-right: 250px; display: flex; flex-direction: column; min-height: 100vh; }
+
+    .admin-topbar {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.875rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 40;
+      transition: background-color 350ms ease, border-color 350ms ease;
+    }
+
+    .admin-topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .admin-topbar-left { display: flex; align-items: center; gap: 0.75rem; }
+
+    .admin-breadcrumb { display: flex; align-items: center; gap: 0.375rem; font-size: 0.8125rem; color: var(--text-secondary); }
+    .admin-breadcrumb-sep { color: var(--text-muted); }
+    .admin-breadcrumb-current { color: var(--text-primary); font-weight: 500; }
+
+    .admin-content { padding: 1.5rem; flex: 1; }
+
+    /* ===== Theme Switcher ===== */
+    .theme-switcher-mini {
+      display: flex; align-items: center; gap: 0.375rem;
+      background: var(--bg-tertiary); border-radius: 0.625rem; padding: 0.25rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .theme-switcher-mini .theme-dot {
+      width: 1.75rem; height: 1.75rem; border-radius: 0.5rem;
+      border: 2px solid rgba(0,0,0,0.06); cursor: pointer;
+      transition: all 150ms ease; display: flex; align-items: center; justify-content: center;
+      font-size: 0.625rem; position: relative;
+    }
+    .theme-switcher-mini .theme-dot:hover { transform: scale(1.08); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .theme-switcher-mini .theme-dot.active {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+      transform: scale(1.05);
+    }
+    .theme-dot-default { background: #3B72F2; }
+    .theme-dot-moon { background: linear-gradient(135deg, #94A3B8 0%, #353B56 100%); }
+    .theme-dot-royal { background: linear-gradient(135deg, #8B5CF6 0%, #D4A843 100%); }
+    .theme-dot-nature { background: #2D8B4E; }
+
+    /* Theme label tooltip */
+    .theme-switcher-mini .theme-dot::after {
+      content: attr(data-label);
+      position: absolute; bottom: -1.75rem; left: 50%; transform: translateX(-50%);
+      background: var(--bg-inverse); color: var(--text-inverse);
+      font-size: 0.5625rem; padding: 0.125rem 0.375rem; border-radius: 0.25rem;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity 150ms ease;
+    }
+    .theme-switcher-mini .theme-dot:hover::after { opacity: 1; }
+
+    /* Dark toggle button in topbar */
+    #darkToggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.25rem; height: 2.25rem; border-radius: 0.5rem;
+      background: transparent; border: 1px solid transparent; color: var(--text-primary);
+      cursor: pointer; font-size: 1rem; padding: 0; transition: all 150ms ease;
+    }
+    #darkToggle:hover { background: var(--bg-tertiary); border-color: var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    #darkToggle.active { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 12%, transparent); border-color: var(--color-primary); }
+
+    /* Avatar contrast: ensure visible on both light/dark */
+    .admin-avatar { background: var(--color-primary); color: #ffffff; }
+
+    /* ===== Sections ===== */
+    .admin-section {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem;
+      transition: all 350ms ease;
+    }
+    .admin-section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color); transition: border-color 350ms ease;
+    }
+    .admin-section-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+    .admin-section-desc { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 0.125rem; }
+
+    .admin-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    /* ===== Color Palette for Theme Settings ===== */
+    .theme-colors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+      gap: 0.75rem;
+    }
+    .theme-color-card {
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: border-color 350ms ease;
+    }
+    .theme-color-swatch {
+      height: 3rem;
+      transition: background-color 350ms ease;
+    }
+    .theme-color-info {
+      padding: 0.5rem 0.625rem;
+      background: var(--bg-primary);
+      transition: background-color 350ms ease;
+    }
+    .theme-color-name {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.125rem;
+    }
+    .theme-color-value {
+      font-size: 0.625rem;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* ===== Theme Variables Table ===== */
+    .theme-vars-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.75rem;
+    }
+    .theme-vars-table th {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      text-align: right;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+    }
+    .theme-vars-table td {
+      padding: 0.375rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: border-color 350ms ease;
+    }
+    .theme-vars-table tr:last-child td { border-bottom: none; }
+    .theme-vars-table .var-name {
+      font-family: 'Courier New', monospace;
+      color: var(--color-primary);
+      direction: ltr;
+      text-align: left;
+      font-size: 0.6875rem;
+    }
+    .theme-vars-table .var-value {
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+      direction: ltr;
+      text-align: left;
+      font-size: 0.6875rem;
+    }
+    .theme-vars-table .var-swatch {
+      width: 1.25rem; height: 1.25rem;
+      border-radius: 0.25rem;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* ===== Component rows ===== */
+    .comp-row {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-bottom: 1rem; align-items: center;
+    }
+    .comp-row:last-child { margin-bottom: 0; }
+
+    /* ===== Mobile ===== */
+    .mobile-toggle {
+      display: none;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem; padding: 0.375rem 0.5rem;
+      color: var(--text-primary); cursor: pointer;
+      font-size: 1.25rem; line-height: 1;
+    }
+    .admin-sidebar-overlay { display: none; }
+
+    @media (max-width: 1024px) {
+      .admin-two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .admin-sidebar { transform: translateX(100%); }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-sidebar-overlay.visible { display: block; position: fixed; inset: 0; background: var(--overlay-dark); z-index: 45; }
+      .admin-main { margin-right: 0; }
+      .mobile-toggle { display: flex; }
+      .admin-content { padding: 1rem; }
+    }
+
+    /* Avatar */
+    .admin-avatar {
+      width: 2rem; height: 2rem; border-radius: 0.5rem;
+      background: var(--btn-primary-bg); color: var(--btn-primary-color);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div class="admin-sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="admin-sidebar-header">
+      <div class="admin-sidebar-logo">UI</div>
+      <div>
+        <div class="admin-sidebar-title">پنل مدیریت</div>
+        <div class="admin-sidebar-subtitle">سیستم طراحی کامپوننت</div>
+      </div>
+    </div>
+
+    <nav class="admin-sidebar-nav">
+      <div class="admin-nav-label">نمایش</div>
+      <button class="admin-nav-item active" data-section="components" onclick="showSection('components', this)">
+        <span class="nav-icon">🎨</span>
+        کامپوننت‌ها
+      </button>
+      <button class="admin-nav-item" data-section="theme-settings" onclick="showSection('theme-settings', this)">
+        <span class="nav-icon">⚙️</span>
+        تنظیمات تم
+      </button>
+    </nav>
+
+    <div class="admin-sidebar-footer">
+      <div class="user-card">
+        <div class="user-card-avatar">سم</div>
+        <div>
+          <div class="user-card-name">سعید محمدی</div>
+          <div class="user-card-role">مدیر سیستم</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="admin-main">
+    <!-- Top Bar -->
+    <header class="admin-topbar">
+      <div class="admin-topbar-right">
+        <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="admin-breadcrumb">
+          <span>پنل مدیریت</span>
+          <span class="admin-breadcrumb-sep">/</span>
+          <span class="admin-breadcrumb-current" id="breadcrumbCurrent">کامپوننت‌ها</span>
+        </div>
+      </div>
+      <div class="admin-topbar-left">
+        <div class="theme-switcher-mini">
+          <button class="theme-dot theme-dot-default active" data-theme="default" data-label="آبی سازمانی" onclick="setTheme('default', this)"></button>
+
+          <div style="display:inline-flex; gap:6px; align-items:center; margin-left:6px;">
+            <button class="theme-dot theme-dot-moon" data-theme="moon" data-label="ماه (تاریک)" onclick="setTheme('moon', this)"></button>
+            <button title="ماه روشن" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border-color);background:linear-gradient(45deg,var(--color-primary-light),var(--color-secondary));" onclick="setTheme('moon-light', this)"></button>
+          </div>
+
+          <div style="display:inline-flex; gap:6px; align-items:center; margin-left:6px;">
+            <button class="theme-dot theme-dot-royal" data-theme="royal" data-label="سلطنتی (تاریک)" onclick="setTheme('royal', this)"></button>
+            <button title="سلطنتی روشن" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border-color);background:linear-gradient(45deg,#C7B8FF,#FDE68A);" onclick="setTheme('royal-light', this)"></button>
+          </div>
+
+          <div style="display:inline-flex; gap:6px; align-items:center; margin-left:6px;">
+            <button class="theme-dot theme-dot-nature" data-theme="nature" data-label="طبیعت (روشن)" onclick="setTheme('nature', this)"></button>
+            <button title="طبیعت تاریک" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border-color);background:linear-gradient(45deg,#14532d,#0b1720);" onclick="setTheme('nature-dark', this)"></button>
+          </div>
+        </div>
+        <button id="darkToggle" class="btn btn-ghost" title="تاریک/روشن" onclick="toggleDarkMode()">🌙</button>
+        <div class="admin-avatar">سم</div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="admin-content">
+
+      <!-- ===== COMPONENTS SECTION ===== -->
+      <div id="section-components">
+
+        <!-- Buttons -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">دکمه‌ها</div>
+              <div class="admin-section-desc">کلاس‌های .btn با variant های مختلف</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <button class="btn">پیش‌فرض</button>
+            <button class="btn btn-primary">اصلی</button>
+            <button class="btn btn-secondary">ثانویه</button>
+            <button class="btn btn-outline">طراحی خطی</button>
+            <button class="btn btn-ghost">شفاف</button>
+          </div>
+          <div class="comp-row">
+            <button class="btn btn-success">موفقیت</button>
+            <button class="btn btn-danger">خطر</button>
+            <button class="btn btn-warning">هشدار</button>
+            <button class="btn btn-info">اطلاعات</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">رنگ‌های اضافی:</div>
+          <div class="comp-row">
+            <button class="btn btn-pink">صورتی</button>
+            <button class="btn btn-purple">بنفش</button>
+            <button class="btn btn-orange">نارنجی</button>
+            <button class="btn btn-green-dark">سبز تیره</button>
+            <button class="btn btn-blue-dark">آبی تیره</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">توپر (Fill):</div>
+          <div class="comp-row">
+            <button class="btn btn-fill-primary">اصلی</button>
+            <button class="btn btn-fill-success">موفقیت</button>
+            <button class="btn btn-fill-danger">خطر</button>
+            <button class="btn btn-fill-warning">هشدار</button>
+            <button class="btn btn-fill-info">اطلاعات</button>
+          </div>
+          <div class="comp-row">
+            <button class="btn btn-fill-pink">صورتی</button>
+            <button class="btn btn-fill-purple">بنفش</button>
+            <button class="btn btn-fill-orange">نارنجی</button>
+            <button class="btn btn-fill-green-dark">سبز تیره</button>
+            <button class="btn btn-fill-blue-dark">آبی تیره</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">خطی (Outline):</div>
+          <div class="comp-row">
+            <button class="btn btn-outline-success">موفقیت</button>
+            <button class="btn btn-outline-danger">خطر</button>
+            <button class="btn btn-outline-warning">هشدار</button>
+            <button class="btn btn-outline-info">اطلاعات</button>
+            <button class="btn btn-outline-pink">صورتی</button>
+            <button class="btn btn-outline-purple">بنفش</button>
+            <button class="btn btn-outline-orange">نارنجی</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">سایزها:</div>
+          <div class="comp-row">
+            <button class="btn btn-primary btn-xs">خیلی کوچک</button>
+            <button class="btn btn-primary btn-sm">کوچک</button>
+            <button class="btn btn-primary">عادی</button>
+            <button class="btn btn-primary btn-lg">بزرگ</button>
+            <button class="btn btn-primary" disabled>غیرفعال</button>
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">نشان‌ها</div>
+              <div class="admin-section-desc">نشان‌های رنگی برای نمایش وضعیت و دسته‌بندی</div>
+            </div>
+          </div>
+          <div class="comp-row">
+            <span class="badge badge-primary">اصلی</span>
+            <span class="badge badge-secondary">ثانویه</span>
+            <span class="badge badge-success">موفقیت</span>
+            <span class="badge badge-danger">خطر</span>
+            <span class="badge badge-warning">هشدار</span>
+            <span class="badge badge-info">اطلاعات</span>
+            <span class="badge badge-accent">تاکید</span>
+          </div>
+          <div class="comp-row">
+            <span class="badge badge-solid-primary">اصلی</span>
+            <span class="badge badge-solid-success">موفقیت</span>
+            <span class="badge badge-solid-danger">خطر</span>
+            <span class="badge badge-solid-warning">هشدار</span>
+          </div>
+          <div class="comp-row">
+            <span class="badge badge-outline-primary">اصلی</span>
+            <span class="badge badge-outline-success">موفقیت</span>
+            <span class="badge badge-outline-danger">خطر</span>
+            <span class="badge badge-outline-warning">هشدار</span>
+          </div>
+          <div class="comp-row">
+            <span class="badge badge-success"><span class="badge-dot"></span>فعال</span>
+            <span class="badge badge-danger"><span class="badge-dot"></span>غیرفعال</span>
+            <span class="badge badge-warning"><span class="badge-dot"></span>در انتظار</span>
+            <span class="badge badge-primary badge-pill">کپسولی</span>
+            <span class="badge badge-primary badge-sm">کوچک</span>
+            <span class="badge badge-primary badge-lg">بزرگ</span>
+          </div>
+        </div>
+
+        <!-- Switches & Links -->
+        <div class="admin-two-col">
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <div>
+                <div class="admin-section-title">کلید تغییر (Switch)</div>
+                <div class="admin-section-desc">کلیدهای تاگل CSS-only</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <label class="switch"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">فعال</span></label>
+              <label class="switch switch-success"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">موفقیت</span></label>
+              <label class="switch switch-danger"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">خطر</span></label>
+              <label class="switch switch-warning"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">هشدار</span></label>
+              <label class="switch switch-info"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">اطلاعات</span></label>
+            </div>
+          </div>
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <div>
+                <div class="admin-section-title">لینک‌ها</div>
+                <div class="admin-section-desc">لینک‌های استایل‌دار با انیمیشن</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <a href="#" class="link">لینک اصلی</a>
+              <a href="#" class="link link-success">لینک موفقیت</a>
+              <a href="#" class="link link-danger">لینک خطر</a>
+              <a href="#" class="link link-warning">لینک هشدار</a>
+              <a href="#" class="link link-info">لینک اطلاعات</a>
+              <a href="#" class="link link-secondary">لینک ثانویه</a>
+              <a href="#" class="link link-muted">لینک محو</a>
+              <a href="#" class="link link-underline">با خط زیر همیشگی</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inputs & Selects -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">فیلدهای ورودی و انتخابگر</div>
+              <div class="admin-section-desc">Input, Select و فرم‌ها</div>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(18rem,1fr)); gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">نام و نام خانوادگی <span class="form-required">*</span></label>
+              <input type="text" class="form-input" placeholder="نام خود را وارد کنید" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">ایمیل</label>
+              <div class="input-group">
+                <input type="email" class="form-input" placeholder="user" />
+                <span class="input-group-append">@company.ir</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">شهر</label>
+              <div class="select-wrapper">
+                <select class="select">
+                  <option value="">انتخاب کنید...</option>
+                  <option>تهران</option>
+                  <option>اصفهان</option>
+                  <option>شیراز</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group has-error">
+              <label class="form-label">ایمیل</label>
+              <input type="email" class="form-input" value="invalid-email" />
+              <span class="form-error">فرمت ایمیل نامعتبر است</span>
+            </div>
+            <div class="form-group has-success">
+              <label class="form-label">شماره موبایل</label>
+              <input type="tel" class="form-input" value="۰۹۱۲۱۲۳۴۵۶۷" />
+              <span class="form-hint" style="color:var(--color-success);">شماره تایید شد</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">توضیحات</label>
+              <textarea class="form-textarea" placeholder="توضیحات خود را بنویسید..." rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menus -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">منوها</div>
+              <div class="admin-section-desc">منوهای عمودی و افقی</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+            <div class="menu" style="width:14rem; position:relative; opacity:1; visibility:visible; transform:none;">
+              <div class="menu-label">حساب کاربری</div>
+              <a href="#" class="menu-item active"><span class="menu-item-icon">👤</span>پروفایل</a>
+              <a href="#" class="menu-item"><span class="menu-item-icon">⚙️</span>تنظیمات</a>
+              <a href="#" class="menu-item"><span class="menu-item-icon">🔔</span>اعلان‌ها <span class="badge badge-danger badge-sm">۳</span></a>
+              <div class="menu-divider"></div>
+              <a href="#" class="menu-item" style="color:var(--color-danger);"><span class="menu-item-icon">🚪</span>خروج</a>
+            </div>
+            <div class="menu" style="width:16rem; position:relative; opacity:1; visibility:visible; transform:none;">
+              <div class="menu-label">ویرایشگر</div>
+              <button class="menu-item"><span class="menu-item-icon">📋</span>کپی <span class="menu-item-shortcut">Ctrl+C</span></button>
+              <button class="menu-item"><span class="menu-item-icon">📄</span>چسباندن <span class="menu-item-shortcut">Ctrl+V</span></button>
+              <button class="menu-item"><span class="menu-item-icon">✂️</span>برش <span class="menu-item-shortcut">Ctrl+X</span></button>
+            </div>
+          </div>
+          <div class="comp-row">
+            <div class="menu menu-horizontal">
+              <a href="#" class="menu-item active">داشبورد</a>
+              <a href="#" class="menu-item">کاربران</a>
+              <a href="#" class="menu-item">گزارشات</a>
+              <a href="#" class="menu-item">تنظیمات</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Buttons -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">دکمه‌های شبکه اجتماعی</div>
+              <div class="admin-section-desc">دکمه‌های استایل‌دار برای پلتفرم‌های اجتماعی</div>
+            </div>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">سبک کم‌رنگ (Light):</div>
+          <div class="comp-row">
+            <button class="btn btn-telegram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>تلگرام</button>
+            <button class="btn btn-instagram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>اینستاگرام</button>
+            <button class="btn btn-whatsapp"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>واتساپ</button>
+            <button class="btn btn-linkedin"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>لینکدین</button>
+            <button class="btn btn-github"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>گیت‌هاب</button>
+            <button class="btn btn-facebook"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>فیس‌بوک</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">توپر (Fill):</div>
+          <div class="comp-row">
+            <button class="btn btn-fill-telegram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>تلگرام</button>
+            <button class="btn btn-fill-instagram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>اینستاگرام</button>
+            <button class="btn btn-fill-whatsapp"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>واتساپ</button>
+            <button class="btn btn-fill-linkedin"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>لینکدین</button>
+            <button class="btn btn-fill-github"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>گیت‌هاب</button>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.5rem;">خطی (Outline):</div>
+          <div class="comp-row">
+            <button class="btn btn-outline-telegram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>تلگرام</button>
+            <button class="btn btn-outline-instagram"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>اینستاگرام</button>
+            <button class="btn btn-outline-whatsapp"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>واتساپ</button>
+            <button class="btn btn-outline-github"><svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>گیت‌هاب</button>
+          </div>
+        </div>
+
+      </div><!-- /section-components -->
+
+      <!-- ===== THEME SETTINGS SECTION ===== -->
+      <div id="section-theme-settings" style="display:none;">
+
+        <!-- Current Theme Info -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">اطلاعات تم فعلی</div>
+              <div class="admin-section-desc">تم فعال: <strong id="currentThemeName">آبی سازمانی</strong></div>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem;">
+            <button class="btn btn-primary" onclick="setThemeByName('default')">آبی سازمانی (روشن)</button>
+            <button class="btn btn-secondary" onclick="setThemeByName('moon')">ماه (تاریک نقره‌ای)</button>
+            <button class="btn btn-secondary" onclick="setThemeByName('royal')">سلطنتی (تاریک بنفش‌طلایی)</button>
+            <button class="btn btn-secondary" onclick="setThemeByName('nature')">طبیعت (روشن سبز)</button>
+          </div>
+        </div>
+
+        <!-- Color Palette -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">پالت رنگی</div>
+              <div class="admin-section-desc">رنگ‌های اصلی و معنایی تم فعلی</div>
+            </div>
+          </div>
+          <div class="theme-colors-grid" id="colorPalette"></div>
+        </div>
+
+        <!-- Surface & Text Colors -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">رنگ‌های سطح و متن</div>
+              <div class="admin-section-desc">پس‌زمینه‌ها، متن‌ها و حاشیه‌ها</div>
+            </div>
+          </div>
+          <div class="theme-colors-grid" id="surfacePalette"></div>
+        </div>
+
+        <!-- Component Variables -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">متغیرهای کامپوننت‌ها</div>
+              <div class="admin-section-desc">مقادیر CSS Custom Properties برای هر بخش</div>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="theme-vars-table" id="varsTable"></table>
+          </div>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">پیش‌نمایش زنده</div>
+              <div class="admin-section-desc">نمایش کامپوننت‌ها با تم فعلی</div>
+            </div>
+          </div>
+          <div class="comp-row" style="margin-bottom:1rem;">
+            <button class="btn btn-primary">دکمه اصلی</button>
+            <button class="btn btn-solid-danger">حذف</button>
+            <span class="badge badge-success"><span class="badge-dot"></span>آنلاین</span>
+            <span class="badge badge-warning">در انتظار</span>
+            <label class="switch"><input type="checkbox" class="switch-input" checked /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">فعال</span></label>
+            <a href="#" class="link">لینک نمونه</a>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">ورودی نمونه</label>
+              <input type="text" class="form-input" placeholder="متن را وارد کنید..." />
+            </div>
+            <div class="form-group">
+              <label class="form-label">انتخاب نمونه</label>
+              <div class="select-wrapper">
+                <select class="select">
+                  <option>گزینه اول</option>
+                  <option>گزینه دوم</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /section-theme-settings -->
+
+    </div><!-- /admin-content -->
+  </main>
+</div>
+
+<script>
+// ===== Theme Management =====
+var THEME_NAMES = {
+  'default': 'آبی سازمانی (روشن)',
+  'moon': 'ماه (تاریک)',
+  'moon-light': 'ماه (روشن)',
+  'royal': 'سلطنتی (تاریک)',
+  'royal-light': 'سلطنتی (روشن)',
+  'nature': 'طبیعت (روشن)',
+  'nature-dark': 'طبیعت (تاریک)'
+};
+
+var COLOR_VARS = [
+  { var: '--color-primary', name: 'رنگ اصلی' },
+  { var: '--color-primary-light', name: 'اصلی روشن' },
+  { var: '--color-primary-dark', name: 'اصلی تیره' },
+  { var: '--color-secondary', name: 'رنگ ثانویه' },
+  { var: '--color-accent', name: 'رنگ تاکیدی' },
+  { var: '--color-success', name: 'موفقیت' },
+  { var: '--color-danger', name: 'خطر' },
+  { var: '--color-warning', name: 'هشدار' },
+  { var: '--color-info', name: 'اطلاعات' },
+  { var: '--color-pink', name: 'صورتی' },
+  { var: '--color-indigo', name: 'نیلی' },
+  { var: '--color-cyan', name: 'فیروزه‌ای' },
+  { var: '--color-purple', name: 'بنفش' }
+];
+
+var SURFACE_VARS = [
+  { var: '--bg-primary', name: 'پس‌زمینه اصلی' },
+  { var: '--bg-secondary', name: 'پس‌زمینه ثانویه' },
+  { var: '--bg-tertiary', name: 'پس‌زمینه سوم' },
+  { var: '--bg-inverse', name: 'پس‌زمینه معکوس' },
+  { var: '--text-primary', name: 'متن اصلی' },
+  { var: '--text-secondary', name: 'متن ثانویه' },
+  { var: '--text-muted', name: 'متن محو' },
+  { var: '--text-inverse', name: 'متن معکوس' },
+  { var: '--border-color', name: 'حاشیه' },
+  { var: '--border-color-strong', name: 'حاشیه پررنگ' }
+];
+
+var COMPONENT_VARS = [
+  { group: 'دکمه‌ها', vars: [
+    '--btn-primary-bg', '--btn-primary-color', '--btn-primary-hover-bg',
+    '--btn-primary-border', '--btn-secondary-bg', '--btn-outline-hover-bg'
+  ]},
+  { group: 'ورودی‌ها', vars: [
+    '--input-bg', '--input-border', '--input-focus-border', '--input-focus-ring', '--input-placeholder'
+  ]},
+  { group: 'نشان‌ها', vars: [
+    '--badge-primary-bg', '--badge-primary-color'
+  ]},
+  { group: 'سوئیچ', vars: [
+    '--switch-bg', '--switch-checked-bg', '--switch-thumb-bg'
+  ]},
+  { group: 'منو', vars: [
+    '--menu-bg', '--menu-item-hover-bg', '--menu-item-active-bg', '--menu-item-active-color'
+  ]},
+  { group: 'انتخابگر', vars: [
+    '--select-bg', '--select-dropdown-bg', '--select-item-hover-bg', '--select-item-active-bg'
+  ]}
+];
+
+function setTheme(theme, dotEl) {
+  document.documentElement.setAttribute('data-theme', theme);
+
+  // Update active dot
+  var dots = document.querySelectorAll('.theme-dot');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.remove('active');
+  }
+  if (dotEl) {
+    dotEl.classList.add('active');
+  } else {
+    // Find dot by data-theme
+    var targetDot = document.querySelector('.theme-dot[data-theme="' + theme + '"]');
+    if (targetDot) targetDot.classList.add('active');
+  }
+
+  // Save to localStorage
+  try { localStorage.setItem('active-theme', theme); } catch(e) {}
+
+  // Update theme settings if visible
+  updateThemeInfo();
+}
+
+function setThemeByName(theme) {
+  setTheme(theme, null);
+}
+
+// Toggle dark mode between 'default' and 'moon'
+function toggleDarkMode() {
+  var current = document.documentElement.getAttribute('data-theme') || 'default';
+  var darkModes = ['moon', 'royal'];
+  var isDark = darkModes.indexOf(current) !== -1;
+  var target = isDark ? 'default' : 'moon';
+  setTheme(target, null);
+  // Update toggle icon/state
+  updateDarkToggle();
+}
+
+function updateDarkToggle() {
+  var btn = document.getElementById('darkToggle');
+  if (!btn) return;
+  var current = document.documentElement.getAttribute('data-theme') || 'default';
+  var darkModes = ['moon', 'royal'];
+  var isDark = darkModes.indexOf(current) !== -1;
+  btn.textContent = isDark ? '☀️' : '🌙';
+  if (isDark) btn.classList.add('active'); else btn.classList.remove('active');
+}
+
+function updateThemeInfo() {
+  var theme = document.documentElement.getAttribute('data-theme') || 'default';
+  var nameEl = document.getElementById('currentThemeName');
+  if (nameEl) nameEl.textContent = THEME_NAMES[theme] || theme;
+
+  // Wait for CSS variables to update
+  setTimeout(function() {
+    renderColorPalette('colorPalette', COLOR_VARS);
+    renderColorPalette('surfacePalette', SURFACE_VARS);
+    renderVarsTable();
+  }, 50);
+}
+
+function getCSSVar(varName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+}
+
+function renderColorPalette(containerId, vars) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+
+  var html = '';
+  for (var i = 0; i < vars.length; i++) {
+    var value = getCSSVar(vars[i].var);
+    html += '<div class="theme-color-card">' +
+      '<div class="theme-color-swatch" style="background:var(' + vars[i].var + ');"></div>' +
+      '<div class="theme-color-info">' +
+        '<div class="theme-color-name">' + vars[i].name + '</div>' +
+        '<div class="theme-color-value">' + vars[i].var + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function renderVarsTable() {
+  var table = document.getElementById('varsTable');
+  if (!table) return;
+
+  var html = '<thead><tr><th>بخش</th><th>متغیر</th><th>مقدار</th><th>نمونه</th></tr></thead><tbody>';
+
+  for (var g = 0; g < COMPONENT_VARS.length; g++) {
+    var group = COMPONENT_VARS[g];
+    for (var v = 0; v < group.vars.length; v++) {
+      var varName = group.vars[v];
+      var value = getCSSVar(varName);
+      var isColor = value && (value.indexOf('#') === 0 || value.indexOf('rgb') === 0 || value.indexOf('rgba') === 0);
+      var swatch = isColor
+        ? '<span class="var-swatch" style="background:var(' + varName + ');"></span>'
+        : '<span style="color:var(--text-muted);">—</span>';
+
+      html += '<tr>' +
+        '<td style="color:var(--text-secondary); font-weight:500;">' + (v === 0 ? group.group : '') + '</td>' +
+        '<td class="var-name">' + varName + '</td>' +
+        '<td class="var-value">' + value + '</td>' +
+        '<td>' + swatch + '</td>' +
+      '</tr>';
+    }
+  }
+
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+// ===== Navigation =====
+function showSection(sectionId, navItem) {
+  // Hide all sections
+  var sections = document.querySelectorAll('[id^="section-"]');
+  for (var i = 0; i < sections.length; i++) {
+    sections[i].style.display = 'none';
+  }
+
+  // Show target
+  var target = document.getElementById('section-' + sectionId);
+  if (target) target.style.display = '';
+
+  // Update nav
+  var navItems = document.querySelectorAll('.admin-nav-item');
+  for (var i = 0; i < navItems.length; i++) {
+    navItems[i].classList.remove('active');
+  }
+  if (navItem) navItem.classList.add('active');
+
+  // Update breadcrumb
+  var bc = document.getElementById('breadcrumbCurrent');
+  if (bc && navItem) {
+    bc.textContent = navItem.textContent.trim();
+  }
+
+  // Update theme info if switching to theme settings
+  if (sectionId === 'theme-settings') {
+    updateThemeInfo();
+  }
+
+  closeSidebar();
+}
+
+// ===== Mobile Sidebar =====
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('visible');
+}
+
+function closeSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  sidebar.classList.remove('open');
+  overlay.classList.remove('visible');
+}
+
+// ===== Init =====
+(function() {
+  // Load saved theme
+  try {
+    var saved = localStorage.getItem('active-theme');
+    if (saved && THEME_NAMES[saved]) {
+      setTheme(saved, null);
+    }
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>

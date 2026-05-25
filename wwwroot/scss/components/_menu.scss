@@ -1,0 +1,216 @@
+// ============================================================================
+// MENU COMPONENT
+// Navigation menu, dropdown menu, and context menu
+// ============================================================================
+
+// ---- Menu Container ----
+.menu {
+  display: flex;
+  flex-direction: column;
+  min-width: $menu-min-width;
+  background: var(--menu-bg);
+  border: 1px solid var(--border-color);
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  padding: $spacing-1 0;
+  overflow: hidden;
+  z-index: $z-dropdown;
+  transition: background-color $transition-theme, border-color $transition-theme;
+  direction: rtl;
+
+  /* vertical menu: make items full-width */
+  .menu-item {
+    width: 100%;
+    text-align: right;
+  }
+
+  @include custom-scrollbar;
+}
+
+// ---- Menu Item ----
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $menu-item-padding-y $menu-item-padding-x;
+  font-size: $text-sm;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+  white-space: nowrap;
+  text-decoration: none;
+  border: none;
+  background: none;
+  /* width/text alignment handled by parent `.menu` for vertical menus; keep base compact */
+  font-family: var(--font-primary);
+
+  &:hover {
+    background: var(--menu-item-hover-bg);
+    color: var(--color-primary);
+  }
+
+  &:active {
+    background: var(--menu-item-active-bg);
+  }
+
+  &.active {
+    background: var(--menu-item-active-bg);
+    color: var(--menu-item-active-color);
+    font-weight: $font-medium;
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .menu-item-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    transition: color $transition-fast;
+  }
+
+  &:hover .menu-item-icon {
+    color: var(--color-primary);
+  }
+
+  &.active .menu-item-icon {
+    color: var(--menu-item-active-color);
+  }
+
+  .menu-item-shortcut {
+    margin-right: auto;
+    font-size: $text-xs;
+    color: var(--text-muted);
+    direction: ltr;
+  }
+
+  .menu-item-badge {
+    margin-right: auto;
+  }
+}
+
+// ---- Menu Divider ----
+.menu-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: $spacing-1 $menu-item-padding-x;
+}
+
+// ---- Menu Label (group header) ----
+.menu-label {
+  padding: $spacing-2 $menu-item-padding-x $spacing-1;
+  font-size: $text-xs;
+  font-weight: $font-semibold;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// ---- Menu with Submenu ----
+.menu-item-submenu {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-left: 1.5px solid var(--text-muted);
+    border-bottom: 1.5px solid var(--text-muted);
+    transform: rotate(45deg);
+    margin-right: auto;
+    transition: transform $transition-fast;
+  }
+
+  &:hover::after {
+    transform: rotate(45deg) translateX(-2px);
+  }
+}
+
+// ---- Horizontal Menu ----
+.menu-horizontal {
+  display: inline-flex;
+  flex-direction: row;
+  min-width: auto;
+  border-radius: $radius-lg;
+  padding: $spacing-1;
+  gap: 0.125rem;
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+
+  .menu-item {
+    border-radius: $radius-md;
+    padding: $spacing-1 $spacing-3;
+    white-space: nowrap;
+  }
+
+  .menu-divider {
+    width: 1px;
+    height: auto;
+    margin: $spacing-1 0;
+  }
+}
+
+// ---- Dropdown Menu (positioned) ----
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-trigger {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: $spacing-1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity $transition-fast, transform $transition-fast, visibility $transition-fast;
+
+    &.show,
+    .dropdown-trigger:hover + & {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  // Alignments
+  .dropdown-menu-start {
+    right: auto;
+    left: 0;
+  }
+
+  .dropdown-menu-end {
+    right: 0;
+    left: auto;
+  }
+
+  // Dropup
+  &.dropup .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: $spacing-1;
+    transform: translateY(8px);
+
+    &.show {
+      transform: translateY(0);
+    }
+  }
+}
+
+// ---- Context Menu ----
+.context-menu {
+  position: fixed;
+  z-index: $z-popover;
+}

@@ -1,0 +1,115 @@
+// ============================================================================
+// LINK COMPONENT
+// Styled anchor/link elements with variants
+// ============================================================================
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  cursor: pointer;
+  transition: color $transition-base, font-weight $transition-base;
+  position: relative;
+
+  &:hover {
+    color: var(--color-primary-dark);
+    font-weight: $font-bold;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-radius: $radius-sm;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+
+  // Icon inside link
+  .link-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    transition: transform $transition-base;
+  }
+
+  &:hover .link-icon {
+    transform: translateX(-2px);
+  }
+}
+
+// ---- Underline Variant (always has underline) ----
+.link-underline {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+// ---- No Underline ----
+.link-none {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// ---- Color Variants ----
+.link-success {
+  color: var(--color-success);
+  &:hover { color: var(--color-success-dark); }
+}
+
+.link-danger {
+  color: var(--color-danger);
+  &:hover { color: var(--color-danger-dark); }
+}
+
+.link-warning {
+  color: var(--color-warning);
+  &:hover { color: var(--color-warning-dark); }
+}
+
+.link-info {
+  color: var(--color-info);
+  &:hover { color: var(--color-info-dark); }
+}
+
+.link-secondary {
+  color: var(--text-secondary);
+  &:hover { color: var(--text-primary); }
+}
+
+.link-muted {
+  color: var(--text-muted);
+  &:hover { color: var(--text-secondary); }
+}
+
+// ---- Size Variants ----
+.link-sm {
+  font-size: $text-xs;
+}
+
+.link-lg {
+  font-size: $text-base;
+}
+
+// ---- External Link Indicator ----
+.link-external {
+  .link-icon-external {
+    width: 0.75em;
+    height: 0.75em;
+    margin-right: $spacing-1;
+    opacity: 0.6;
+    transition: opacity $transition-base;
+  }
+
+  &:hover .link-icon-external {
+    opacity: 1;
+  }
+}
+
+// ---- Disabled Link ----
+.link-disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+  pointer-events: none;
+}

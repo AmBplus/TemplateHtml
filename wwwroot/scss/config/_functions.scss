@@ -1,0 +1,17 @@
+// ============================================================================
+// SCSS FUNCTIONS
+// Helper functions for SCSS computation
+// ============================================================================
+
+// Convert px to rem
+@function px-to-rem($px, $base: 16) {
+  @return ($px / $base) * 1rem;
+}
+
+// Map deep get - for nested map access
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}

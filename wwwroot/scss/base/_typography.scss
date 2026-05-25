@@ -1,0 +1,66 @@
+// ============================================================================
+// TYPOGRAPHY
+// ============================================================================
+
+h1, .h1 {
+  font-size: $text-3xl;
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  color: var(--text-primary);
+}
+
+h2, .h2 {
+  font-size: $text-2xl;
+  font-weight: $font-semibold;
+  line-height: $leading-tight;
+  color: var(--text-primary);
+}
+
+h3, .h3 {
+  font-size: $text-xl;
+  font-weight: $font-semibold;
+  line-height: $leading-tight;
+  color: var(--text-primary);
+}
+
+h4, .h4 {
+  font-size: $text-lg;
+  font-weight: $font-semibold;
+  line-height: $leading-normal;
+  color: var(--text-primary);
+}
+
+h5, .h5 {
+  font-size: $text-base;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  color: var(--text-primary);
+}
+
+h6, .h6 {
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  line-height: $leading-normal;
+  color: var(--text-secondary);
+}
+
+.text-xs   { font-size: $text-xs; }
+.text-sm   { font-size: $text-sm; }
+.text-base { font-size: $text-base; }
+.text-lg   { font-size: $text-lg; }
+.text-xl   { font-size: $text-xl; }
+.text-2xl  { font-size: $text-2xl; }
+.text-3xl  { font-size: $text-3xl; }
+
+.font-light    { font-weight: $font-light; }
+.font-normal   { font-weight: $font-normal; }
+.font-medium   { font-weight: $font-medium; }
+.font-semibold { font-weight: $font-semibold; }
+.font-bold     { font-weight: $font-bold; }
+
+.text-primary   { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted     { color: var(--text-muted); }
+.text-center    { text-align: center; }
+.text-right     { text-align: right; }
+.text-left      { text-align: left; }

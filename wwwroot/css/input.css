@@ -1,0 +1,687 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for Easy Theming */
+:root {
+  /* ========== COLOR PALETTE ========== */
+  
+  /* Primary - Blue */
+  --color-primary: #3964f3;
+  --color-primary-light: #1969eb;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-lighter: #dbeafe;
+  
+  /* Secondary - Teal */
+  --color-secondary: #0f766e;
+  --color-secondary-light: #14b8a6;
+  --color-secondary-dark: #0f766e;
+  --color-secondary-lighter: #ccfbf1;
+  
+  /* Accent - Amber */
+  --color-accent: #da8b03;
+  --color-accent-light: #fbbf24;
+  --color-accent-dark: #d97706;
+  --color-accent-lighter: #fef3c7;
+  
+  /* Info - Sky */
+  --color-info: #0ea5e9;
+  --color-info-light: #38bdf8;
+  --color-info-dark: #0284c7;
+  --color-info-darker: #0369a1;
+  --color-info-bg: #e0f2fe;
+  --color-info-border: #bae6fd;
+  
+  /* Danger / Error - Red */
+  --color-danger: #dc2626;
+  --color-danger-light: #ef4444;
+  --color-danger-lighter: #fca5a5;
+  --color-danger-dark: #b91c1c;
+  --color-danger-darker: #991b1b;
+  --color-danger-bg: #fee2e2;
+  --color-danger-border: #fecaca;
+  
+  /* Success - Emerald */
+  --color-success: #15a877;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-success-bg: #d1fae5;
+  
+  /* Warning - Orange */
+  --color-warning: #ac6d00;
+  --color-warning-light: #da9f0a;
+  --color-warning-dark: #d97706;
+  --color-warning-bg: #fef3c7;
+  
+  /* Error (Alias for Danger) */
+  --color-error: #dc2626;
+  --color-error-light: #ef4444;
+  --color-error-dark: #b91c1c;
+  --color-error-bg: #fee2e2;
+  
+  /* Help - Violet */
+  --color-help: #8b5cf6;
+  --color-help-light: #a78bfa;
+  --color-help-dark: #7c3aed;
+  --color-help-bg: #ede9fe;
+  
+  /* Neutral / Gray */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+  
+  /* Extra colors */
+  --color-pink: #ec4899;
+  --color-pink-light: #f472b6;
+  --color-pink-dark: #db2777;
+  --color-pink-bg: #fce7f3;
+  
+  --color-indigo: #6366f1;
+  --color-indigo-light: #818cf8;
+  --color-indigo-dark: #4f46e5;
+  --color-indigo-bg: #e0e7ff;
+  
+  --color-cyan: #06b6d4;
+  --color-cyan-light: #22d3ee;
+  --color-cyan-dark: #0891b2;
+  --color-cyan-bg: #cffafe;
+  
+  --color-rose: #f43f5e;
+  --color-rose-light: #fb7185;
+  --color-rose-dark: #e11d48;
+  --color-rose-bg: #ffe4e6;
+  
+  --color-lime: #84cc16;
+  --color-lime-light: #a3e635;
+  --color-lime-dark: #65a30d;
+  --color-lime-bg: #ecfccb;
+  
+  /* Disabled states */
+  --color-disabled: #94a3b8;
+  --color-disabled-bg: #e2e8f0;
+  
+  /* Overlay colors */
+  --overlay-light: rgba(255, 255, 255, 0.8);
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+  
+  /* Font */
+  --font-primary: 'Vazirmatn', 'Vazirmatn-FD-NL-font-face', 'Tahoma', 'Arial', sans-serif;
+  
+  /* Light Mode Theme */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.1);
+  
+  /* Button specific variables - Light Mode */
+  --btn-primary-bg: #eef3fa;
+  --btn-primary-color: #185ee0;
+  --btn-primary-hover-bg: #dbe9ff;
+  --btn-primary-active-bg: #dbe4f1;
+  
+  --btn-outline-hover-bg: #e6eef9;
+  --btn-outline-active-bg: #dbe9ff;
+  
+  --btn-secondary-bg: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+  --btn-secondary-hover-bg: color-mix(in srgb, var(--color-gray-400) 16%, transparent);
+}
+
+/* Dark Mode */
+.dark {
+  --color-warning: #c09447;
+  --bg-primary: #1e293b;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #475569;
+  --shadow: rgba(0, 0, 0, 0.3);
+  
+  /* Dark mode backgrounds */
+  --color-danger: #c90707;
+  --color-info-bg: #082f49;
+  --color-primary: #3B82F6;
+  --color-info-border: #0369a1;
+  --color-danger-bg: #b60c0c;
+  --color-danger-border: #991b1b;
+  --color-success-bg: #064e3b;
+  --color-warning-bg: #451a03;
+  --color-error-bg: #7f1d1d;
+  --color-help-bg: #2e1065;
+  --color-pink-bg: #831843;
+  --color-indigo-bg: #312e81;
+  --color-cyan-bg: #164e63;
+  --color-rose-bg: #881337;
+  --color-lime-bg: #365314;
+  
+  /* Dark mode text colors */
+  --color-info-dark: #38bdf8;
+  --color-info-darker: #7dd3fc;
+  --color-danger-dark: #f87171;
+  --color-danger-darker: #fca5a5;
+  --color-success-dark: #34d399;
+  --color-warning-dark: #fbbf24;
+  --color-error-dark: #f87171;
+  --color-help-dark: #a78bfa;
+  --color-pink-dark: #f472b6;
+  --color-indigo-dark: #818cf8;
+  --color-cyan-dark: #22d3ee;
+  --color-rose-dark: #fb7185;
+  --color-lime-dark: #a3e635;
+  
+  --color-disabled: #64748b;
+  --color-disabled-bg: #334155;
+  --overlay-light: rgba(0, 0, 0, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.8);
+  
+  /* Button specific variables - Dark Mode */
+  --btn-primary-bg: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --btn-primary-color: #93c5fd;
+  --btn-primary-hover-bg: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  --btn-primary-hover-color: #bfdbfe;
+  --btn-primary-active-bg: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  
+  --btn-outline-color: #93c5fd;
+  --btn-outline-hover-bg: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --btn-outline-hover-color: #bfdbfe;
+  --btn-outline-active-bg: color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+  
+  body {
+    @apply font-primary bg-[var(--bg-secondary)] text-[var(--text-primary)];
+    font-family: var(--font-primary);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ==========================================================================
+   COMPONENT STYLES
+   ========================================================================== */
+
+@layer components {
+  
+  /* ===== BASE BUTTON ===== */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-xl text-sm font-medium
+    transition-all duration-200 ease-out
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    active:scale-[0.98]
+    select-none;
+    
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  /* ===== PRIMARY BUTTON ===== */
+  .btn-primary {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
+    border: 1px solid color-mix(in srgb, var(--btn-primary-color) 15%, transparent);
+  }
+  
+  .btn-primary:hover {
+    background: var(--btn-primary-hover-bg);
+    border-color: color-mix(in srgb, var(--btn-primary-color) 25%, transparent);
+  }
+  
+  .btn-primary:active {
+    background: var(--btn-primary-active-bg);
+  }
+  
+  .btn-primary:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn-primary-color) 15%, transparent);
+  }
+  
+  /* ===== OUTLINE BUTTON ===== */
+  .btn-outline {
+    background: transparent;
+    color: var(--btn-primary-color);
+    border: 1px solid color-mix(in srgb, var(--btn-primary-color) 35%, transparent);
+  }
+  
+  .btn-outline:hover {
+    background: var(--btn-outline-hover-bg);
+    border-color: color-mix(in srgb, var(--btn-primary-color) 50%, transparent);
+  }
+  
+  .btn-outline:active {
+    background: var(--btn-outline-active-bg);
+    transform: scale(0.98);
+  }
+  
+  .btn-outline:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--btn-primary-color) 15%, transparent);
+  }
+  
+  /* ===== SECONDARY BUTTON ===== */
+  .btn-secondary {
+    background: var(--btn-secondary-bg);
+    color: var(--text-primary);
+    border: 1px solid color-mix(in srgb, var(--color-gray-400) 20%, transparent);
+  }
+  
+  .btn-secondary:hover {
+    background: var(--btn-secondary-hover-bg);
+  }
+  
+  .btn-secondary:active {
+    transform: scale(0.98);
+  }
+  
+  /* ===== SUCCESS BUTTON ===== */
+  .btn-success {
+    background: color-mix(in srgb, var(--color-success) 10%, transparent);
+    color: var(--color-success);
+    border: 1px solid color-mix(in srgb, var(--color-success) 20%, transparent);
+  }
+  
+  .btn-success:hover {
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-success) 30%, transparent);
+  }
+  
+  .btn-success:active {
+    background: color-mix(in srgb, var(--color-success) 20%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-success:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 15%, transparent);
+  }
+  
+  /* ===== DANGER BUTTON ===== */
+  .btn-danger {
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    color: var(--color-danger);
+    border: 1px solid color-mix(in srgb, var(--color-danger) 20%, transparent);
+  }
+  
+  .btn-danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
+  }
+  
+  .btn-danger:active {
+    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-danger:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 15%, transparent);
+  }
+  
+  /* ===== WARNING BUTTON ===== */
+  .btn-warning {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  }
+  
+  .btn-warning:hover {
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+  
+  .btn-warning:active {
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-warning:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+  
+  /* ===== INFO BUTTON ===== */
+  .btn-info {
+    background: color-mix(in srgb, var(--color-info) 10%, transparent);
+    color: var(--color-info);
+    border: 1px solid color-mix(in srgb, var(--color-info) 20%, transparent);
+  }
+  
+  .btn-info:hover {
+    background: color-mix(in srgb, var(--color-info) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-info) 30%, transparent);
+  }
+  
+  .btn-info:active {
+    background: color-mix(in srgb, var(--color-info) 20%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-info:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-info) 15%, transparent);
+  }
+  
+  /* ===== GHOST BUTTON ===== */
+  .btn-ghost {
+    background: #f1f4f5;
+    color: var(--text-primary);
+    border: 1px solid transparent;
+  }
+  
+  .btn-ghost:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+  }
+  
+  .btn-ghost:active {
+    background: var(--border-color);
+    transform: scale(0.98);
+  }
+  
+  .btn-ghost:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gray-400) 15%, transparent);
+  }
+  
+  /* ===== OUTLINE VARIANTS ===== */
+  .btn-outline-success {
+    background: transparent;
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+  }
+  
+  .btn-outline-success:hover {
+    background: color-mix(in srgb, var(--color-success) 10%, transparent);
+    border-color: var(--color-success);
+  }
+  
+  .btn-outline-success:active {
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-outline-success:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 15%, transparent);
+  }
+  
+  .btn-outline-danger {
+    background: transparent;
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
+  }
+  
+  .btn-outline-danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    border-color: var(--color-danger);
+  }
+  
+  .btn-outline-danger:active {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-outline-danger:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 15%, transparent);
+  }
+  
+  .btn-outline-warning {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+  
+  .btn-outline-warning:hover {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    border-color: var(--color-accent);
+  }
+  
+  .btn-outline-warning:active {
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-outline-warning:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+  
+  .btn-outline-info {
+    background: transparent;
+    color: var(--color-info);
+    border: 1px solid var(--color-info);
+  }
+  
+  .btn-outline-info:hover {
+    background: color-mix(in srgb, var(--color-info) 10%, transparent);
+    border-color: var(--color-info);
+  }
+  
+  .btn-outline-info:active {
+    background: color-mix(in srgb, var(--color-info) 15%, transparent);
+    transform: scale(0.98);
+  }
+  
+  .btn-outline-info:focus {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-info) 15%, transparent);
+  }
+  
+  /* ===== BUTTON SIZES ===== */
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs rounded-lg;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-base rounded-xl;
+  }
+  
+  .btn-xs {
+    @apply px-2 py-1 text-xs rounded-lg;
+  }
+  
+  /* ===== DISABLED STATE ===== */
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE OVERRIDES
+   ========================================================================== */
+
+@layer components {
+  .dark .btn-success {
+    background: color-mix(in srgb, var(--color-success) 15%, transparent);
+    color: var(--color-success-dark);
+    border-color: color-mix(in srgb, var(--color-success) 30%, transparent);
+  }
+  
+  .dark .btn-success:hover {
+    background: color-mix(in srgb, var(--color-success) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
+  }
+  
+  .dark .btn-danger {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    color: var(--color-danger-dark);
+    border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
+  }
+  
+  .dark .btn-danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 40%, transparent);
+  }
+  
+  .dark .btn-warning {
+    background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    color: var(--color-warning-dark);
+    border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+  
+  .dark .btn-warning:hover {
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+  
+  .dark .btn-info {
+    background: color-mix(in srgb, var(--color-info) 15%, transparent);
+    color: var(--color-info-dark);
+    border-color: color-mix(in srgb, var(--color-info) 30%, transparent);
+  }
+  
+  .dark .btn-info:hover {
+    background: color-mix(in srgb, var(--color-info) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-info) 40%, transparent);
+  }
+  
+  .dark .btn-ghost:hover {
+    background: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-gray-400) 20%, transparent);
+  }
+  
+  .dark .btn-outline-success {
+    color: var(--color-success-dark);
+    border-color: var(--color-success-dark);
+  }
+  
+  .dark .btn-outline-success:hover {
+    background: color-mix(in srgb, var(--color-success) 10%, transparent);
+  }
+  
+  .dark .btn-outline-danger {
+    color: var(--color-danger-dark);
+    border-color: var(--color-danger-dark);
+  }
+  
+  .dark .btn-outline-danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+  }
+  
+  .dark .btn-outline-warning {
+    color: var(--color-warning-dark);
+    border-color: var(--color-warning-dark);
+  }
+  
+  .dark .btn-outline-warning:hover {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+  
+  .dark .btn-outline-info {
+    color: var(--color-info-dark);
+    border-color: var(--color-info-dark);
+  }
+  
+  .dark .btn-outline-info:hover {
+    background: color-mix(in srgb, var(--color-info) 10%, transparent);
+  }
+  .dark   .btn-ghost {
+    background: #f4f6f710;
+    color: var(--text-primary);
+    border: 1px solid transparent;
+  }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+@layer utilities {
+  
+  /* RTL-specific utilities */
+  .flip-x {
+    transform: scaleX(-1);
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Custom shadows */
+  .shadow-custom {
+    box-shadow: 0 4px 6px -1px var(--shadow), 0 2px 4px -1px var(--shadow);
+  }
+  
+  /* Focus visible for accessibility */
+  .focus-visible-ring:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    var(--bg-tertiary) 0%,
+    var(--border-color) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* ==========================================================================
+   SCROLLBAR STYLING
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

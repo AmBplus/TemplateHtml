@@ -1,0 +1,279 @@
+// ============================================================================
+// GROUP INPUT COMPONENT
+// Input groups with prepend/append addons, icons, and labels
+// ============================================================================
+
+// ---- Input Field (base) ----
+.form-input {
+  @include input-base;
+}
+
+.form-input-sm {
+  @include input-base;
+  @include input-size-sm;
+}
+
+.form-input-lg {
+  @include input-base;
+  @include input-size-lg;
+}
+
+// ---- Textarea ----
+.form-textarea {
+  @include input-base;
+  min-height: 5rem;
+  resize: vertical;
+}
+
+// ---- Input Group ----
+.input-group {
+  display: flex;
+  width: 100%;
+  direction: rtl;
+  align-items: stretch;
+
+  .form-input,
+  .input-group-prepend,
+  .input-group-append {
+    border-radius: 0;
+    margin-inline-start: -1px;
+  }
+
+  // First child gets right border-radius
+  > :first-child {
+    border-radius: 0 $radius-lg $radius-lg 0;
+    margin-inline-start: 0;
+  }
+
+  // Last child gets left border-radius
+  > :last-child {
+    border-radius: $radius-lg 0 0 $radius-lg;
+  }
+
+  // Only child
+  > :only-child {
+    border-radius: $radius-lg;
+  }
+}
+
+// ---- Prepend Addon ----
+.input-group-prepend {
+  display: flex;
+  align-items: center;
+  padding: $input-padding-y $input-padding-x;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  transition: background-color $transition-theme, border-color $transition-theme;
+}
+
+// ---- Append Addon ----
+.input-group-append {
+  display: flex;
+  align-items: center;
+  padding: $input-padding-y $input-padding-x;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  transition: background-color $transition-theme, border-color $transition-theme;
+}
+
+// ---- Addon with icon ----
+.input-group-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+// ---- Input with Icon Inside ----
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  direction: rtl;
+
+  .form-input {
+    width: 100%;
+  }
+
+  // Icon on the right (RTL = start)
+  &.input-icon-right .form-input {
+    padding-right: 2.5rem;
+  }
+
+  &.input-icon-right .input-icon {
+    position: absolute;
+    right: 0.75rem;
+    pointer-events: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  // Icon on the left (RTL = end)
+  &.input-icon-left .form-input {
+    padding-left: 2.5rem;
+  }
+
+  &.input-icon-left .input-icon {
+    position: absolute;
+    left: 0.75rem;
+    pointer-events: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  // Clickable icon
+  &.input-icon-clickable .input-icon {
+    pointer-events: auto;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color $transition-fast;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+// ---- Form Group ----
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+  width: 100%;
+
+  .form-label {
+    font-size: $text-sm;
+    font-weight: $font-medium;
+    color: var(--text-primary);
+    transition: color $transition-theme;
+
+    .form-required {
+      color: var(--color-danger);
+      margin-right: $spacing-1;
+    }
+  }
+
+  .form-hint {
+    font-size: $text-xs;
+    color: var(--text-muted);
+    transition: color $transition-theme;
+  }
+
+  .form-error {
+    font-size: $text-xs;
+    color: var(--color-danger);
+    transition: color $transition-theme;
+  }
+
+  // Input with error
+  &.has-error {
+    .form-input,
+    .form-textarea,
+    .select {
+      border-color: var(--color-danger);
+
+      &:focus {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 15%, transparent);
+      }
+    }
+
+    .form-label {
+      color: var(--color-danger);
+    }
+  }
+
+  // Input with success
+  &.has-success {
+    .form-input,
+    .form-textarea,
+    .select {
+      border-color: var(--color-success);
+
+      &:focus {
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 15%, transparent);
+      }
+    }
+  }
+}
+
+// ---- Input with Addon Button ----
+.input-group-btn {
+  .btn {
+    border-radius: 0;
+    height: 100%;
+    border: 1px solid var(--border-color);
+  }
+
+  > :first-child .btn {
+    border-radius: 0 $radius-lg $radius-lg 0;
+  }
+
+  > :last-child .btn {
+    border-radius: $radius-lg 0 0 $radius-lg;
+  }
+}
+
+// ---- Checkbox & Radio in Groups ----
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  cursor: pointer;
+  direction: rtl;
+  padding: $spacing-1 0;
+
+  .form-check-input {
+    width: 1.125rem;
+    height: 1.125rem;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .form-check-label {
+    font-size: $text-sm;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color $transition-theme;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ---- Inline Form Check ----
+.form-check-inline {
+  display: inline-flex;
+  margin-left: $spacing-4;
+}

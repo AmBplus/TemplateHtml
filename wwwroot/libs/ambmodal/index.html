@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fa" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbMsg — Complete Examples | Toast, Animations, Sizes, …</title>
+    <link rel="stylesheet" href="./AmbMsg.css">
+    <style>
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f3f4f6; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; }
+        .demo-container { max-width: 1000px; width: 100%; background: white; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,.06); padding: 2rem; }
+        h1 { margin: 0 0 .25rem; font-weight: 700; font-size: 1.8rem; color: #111827; }
+        .subtitle { color: #6b7280; margin: 0 0 1.75rem; font-size: 0.95rem; }
+        .example-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+        .example-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.25rem; flex: 1 1 220px; display: flex; flex-direction: column; gap: 0.6rem; }
+        .example-card h3 { margin: 0; font-size: 1rem; font-weight: 600; color: #1f2937; }
+        .example-card p { margin: 0; font-size: 0.85rem; color: #6b7280; flex: 1; }
+        button { font-weight: 500; border: none; border-radius: 0.4rem; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; background: #e5e7eb; color: #1f2937; transition: background .15s; white-space: nowrap; }
+        button:hover { background: #d1d5db; }
+        .btn-primary { background: #6366f1; color: white; } .btn-primary:hover { background: #4f46e5; }
+        .btn-danger { background: #dc2626; color: white; } .btn-danger:hover { background: #b91c1c; }
+        .btn-success { background: #059669; color: white; } .btn-success:hover { background: #047857; }
+        .btn-warning { background: #d97706; color: white; } .btn-warning:hover { background: #b45309; }
+        .btn-info { background: #2563eb; color: white; } .btn-info:hover { background: #1d4ed8; }
+        hr { margin: 2rem 0; border: 0; border-top: 1px solid #e5e7eb; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem; }
+        .toast-container { position: fixed; top: 1rem; right: 1rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none; }
+        .toast-item { background: white; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,.12); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 500; animation: toast-in 0.3s ease-out; pointer-events: auto; min-width: 220px; max-width: 380px; }
+        .toast-item.success { border-left: 4px solid #059669; color: #065f46; }
+        .toast-item.error   { border-left: 4px solid #dc2626; color: #991b1b; }
+        .toast-item.warning { border-left: 4px solid #d97706; color: #92400e; }
+        .toast-item.info    { border-left: 4px solid #2563eb; color: #1e40af; }
+        @keyframes toast-in { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes toast-out { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(100%); } }
+    </style>
+</head>
+<body>
+    <div class="toast-container" id="toastContainer"></div>
+    <div class="amb-toast-container" data-amb-toast-step="@delayStep">
+                  <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="test"></div>
+                <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="test"></div>
+                <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="test"></div>
+
+    </div>
+    <div class="demo-container">
+        <h1>🎯 AmbMsg — Complete Showcase</h1>
+        <p class="subtitle">Sizes • 9 Positions • 12 Animations • Static Backdrop • Confirm/Alert • Draggable • Dark/RTL • Message Lists</p>
+
+        <!-- NEW: SIZE GALLERY (همه سایزها) -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">📏 Size Gallery (sm → full)</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>SM (300px)</h3><p>پیش‌فرض alert</p><button class="btn-primary" onclick="openSizeDemo('sm')">Open sm</button></div>
+            <div class="example-card"><h3>MD (500px)</h3><p>پیش‌فرض کلی</p><button class="btn-primary" onclick="openSizeDemo('md')">Open md</button></div>
+            <div class="example-card"><h3>LG (800px)</h3><p>فرم‌های بزرگ</p><button class="btn-primary" onclick="openSizeDemo('lg')">Open lg</button></div>
+            <div class="example-card"><h3>XL (1140px)</h3><p>محتوای حجیم</p><button class="btn-primary" onclick="openSizeDemo('xl')">Open xl</button></div>
+            <div class="example-card"><h3>XXL (1400px)</h3><p>جداول بزرگ</p><button class="btn-primary" onclick="openSizeDemo('xxl')">Open xxl</button></div>
+            <div class="example-card"><h3>FULL (100%)</h3><p>تمام‌صفحه</p><button class="btn-primary" onclick="openSizeDemo('full')">Open full</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 1: TOAST TIMER MODALS -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">⏱️ Timer‑based Toast Modals</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Toast Success</h3><p>Auto‑closes in 2.5s</p><button class="btn-success" onclick="showToast('success', 'Operation completed!', 2500)">Show Toast</button></div>
+            <div class="example-card"><h3>Toast Error</h3><p>Auto‑closes in 3s</p><button class="btn-danger" onclick="showToast('error', 'Something went wrong!', 3000)">Show Toast</button></div>
+            <div class="example-card"><h3>Toast Warning</h3><p>Auto‑closes in 2s</p><button class="btn-warning" onclick="showToast('warning', 'Session expiring soon…', 2000)">Show Toast</button></div>
+            <div class="example-card"><h3>Toast Info</h3><p>Auto‑closes in 1.8s</p><button class="btn-info" onclick="showToast('info', 'New update available.', 1800)">Show Toast</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 1.5: ALERT WITH MESSAGE LISTS -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">📋 Alert Types with Message Lists</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Success Messages</h3><p>Multiple success tips</p><button class="btn-success" onclick="AmbMsg.success(['Mission accomplished successfully', 'All files have been processed', 'Email sent to the user'], {btnText:'Got it'})">Show Success</button></div>
+            <div class="example-card"><h3>Error Messages</h3><p>Validation errors</p><button class="btn-danger" onclick="AmbMsg.error(['Connection timeout occurred', 'Invalid input format detected', 'Permission denied for this operation'], {btnText:'Got it'})">Show Errors</button></div>
+            <div class="example-card"><h3>Warning Messages</h3><p>Important warnings</p><button class="btn-warning" onclick="AmbMsg.warning(['Your session will expire in 5 minutes', 'Disk space is running low', 'Backup hasn\'t been performed today'], {btnText:'Got it'})">Show Warnings</button></div>
+            <div class="example-card"><h3>Info Messages</h3><p>Helpful information</p><button class="btn-info" onclick="AmbMsg.info(['New update available for download', 'Server maintenance scheduled for tonight', 'Your colleague shared a file with you'], {btnText:'Got it'})">Show Info</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 2: ANIMATION GALLERY (12 types) -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">🎬 Animation Gallery (12 types)</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Fade</h3><p>Simple opacity</p><button onclick="openAnimModal('fade')">Open</button></div>
+            <div class="example-card"><h3>Zoom In</h3><p>Scale up from 0.7</p><button onclick="openAnimModal('zoom-in')">Open</button></div>
+            <div class="example-card"><h3>Zoom Out</h3><p>Scale down from 1.3</p><button onclick="openAnimModal('zoom-out')">Open</button></div>
+            <div class="example-card"><h3>Slide Up</h3><p>From bottom</p><button onclick="openAnimModal('slide-up')">Open</button></div>
+            <div class="example-card"><h3>Slide Down</h3><p>From top</p><button onclick="openAnimModal('slide-down')">Open</button></div>
+            <div class="example-card"><h3>Slide Left</h3><p>From right</p><button onclick="openAnimModal('slide-left')">Open</button></div>
+            <div class="example-card"><h3>Slide Right</h3><p>From left</p><button onclick="openAnimModal('slide-right')">Open</button></div>
+            <div class="example-card"><h3>Flip X</h3><p>3D rotate X</p><button onclick="openAnimModal('flip-x')">Open</button></div>
+            <div class="example-card"><h3>Flip Y</h3><p>3D rotate Y</p><button onclick="openAnimModal('flip-y')">Open</button></div>
+            <div class="example-card"><h3>Bounce</h3><p>Elastic scale</p><button onclick="openAnimModal('bounce')">Open</button></div>
+            <div class="example-card"><h3>Rotate</h3><p>Spin + scale</p><button onclick="openAnimModal('rotate')">Open</button></div>
+            <div class="example-card"><h3>None</h3><p>No animation</p><button onclick="openAnimModal('none')">Open</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 3: STATIC BACKDROP DEMOS -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">🛡️ Static Backdrop</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Static + Form</h3><p>Backdrop won't close modal</p><button class="btn-primary" onclick="openStaticModal('form')">Open form</button></div>
+            <div class="example-card"><h3>Static + Important</h3><p>Must use close button</p><button class="btn-danger" onclick="openStaticModal('important')">Important message</button></div>
+            <div class="example-card"><h3>Static + Dark</h3><p>Dark theme, static</p><button onclick="openStaticModal('dark')">Dark static</button></div>
+            <div class="example-card"><h3>Static + Timer</h3><p>Auto‑close 4s, static</p><button class="btn-warning" onclick="openStaticModal('timer')">Auto close</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 4: CONFIRM / ALERT / LOADING -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">💬 Confirm, Alert & Loading</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Confirm Dialog</h3><p>With callback</p><button class="btn-primary" id="btn-confirm">Delete item?</button></div>
+            <div class="example-card"><h3>Alert Types</h3><p>All four variants</p><div class="btn-group">
+                <button class="btn-success" onclick="AmbMsg.success('Saved!')">✓</button>
+                <button class="btn-danger" onclick="AmbMsg.error('Error!')">✗</button>
+                <button class="btn-warning" onclick="AmbMsg.warning('Warning!')">⚠</button>
+                <button class="btn-info" onclick="AmbMsg.info('Info')">ℹ</button>
+            </div></div>
+            <div class="example-card"><h3>Loading State</h3><p>Simulate async</p><button id="btn-loading">Load data</button></div>
+        </div>
+
+        <hr>
+
+        <!-- SECTION 5: DRAGGABLE & DARK/RTL -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">🖱️ Draggable, Dark & RTL</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Draggable</h3><p>Drag by header</p><button data-amb-toggle="modal" data-amb-target="#attr-draggable">Open draggable</button></div>
+            <div class="example-card"><h3>Dark + RTL</h3><p>Persian dark modal</p><button data-amb-toggle="modal" data-amb-target="#attr-dark-rtl">Open dark RTL</button></div>
+            <div class="example-card"><h3>Custom Position</h3><p>Bottom‑right</p><button onclick="openPositionModal()">Bottom right</button></div>
+        </div>
+
+        <hr>
+
+        <!-- NEW SECTION 6: POSITIONS GALLERY (9 positions) -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">📍 ۹ موقعیت مختلف نمایش (Positions Gallery)</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Top-Left</h3><p>بالا-چپ</p><button onclick="openPositionDemo('top-left')">Open</button></div>
+            <div class="example-card"><h3>Top-Center</h3><p>بالا-وسط</p><button onclick="openPositionDemo('top-center')">Open</button></div>
+            <div class="example-card"><h3>Top-Right</h3><p>بالا-راست</p><button onclick="openPositionDemo('top-right')">Open</button></div>
+            <div class="example-card"><h3>Center-Left</h3><p>وسط-چپ</p><button onclick="openPositionDemo('center-left')">Open</button></div>
+            <div class="example-card"><h3>Center</h3><p>وسط</p><button class="btn-primary" onclick="openPositionDemo('center')">Open</button></div>
+            <div class="example-card"><h3>Center-Right</h3><p>وسط-راست</p><button onclick="openPositionDemo('center-right')">Open</button></div>
+            <div class="example-card"><h3>Bottom-Left</h3><p>پایین-چپ</p><button onclick="openPositionDemo('bottom-left')">Open</button></div>
+            <div class="example-card"><h3>Bottom-Center</h3><p>پایین-وسط</p><button onclick="openPositionDemo('bottom-center')">Open</button></div>
+            <div class="example-card"><h3>Bottom-Right</h3><p>پایین-راست</p><button class="btn-warning" onclick="openPositionDemo('bottom-right')">Open</button></div>
+        </div>
+
+        <hr>
+
+        <!-- NEW SECTION 7: FORM VALIDATOR SIMULATION -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">🧪 شبیه‌سازی خطاهای اعتبارسنجی فرم (FormValidator)</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>خطای ورود (۳ خطا)</h3><p>rtl با عنوان و دکمه</p><button class="btn-danger" onclick="AmbMsg.error(['نام کاربری الزامی است', 'رمز عبور باید حداقل ۴ کاراکتر باشد', 'کد امنیتی اشتباه است'], {title:'لطفاً خطاهای زیر را برطرف کنید', rtl:true, btnText:'باشه'})">نمایش خطاها</button></div>
+            <div class="example-card"><h3>خطای ثبت‌نام (۴ خطا)</h3><p>rtl با دکمه سفارشی</p><button class="btn-danger" onclick="AmbMsg.error(['ایمیل وارد شده معتبر نیست', 'شماره موبایل باید با ۰۹ شروع شود', 'کد ملی نامعتبر است', 'رمز عبور باید شامل حروف بزرگ، کوچک و عدد باشد'], {title:'خطاهای ثبت‌نام', rtl:true, btnText:'متوجه شدم'})">نمایش خطاها</button></div>
+            <div class="example-card"><h3>Dark Error</h3><p>تم تاریک + rtl</p><button class="btn-danger" onclick="AmbMsg.error(['پایگاه داده در دسترس نیست', 'Timeout اتصال به سرور', 'مجوز دسترسی منقضی شده است'], {title:'خطای سیستمی', rtl:true, theme:'dark', btnText:'تلاش مجدد'})">Dark Error</button></div>
+            <div class="example-card"><h3>Super Custom</h3><p>Dark + Large + Flip</p><button class="btn-danger" onclick="AmbMsg.error(['سیستم با مشکل مواجه شده است', 'لطفاً با پشتیبانی تماس بگیرید', 'کد خطا: ۵۰۰'], {title:'خطای بحرانی', rtl:true, theme:'dark', size:'lg', animOpen:'flip-x', btnText:'تماس با پشتیبانی'})">Super Custom</button></div>
+        </div>
+
+        <hr>
+
+        <!-- NEW SECTION 8: SINGLE ALERT (amb-alert-*) -->
+        <h2 style="font-size:1.2rem; margin:0 0 1rem;">📢 Alert تکی (با آیکون در هدر)</h2>
+        <div class="example-grid">
+            <div class="example-card"><h3>Success Alert</h3><p>تک پیام</p><button class="btn-success" onclick="AmbMsg.alert({type:'success', message:'عملیات با موفقیت انجام شد!', rtl:true, btnText:'باشه'})">Show</button></div>
+            <div class="example-card"><h3>Error Alert</h3><p>تک پیام</p><button class="btn-danger" onclick="AmbMsg.alert({type:'error', message:'مشکلی پیش آمده است!', rtl:true, btnText:'باشه'})">Show</button></div>
+            <div class="example-card"><h3>Warning Alert</h3><p>تک پیام</p><button class="btn-warning" onclick="AmbMsg.alert({type:'warning', message:'جلسه شما به زودی منقضی می‌شود.', rtl:true, btnText:'باشه'})">Show</button></div>
+            <div class="example-card"><h3>Info Alert</h3><p>تک پیام</p><button class="btn-info" onclick="AmbMsg.alert({type:'info', message:'نسخه جدید در دسترس است.', rtl:true, btnText:'باشه'})">Show</button></div>
+        </div>
+
+    </div><!-- /demo-container -->
+
+    <!-- Hidden attribute-driven modal definitions -->
+    <div style="display:none;">
+        <div id="attr-draggable" data-amb-title="Draggable modal" data-amb-draggable="true" data-amb-size="md" data-amb-footer="<button class='amb-btn amb-btn-secondary' data-amb-dismiss='modal'>Close</button>"><p>↕ Drag this modal by its header. Works with mouse and touch.</p></div>
+        <div id="attr-dark-rtl" data-amb-title="وضع تاریک" data-amb-theme="dark" data-amb-rtl="true" data-amb-footer="<button class='amb-btn amb-btn-primary' data-amb-dismiss='modal'>باشه</button>" data-amb-size="sm" data-amb-position="top-center"><p>این مودال با <strong>تم تاریک</strong> و راست‌چین نمایش داده می‌شود.</p></div>
+    </div>
+<!-- اضافه کردن این بخش قبل از <script src="./AmbMsg.js"></script> -->
+
+<!-- NEW: Toast & Alert Global Shortcuts -->
+<h2 style="font-size:1.2rem; margin:2rem 0 1rem;">🌐 Global Shortcuts (بدون AmbMsg. prefix)</h2>
+<div class="example-grid">
+    <div class="example-card"><h3>AlertSuccess</h3><p>Modal success</p><button class="btn-success" onclick="AlertSuccess('عملیات موفق', ['فایل ذخیره شد', 'ایمیل ارسال شد'])">AlertSuccess</button></div>
+    <div class="example-card"><h3>AlertError</h3><p>Modal error</p><button class="btn-danger" onclick="AlertError('خطا', ['فیلد نام الزامی است', 'ایمیل نامعتبر است'])">AlertError</button></div>
+    <div class="example-card"><h3>AlertWarning</h3><p>Modal warning</p><button class="btn-warning" onclick="AlertWarning('هشدار', 'جلسه شما منقضی می‌شود')">AlertWarning</button></div>
+    <div class="example-card"><h3>AlertInfo</h3><p>Modal info</p><button class="btn-info" onclick="AlertInfo('اطلاعات', 'نسخه جدید منتشر شد')">AlertInfo</button></div>
+</div>
+
+<div class="example-grid" style="margin-top:0;">
+    <div class="example-card"><h3>ToastSuccess</h3><p>Toast notification</p><button class="btn-success" onclick="ToastSuccess('عملیات با موفقیت انجام شد')">ToastSuccess</button></div>
+    <div class="example-card"><h3>ToastError</h3><p>Toast notification</p><button class="btn-danger" onclick="ToastError('خطا در اتصال به سرور')">ToastError</button></div>
+    <div class="example-card"><h3>ToastWarning</h3><p>Toast notification</p><button class="btn-warning" onclick="ToastWarning('فضای دیسک رو به اتمام است')">ToastWarning</button></div>
+    <div class="example-card"><h3>ToastInfo</h3><p>Toast notification</p><button class="btn-info" onclick="ToastInfo('پیام جدید دریافت شد')">ToastInfo</button></div>
+</div>
+
+<div class="example-grid" style="margin-top:0;">
+    <div class="example-card"><h3>FireToast</h3><p>Dynamic type</p><button class="btn-primary" onclick="FireToast('success', 'پویا: موفقیت!')">FireToast success</button></div>
+    <div class="example-card"><h3>FireAlert</h3><p>Dynamic type</p><button class="btn-primary" onclick="FireAlert('error', 'پویا: خطا!', 'متن خطای داینامیک')">FireAlert error</button></div>
+</div>
+
+<!-- اضافه کردن قبل از <script src="./AmbMsg.js"></script> -->
+
+<!-- NEW: Auto-Resolve Toast Containers (اسکن خودکار) -->
+<!-- جایگزین کامل section Auto-Resolve با این: -->
+
+<!-- NEW: Auto-Resolve Containers (اسکن خودکار DOM برای Toast و Alert) -->
+<h2 style="font-size:1.2rem; margin:2rem 0 1rem;">🔍 Auto-Resolve Containers (اسکن خودکار DOM)</h2>
+
+<!-- Toast Examples -->
+<h3 style="font-size:1rem; margin:1rem 0 0.75rem; color:#6366f1;">📦 Toast Containers</h3>
+<div class="example-grid">
+    <div class="example-card"><h3>Single Toast</h3><p>یه دونه success</p>
+        <div class="amb-toast-container" data-amb-toast-step="300">
+            <div class="amb-toast-item" data-amb-toast-type="success" data-amb-toast-msg="✅ عملیات با موفقیت انجام شد"></div>
+        </div>
+        <small style="color:#059669;margin-top:.5rem;display:block;">← خودکار به Toast تبدیل میشه</small>
+    </div>
+    <div class="example-card"><h3>Mixed Toast</h3><p>چهار نوع مختلف</p>
+        <div class="amb-toast-container" data-amb-toast-step="400">
+            <div class="amb-toast-item" data-amb-toast-type="success" data-amb-toast-msg="ذخیره شد"></div>
+            <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="خطا در اتصال"></div>
+            <div class="amb-toast-item" data-amb-toast-type="warning" data-amb-toast-msg="هشدار: زمان کم است"></div>
+            <div class="amb-toast-item" data-amb-toast-type="info" data-amb-toast-msg="اطلاعیه جدید"></div>
+        </div>
+        <small style="color:#6366f1;margin-top:.5rem;display:block;">← پشت سر هم با تأخیر ۴۰۰ms</small>
+    </div>
+    <div class="example-card"><h3>Toast Form Errors</h3><p>خطاهای اعتبارسنجی</p>
+        <div class="amb-toast-container" data-amb-toast-step="250">
+            <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="نام کاربری الزامی است"></div>
+            <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="رمز عبور باید حداقل ۸ کاراکتر باشد"></div>
+            <div class="amb-toast-item" data-amb-toast-type="error" data-amb-toast-msg="ایمیل نامعتبر است"></div>
+        </div>
+        <small style="color:#dc2626;margin-top:.5rem;display:block;">← ۳ خطا پشت سر هم</small>
+    </div>
+</div>
+
+<!-- Alert Examples -->
+<h3 style="font-size:1rem; margin:1.5rem 0 0.75rem; color:#f59e0b;">🪟 Alert Modal Containers</h3>
+<div class="example-grid">
+    <div class="example-card"><h3>Single Alert</h3><p>یه دونه error</p>
+        <div class="amb-alert-container" data-amb-alert-step="300">
+            <div class="amb-alert-item" 
+                 data-amb-alert-type="error" 
+                 data-amb-alert-title="خطای سیستمی"
+                 data-amb-alert-msg="پایگاه داده در دسترس نیست"
+                 data-amb-alert-rtl="true"
+                 data-amb-alert-btn="تلاش مجدد"></div>
+        </div>
+        <small style="color:#dc2626;margin-top:.5rem;display:block;">← خودکار Modal Alert باز میشه</small>
+    </div>
+  
+
+</div>
+    <script src="./AmbMsg.js"></script>
+    <script>
+        const Amb = window.AmbMsg;
+
+        function showToast(type, message, duration = 2500) {
+            const container = document.getElementById('toastContainer');
+            const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+            const toast = document.createElement('div');
+            toast.className = `toast-item ${type}`;
+            toast.innerHTML = `<span>${icons[type] || ''}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.animation = 'toast-out 0.3s ease-in forwards'; toast.addEventListener('animationend', () => toast.remove()); }, duration);
+        }
+
+        function openSizeDemo(size) {
+            Amb.open('size-' + size, {
+                title: `Size: ${size}`,
+                body: `<p>این مودال با سایز <strong>${size}</strong> باز شده است.</p>`,
+                footer: '<button class="amb-btn amb-btn-outline" data-amb-dismiss="modal">Close</button>',
+                size: size,
+                animOpen: 'zoom-in',
+                animClose: 'zoom-out'
+            });
+        }
+
+        function openAnimModal(animName) {
+            const id = 'anim-' + animName;
+            Amb.destroy(id);
+            const map = { fade:'fade','zoom-in':'zoom-in','zoom-out':'zoom-out','slide-up':'slide-up','slide-down':'slide-down','slide-left':'slide-left','slide-right':'slide-right','flip-x':'flip-x','flip-y':'flip-y',bounce:'bounce',rotate:'rotate',none:'none' };
+            Amb.open(id, { title:`Animation: ${animName}`, body:`<p>This modal uses the <strong>${animName}</strong> animation for opening.</p><p style="margin-top:0.5rem;color:#6b7280;">Close animation: ${map[animName]||'fade'}</p>`, footer:'<button class="amb-btn amb-btn-outline" data-amb-dismiss="modal">Close</button>', animOpen:animName, animClose:map[animName]||'fade', size:'sm', position:'center' });
+        }
+
+        function openStaticModal(type) {
+            const configs = {
+                form: { title:'Static Backdrop — Form', body:`<p>Click outside — <strong>nothing happens</strong>.</p><label style="display:block;margin-top:1rem;">Your name:</label><input type="text" style="width:100%;padding:.5rem;margin-top:.25rem;border:1px solid #d1d5db;border-radius:.25rem;" placeholder="Enter name">`, footer:'<button class="amb-btn amb-btn-primary" data-amb-dismiss="modal">Submit</button>', theme:'' },
+                important: { title:'⚠️ Important Notice', body:'<p>This is a critical message. You must acknowledge it by clicking the button below.</p>', footer:'<button class="amb-btn amb-btn-danger" data-amb-dismiss="modal">I Understand</button>', theme:'' },
+                dark: { title:'Dark Static Modal', body:'<p>Dark theme with static backdrop. No escape via outside click.</p>', footer:'<button class="amb-btn amb-btn-outline" data-amb-dismiss="modal">Close</button>', theme:'dark' },
+                timer: { title:'Auto‑closing static', body:'<p>This modal will auto‑close in <strong>4 seconds</strong>. Backdrop is static.</p>', footer:'<button class="amb-btn amb-btn-warning" data-amb-dismiss="modal">Close now</button>', theme:'', autoClose:4000 }
+            };
+            const cfg = configs[type] || configs.form;
+            Amb.open('static-'+type, { title:cfg.title, body:cfg.body, footer:cfg.footer, backdrop:'static', keyboard:true, theme:cfg.theme||'', size:'sm', animOpen:'bounce', animClose:'fade', autoClose:cfg.autoClose||0 });
+        }
+
+        function openPositionModal() {
+            Amb.open('pos-bottom-right', { title:'Bottom Right', body:'<p>This modal appears at the <strong>bottom‑right</strong> corner.</p>', footer:'<button class="amb-btn amb-btn-outline" data-amb-dismiss="modal">Close</button>', position:'bottom-right', size:'sm', animOpen:'slide-up', animClose:'slide-down' });
+        }
+
+        function openPositionDemo(pos) {
+            const title = pos.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+            Amb.open('pos-' + pos, { title:title, body:`<p>موقعیت: <strong>${pos}</strong></p>`, footer:'<button class="amb-btn amb-btn-outline" data-amb-dismiss="modal">Close</button>', position:pos, size:'sm', animOpen:'zoom-in', animClose:'zoom-out' });
+        }
+
+        document.getElementById('btn-confirm').addEventListener('click', () => {
+            Amb.confirm({ title:'Delete item?', message:'Are you sure you want to delete this item?', confirmText:'Yes, delete', cancelText:'Cancel', onConfirm:()=>showToast('success','Item deleted successfully.',2000), onCancel:()=>showToast('info','Deletion cancelled.',1500) });
+        });
+
+        document.getElementById('btn-loading').addEventListener('click', () => {
+            const modal = Amb.create('loading-demo', { title:'Fetching data…', body:'<p>Please wait while we process your request.</p>', size:'sm', backdrop:'static', keyboard:false });
+            modal.show(); modal.setLoading(true);
+            setTimeout(() => { modal.setLoading(false); modal._body.innerHTML='<p>✅ Data loaded successfully!</p>'; const f=modal._dialog.querySelector('.amb-footer'); if(!f){ const nf=document.createElement('div'); nf.className='amb-footer'; nf.innerHTML='<button class="amb-btn amb-btn-primary" data-amb-dismiss="modal">Close</button>'; modal._dialog.append(nf); } }, 2000);
+        });
+    </script>
+</body>
+</html>

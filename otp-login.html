@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تایید هویت | سامانه دانا</title>
+
+    <link rel="stylesheet" href="./wwwroot/css/output.css" />
+    <link rel="stylesheet" href="./wwwroot/css/animated-background.css" />
+    <link href="/wwwroot/fonts/set-font-site.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .otp-digit {
+            width: 55px; 
+            height: 55px; 
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            font-weight: 700;
+            border: 2px solid var(--border-color);
+            border-bottom: 3px solid var(--border-color);
+            border-radius: 0.75rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            caret-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-bottom: 0.3rem;
+            padding-top: 0.3rem;
+        }
+        .otp-digit:focus {
+            outline: none;
+            border-color: var(--border-color);
+            border-bottom-color: var(--color-primary);
+            border-bottom-width: 3px;
+        }
+        .otp-digit.filled {
+            border-color: var(--border-color);
+            border-bottom-color: var(--color-primary);
+        }
+        .otp-digit.error {
+            border-bottom-color: var(--color-danger);
+            animation: shake 0.4s ease;
+        }
+        .otp-digit.success {
+            border-bottom-color: var(--color-success);
+        }
+        @keyframes shake {
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-3px); }
+        }
+        .timer-ring {
+            transition: stroke-dashoffset 1s linear;
+        }
+   
+    </style>
+</head>
+<body class="min-h-screen bg-[var(--bg-secondary)] font-primary">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <!-- Glowing Orbs -->
+        <div class="glow bg-primary w-96 h-96 top-[-10%] right-[-5%]"></div>
+        <div class="glow bg-accent w-80 h-80 bottom-[-10%] left-[-5%]"></div>
+        
+        <!-- Floating Shapes -->
+        <svg class="shape shape-1 w-20 h-20 top-[10%] right-[15%] text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+        </svg>
+        <svg class="shape shape-2 w-16 h-16 top-[20%] left-[20%] text-accent" fill="currentColor" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="16" rx="3"/>
+        </svg>
+        <svg class="shape shape-3 w-24 h-24 bottom-[15%] right-[25%] text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <polygon points="12,2 22,20 2,20"/>
+        </svg>
+        <svg class="shape shape-4 w-14 h-14 top-[60%] right-[10%] text-accent" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <svg class="shape shape-5 w-18 h-18 bottom-[30%] left-[15%] text-primary" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8"/>
+        </svg>
+        <svg class="shape shape-6 w-20 h-20 top-[40%] left-[30%] text-accent" fill="currentColor" viewBox="0 0 24 24">
+            <rect x="6" y="6" width="12" height="12" rx="2"/>
+        </svg>
+    </div>
+    <!-- ═══════ محتوای اصلی ═══════ -->
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-3 sm:p-4">
+        <div class="w-full max-w-6xl">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+
+                <!-- ستون چپ — Branding (فقط دسکتاپ) -->
+                <div class="hidden lg:block">
+                    <div class="text-center lg:text-right space-y-6">
+                        <div class="inline-block p-1">
+                            <img src="./wwwroot/imgs/logoazad.png" width="200" alt="لوگو دانشگاه آزاد">
+                        </div>
+                        <h1 class="text-5xl font-bold text-[var(--text-secondary)]">سامانه دانا</h1>
+                        <div class="space-y-4 pt-6">
+                            <div class="flex items-center gap-3 justify-end">
+                                <span class="text-[var(--text-secondary)]">احراز هویت دو مرحله‌ای امن</span>
+                                <div class="w-10 h-10 bg-primary-lighter/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 justify-end">
+                                <span class="text-[var(--text-secondary)]">کد یکبار مصرف پیامکی</span>
+                                <div class="w-10 h-10 bg-primary-lighter/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 justify-end">
+                                <span class="text-[var(--text-secondary)]">حفاظت از حساب کاربری</span>
+                                <div class="w-10 h-10 bg-primary-lighter/20 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ستون راست — فرم OTP -->
+                <div class="w-full">
+                    <!-- هدر موبایل -->
+                    <div class="lg:hidden text-center mb-3">
+                        <div class="inline-block rounded-xl mb-1.5 overflow-hidden" style="padding: 2px;">
+                            <img src="./wwwroot/imgs/logoazad.png" class="w-20 h-30 object-contain" alt="لوگو دانشگاه آزاد">
+                        </div>
+                        <p class="text-2xl text-[var(--text-primary)] mt-0.5">سامانه دانا</p>
+                    </div>
+
+                    <!-- کارت OTP -->
+                    <div class="bg-[var(--bg-primary)] rounded-2xl shadow-2xl border border-[var(--border-color)] p-5 md:p-6">
+
+                        <!-- هدر کارت -->
+                        <div class="flex items-center justify-between mb-5">
+                            <div>
+                                <h2 class="text-lg font-bold text-[var(--text-primary)]">کد تایید</h2>
+                                <p class="text-xs text-[var(--text-secondary)] mt-0.5">کد ۵ رقمی پیامک شده را وارد کنید</p>
+                            </div>
+                            <button id="theme-toggle" class="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors shrink-0" aria-label="تغییر تم">
+                                <svg class="sun-icon w-5 h-5 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                                <svg class="moon-icon w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- فرم -->
+                        <form id="otp-form" autocomplete="off" class="space-y-5">
+
+                            <!-- ۵ فیلد کد -->
+                            <div class="flex justify-center gap-2 sm:gap-3" dir="ltr">
+                                <input type="text" maxlength="1" class="otp-digit" id="otp-1" inputmode="numeric" pattern="[0-9]" autofocus>
+                                <input type="text" maxlength="1" class="otp-digit" id="otp-2" inputmode="numeric" pattern="[0-9]">
+                                <input type="text" maxlength="1" class="otp-digit" id="otp-3" inputmode="numeric" pattern="[0-9]">
+                                <input type="text" maxlength="1" class="otp-digit" id="otp-4" inputmode="numeric" pattern="[0-9]">
+                                <input type="text" maxlength="1" class="otp-digit" id="otp-5" inputmode="numeric" pattern="[0-9]">
+                            </div>
+
+                            <!-- تلاش باقی‌مانده -->
+                            <p class="text-center text-xs text-[var(--text-secondary)]">
+                                <span id="attempts-count" class="font-bold text-[var(--color-primary)]">۳</span> تلاش باقی‌مانده
+                            </p>
+
+                            <!-- تایمر -->
+                            <div class="flex items-center gap-3 bg-[var(--bg-secondary)] rounded-xl p-3">
+                                <div class="relative w-14 h-14 shrink-0">
+                                    <svg class="w-14 h-14 -rotate-90" viewBox="0 0 56 56">
+                                        <circle cx="28" cy="28" r="24" stroke="var(--border-color)" stroke-width="3" fill="none"/>
+                                        <circle id="timer-circle" cx="28" cy="28" r="24" stroke="var(--color-primary)" stroke-width="3" fill="none" stroke-dasharray="150.8" stroke-dashoffset="0" stroke-linecap="round" class="timer-ring"/>
+                                    </svg>
+                                    <span id="timer-display" class="absolute inset-0 flex items-center justify-center text-sm font-bold text-[var(--color-primary)] tabular-nums">05:00</span>
+                                </div>
+                                <span class="text-xs text-[var(--text-secondary)]">زمان باقی مانده تا منقضی شدن کد ارسالی</span>
+                            </div>
+
+                            <!-- پیغام خطا -->
+                            <div id="error-message" class="hidden animate-slide-down">
+                                <div class="flex items-center gap-2 bg-[var(--color-danger-bg)] border-r-4 border-[var(--color-danger)] rounded-xl p-3">
+                                    <svg class="w-5 h-5 text-[var(--color-danger)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                    </svg>
+                                    <p id="error-text" class="text-sm text-[var(--color-danger-dark)]"></p>
+                                </div>
+                            </div>
+
+                            <!-- پیغام موفقیت -->
+                            <div id="success-message" class="hidden animate-slide-down">
+                                <div class="flex items-center gap-2 bg-[var(--color-success-bg)] border-r-4 border-[var(--color-success)] rounded-xl p-3">
+                                    <svg class="w-5 h-5 text-[var(--color-success)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <p id="success-text" class="text-sm text-[var(--color-success-dark)]"></p>
+                                </div>
+                            </div>
+
+                            <!-- دکمه -->
+                            <button type="submit" id="submit-btn" disabled
+                                    class="w-full bg-primary text-white py-3 rounded-xl font-semibold transition-all duration-300
+                                           hover:bg-primary-dark focus:outline-none focus:ring-4 focus:ring-primary/30
+                                           disabled:opacity-50 disabled:cursor-not-allowed shadow-lg active:scale-[0.98]">
+                                تایید و ورود
+                            </button>
+                        </form>
+
+                        <!-- بازگشت -->
+                        <div class="mt-4 pt-4 border-t border-[var(--border-color)] text-center">
+                            <a href="./login.html" class="text-sm text-[var(--text-secondary)] hover:text-primary transition-colors">
+                                ← بازگشت به صفحه ورود
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- پشتیبانی -->
+                    <p class="mt-4 text-center text-xs text-[var(--text-secondary)]">
+                        کد دریافت نکرده‌اید؟ <a href="#" class="text-primary font-medium hover:underline">تماس با پشتیبانی</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="./wwwroot/js/shared/theme.js"></script>
+    <script>
+        (function() {
+            const TOTAL = 5, MAX_ATTEMPTS = 3, TIMER_MINUTES = 5, LOCKOUT_SECS = 30;
+            const inputs = [];
+            let timerInterval, lockoutInterval, expiry, attempts = MAX_ATTEMPTS, locked = false, loading = false;
+
+            const form = document.getElementById('otp-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const timerDisplay = document.getElementById('timer-display');
+            const timerCircle = document.getElementById('timer-circle');
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            const successDiv = document.getElementById('success-message');
+            const successText = document.getElementById('success-text');
+            const attemptsCount = document.getElementById('attempts-count');
+
+            function init() {
+                for (let i = 1; i <= TOTAL; i++) {
+                    const el = document.getElementById(`otp-${i}`);
+                    if (el) { inputs.push(el); bind(el, i - 1); }
+                }
+                inputs[0]?.focus();
+                updateAttempts();
+                startTimer();
+            }
+
+            function bind(input, idx) {
+                input.addEventListener('input', function(e) {
+                    if (locked || loading) return;
+                    let v = e.target.value.replace(/[^0-9]/g, '').slice(0, 1);
+                    e.target.value = v;
+                    e.target.classList.toggle('filled', !!v);
+                    if (v && idx < TOTAL - 1) inputs[idx + 1].focus();
+                    checkComplete();
+                });
+                input.addEventListener('keydown', function(e) {
+                    if (locked || loading) { e.preventDefault(); return; }
+                    if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+                        inputs[idx - 1].focus(); inputs[idx - 1].value = '';
+                        inputs[idx - 1].classList.remove('filled'); checkComplete(); e.preventDefault();
+                    }
+                });
+                input.addEventListener('paste', function(e) {
+                    if (locked || loading) { e.preventDefault(); return; }
+                    e.preventDefault();
+                    const d = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '').slice(0, TOTAL).split('');
+                    d.forEach((c, i) => { if (i < TOTAL) { inputs[i].value = c; inputs[i].classList.add('filled'); } });
+                    inputs[Math.min(d.length, TOTAL) - 1]?.focus();
+                    checkComplete();
+                });
+                input.addEventListener('focus', () => { if (!locked && !loading) input.select(); });
+            }
+
+            function code() { return inputs.map(i => i.value).join(''); }
+            function checkComplete() {
+                const ok = inputs.every(i => i.value.length === 1);
+                submitBtn.disabled = !ok || locked || loading;
+            }
+            function updateAttempts() { attemptsCount.textContent = attempts; }
+
+            function showError(msg) {
+                errorText.textContent = msg; errorDiv.classList.remove('hidden'); successDiv.classList.add('hidden');
+                inputs.forEach(i => i.classList.add('error'));
+                setTimeout(() => inputs.forEach(i => i.classList.remove('error')), 1500);
+            }
+            function showSuccess(msg) {
+                successText.textContent = msg; successDiv.classList.remove('hidden'); errorDiv.classList.add('hidden');
+            }
+
+            function resetForm() {
+                inputs.forEach(i => { i.value = ''; i.classList.remove('filled', 'error', 'success'); i.disabled = false; });
+                inputs[0]?.focus(); submitBtn.disabled = true;
+            }
+
+            function lockout() {
+                locked = true; let sec = LOCKOUT_SECS;
+                inputs.forEach(i => i.disabled = true); submitBtn.disabled = true;
+                clearInterval(timerInterval);
+                const update = () => {
+                    if (sec <= 0) { clearInterval(lockoutInterval); locked = false; attempts = MAX_ATTEMPTS; updateAttempts(); resetForm(); startTimer(); }
+                    else { showError(`حساب کاربری قفل شد. ${sec} ثانیه صبر کنید`); sec--; }
+                };
+                update(); lockoutInterval = setInterval(update, 1000);
+            }
+
+            function startTimer() {
+                expiry = Date.now() + TIMER_MINUTES * 60000;
+                clearInterval(timerInterval);
+                const tick = () => {
+                    const diff = expiry - Date.now();
+                    if (diff <= 0) { clearInterval(timerInterval); timerDisplay.textContent = '00:00'; timerCircle.style.strokeDashoffset = '150.8'; inputs.forEach(i => i.disabled = true); showError('زمان به پایان رسید'); return; }
+                    const m = Math.floor(diff / 60000), s = Math.floor((diff % 60000) / 1000);
+                    timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                    timerCircle.style.strokeDashoffset = 150.8 * (1 - diff / (TIMER_MINUTES * 60000));
+                };
+                tick(); timerInterval = setInterval(tick, 1000);
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (locked || loading || code().length !== TOTAL) return;
+                loading = true; submitBtn.disabled = true; errorDiv.classList.add('hidden'); successDiv.classList.add('hidden');
+
+                setTimeout(() => {
+                    loading = false;
+                    if (code() === '12345') {
+                        showSuccess('کد تایید شد. در حال انتقال...');
+                        clearInterval(timerInterval);
+                        setTimeout(() => location.href = './courses.html', 1200);
+                    } else {
+                        attempts--;
+                        updateAttempts();
+                        attempts <= 0 ? lockout() : (showError(`کد اشتباه است. ${attempts} تلاش باقی‌مانده`), resetForm());
+                    }
+                }, 800);
+            });
+
+            document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+        })();
+    </script>
+</body>
+</html>

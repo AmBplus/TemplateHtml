@@ -1,0 +1,136 @@
+// ============================================================================
+// SWITCH / TOGGLE COMPONENT
+// A CSS-only toggle switch
+// ============================================================================
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  cursor: pointer;
+  user-select: none;
+  direction: rtl;
+
+  // Hide native checkbox
+  .switch-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  // Track
+  .switch-track {
+    position: relative;
+    display: inline-block;
+    width: $switch-width;
+    height: $switch-height;
+    background: var(--switch-bg);
+    border-radius: $radius-full;
+    transition: background-color $transition-base, box-shadow $transition-base;
+    flex-shrink: 0;
+  }
+
+  // Thumb
+  .switch-thumb {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    transform: translateY(-50%);
+    width: $switch-thumb-size;
+    height: $switch-thumb-size;
+    background: var(--switch-thumb-bg);
+    border-radius: $radius-full;
+    box-shadow: $shadow-sm;
+    transition: transform $transition-base, background-color $transition-base;
+  }
+
+  // Label text
+  .switch-label {
+    font-size: $text-sm;
+    color: var(--text-primary);
+    transition: color $transition-theme;
+  }
+
+  // ---- Checked State ----
+  .switch-input:checked ~ .switch-track {
+    background: var(--switch-checked-bg);
+
+    .switch-thumb {
+      transform: translateY(-50%) translateX(calc(-1 * (#{$switch-width} - #{$switch-thumb-size} - 6px)));
+    }
+  }
+
+  // ---- Focus State ----
+  .switch-input:focus-visible ~ .switch-track {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+  }
+
+  // ---- Disabled State ----
+  &.disabled,
+  .switch-input:disabled ~ .switch-track {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .switch-input:disabled ~ .switch-label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // ---- Color Variants ----
+  &.switch-success .switch-input:checked ~ .switch-track {
+    background: var(--color-success);
+  }
+
+  &.switch-danger .switch-input:checked ~ .switch-track {
+    background: var(--color-danger);
+  }
+
+  &.switch-warning .switch-input:checked ~ .switch-track {
+    background: var(--color-warning);
+  }
+
+  &.switch-info .switch-input:checked ~ .switch-track {
+    background: var(--color-info);
+  }
+
+  &.switch-secondary .switch-input:checked ~ .switch-track {
+    background: var(--color-secondary);
+  }
+
+  // ---- Size Variants ----
+  &.switch-sm {
+    .switch-track {
+      width: 2.125rem;
+      height: 1.125rem;
+    }
+
+    .switch-thumb {
+      width: 0.8125rem;
+      height: 0.8125rem;
+    }
+
+    .switch-input:checked ~ .switch-track .switch-thumb {
+      transform: translateY(-50%) translateX(calc(-1 * (2.125rem - 0.8125rem - 6px)));
+    }
+  }
+
+  &.switch-lg {
+    .switch-track {
+      width: 3.25rem;
+      height: 1.75rem;
+    }
+
+    .switch-thumb {
+      width: 1.3125rem;
+      height: 1.3125rem;
+    }
+
+    .switch-input:checked ~ .switch-track .switch-thumb {
+      transform: translateY(-50%) translateX(calc(-1 * (3.25rem - 1.3125rem - 6px)));
+    }
+  }
+}

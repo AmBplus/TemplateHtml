@@ -1,0 +1,190 @@
+// ============================================================================
+// DEFAULT THEME - Soft Organizational Blue (تم پیش‌فرض آبی سازمانی)
+// A calm, professional blue palette suitable for enterprise/admin panels
+// ============================================================================
+
+:root,
+[data-theme="default"] {
+  // ---- Primary Colors ----
+  --color-primary: #3964f3;
+  --color-primary-light: #1969eb;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-lighter: #DBEAFE;
+
+  // ---- Secondary Colors ----
+  --color-secondary: #0f766e;
+  --color-secondary-light: #14B8A6;
+  --color-secondary-dark: #0f766e;
+  --color-secondary-lighter: #CCFBF1;
+
+  // ---- Accent Colors ----
+  --color-accent: #da8b03;
+  --color-accent-light: #fbbf24;
+  --color-accent-dark: #d97706;
+  --color-accent-lighter: #FEF3C7;
+
+  // ---- Semantic Colors ----
+  --color-success: #15a877;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-success-bg: #d1fae5;
+  --color-success-border: #A7F3D0;
+
+  --color-danger: #dc2626;
+  --color-danger-light: #ef4444;
+  --color-danger-dark: #b91c1c;
+  --color-danger-bg: #fee2e2;
+  --color-danger-border: #fecaca;
+
+  /* badge text contrast overrides (light theme uses semantic color text) */
+  --badge-danger-text: var(--color-danger);
+  --badge-warning-text: var(--color-warning);
+
+  --color-warning: #F59E0B;
+  --color-warning-light: #FBBF24;
+  --color-warning-dark: #B45309;
+  --color-warning-bg: rgba(245, 158, 11, 0.10);
+  --color-warning-border: rgba(245, 158, 11, 0.22);
+
+  --color-info: #0ea5e9;
+  --color-info-light: #38bdf8;
+  --color-info-dark: #0284c7;
+  --color-info-bg: #e0f2fe;
+  --color-info-border: #bae6fd;
+
+  // ---- Extra Colors ----
+  --color-pink: #EC4899;
+  --color-pink-bg: #FCE7F3;
+  --color-indigo: #6366F1;
+  --color-indigo-bg: #E0E7FF;
+  --color-cyan: #06B6D4;
+  --color-cyan-bg: #CFFAFE;
+  --color-purple: #8b5cf6;
+  --color-purple-bg: #EDE9FE;
+
+  // ---- Additional Color Variants ----
+  --color-info-darker: #0369a1;
+  --color-danger-lighter: #fca5a5;
+  --color-danger-darker: #991b1b;
+  --color-error: #dc2626;
+  --color-error-light: #ef4444;
+  --color-error-dark: #b91c1c;
+  --color-error-bg: #fee2e2;
+  --color-help: #8b5cf6;
+  --color-help-light: #a78bfa;
+  --color-help-dark: #7c3aed;
+  --color-help-bg: #ede9fe;
+  --color-pink-light: #f472b6;
+  --color-pink-dark: #db2777;
+  --color-indigo-light: #818cf8;
+  --color-indigo-dark: #4f46e5;
+  --color-cyan-light: #22d3ee;
+  --color-cyan-dark: #0891b2;
+  --color-rose: #f43f5e;
+  --color-rose-light: #fb7185;
+  --color-rose-dark: #e11d48;
+  --color-rose-bg: #ffe4e6;
+  --color-lime: #84cc16;
+  --color-lime-light: #a3e635;
+  --color-lime-dark: #65a30d;
+  --color-lime-bg: #ecfccb;
+  --color-green-dark: #15803d;
+  --color-blue-dark: #1e3a8a;
+  --color-orange: #f97316;
+  --color-github: #24292e;
+  --color-youtube: red;
+  --color-twitter: #1da1f2;
+  --color-instagram: #e4405f;
+  --color-facebook: #1877f2;
+  --color-telegram: #08c;
+  --color-linkedin: #0077b5;
+  --color-whatsapp: #25d366;
+  --color-pinterest: #e60023;
+  --color-snapchat: #fffc00;
+  --color-tiktok: #000;
+  --color-disabled: #94a3b8;
+  --color-disabled-bg: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  // ---- Neutral / Gray ----
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1E293B;
+  --color-gray-900: #0F172A;
+
+  // ---- Semantic Surface & Text ----
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #F1F5F9;
+  --bg-inverse: #1E293B;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --text-inverse: #FFFFFF;
+  --text-muted: #94A3B8;
+  --border-color: #E2E8F0;
+  --border-color-strong: #CBD5E1;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-color-strong: rgba(0, 0, 0, 0.15);
+
+  // ---- Font ----
+  --font-primary: 'Vazirmatn', 'Vazirmatn-FD-NL-font-face', 'Tahoma', 'Arial', sans-serif;
+
+  // ---- Component-specific Variables ----
+
+  // Buttons
+  --btn-primary-bg: #eef3fa;
+  --btn-primary-color: #185ee0;
+  --btn-primary-hover-bg: #dbe9ff;
+  --btn-primary-active-bg: #dbe4f1;
+  --btn-primary-border: color-mix(in srgb, var(--color-primary) 15%, transparent);
+
+  --btn-outline-hover-bg: #EEF2FF;
+  --btn-outline-active-bg: #DBEAFE;
+
+  --btn-secondary-bg: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+  --btn-secondary-hover-bg: color-mix(in srgb, var(--color-gray-400) 16%, transparent);
+
+  // ---- Additional Button Variables ----
+  --btn-outline-color: var(--btn-primary-color);
+  --btn-outline-hover-color: var(--btn-primary-color);
+  --btn-outline-active-color: var(--btn-primary-color);
+  --btn-primary-hover-color: var(--btn-primary-color);
+
+  // Inputs
+  --input-bg: #FFFFFF;
+  --input-border: var(--border-color);
+  --input-focus-border: var(--color-primary);
+  --input-focus-ring: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --input-placeholder: var(--text-secondary);
+
+  // Badge
+  --badge-primary-bg: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  --badge-primary-color: var(--color-primary);
+
+  // Switch
+  --switch-bg: var(--color-gray-300);
+  --switch-checked-bg: var(--color-primary);
+  --switch-thumb-bg: #FFFFFF;
+
+  // Menu
+  --menu-bg: var(--bg-primary);
+  --menu-item-hover-bg: var(--bg-tertiary);
+  --menu-item-active-bg: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  --menu-item-active-color: var(--color-primary);
+
+  // Select
+  --select-bg: var(--bg-primary);
+  --select-dropdown-bg: var(--bg-primary);
+  --select-item-hover-bg: var(--bg-tertiary);
+  --select-item-active-bg: color-mix(in srgb, var(--color-primary) 8%, transparent);
+
+  // Overlay
+  --overlay-light: rgba(255, 255, 255, 0.8);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+}

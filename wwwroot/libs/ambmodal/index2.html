@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbMsg — نمونه‌های کامل با بدنه‌های از پیش تعریف شده</title>
+    <link rel="stylesheet" href="./ambmsg.css">
+    <style>
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f3f4f6; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; }
+        .demo-container { max-width: 1000px; width: 100%; background: white; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,.06); padding: 2rem; }
+        h1 { margin: 0 0 .25rem; font-weight: 700; font-size: 1.8rem; color: #111827; }
+        .subtitle { color: #6b7280; margin: 0 0 1.75rem; font-size: 0.95rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.75rem; }
+        .example-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+        .example-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1.25rem; flex: 1 1 220px; display: flex; flex-direction: column; gap: 0.6rem; }
+        .example-card h3 { margin: 0; font-size: 1rem; font-weight: 600; color: #1f2937; }
+        .example-card p { margin: 0; font-size: 0.85rem; color: #6b7280; flex: 1; }
+        button { font-weight: 500; border: none; border-radius: 0.4rem; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; background: #e5e7eb; color: #1f2937; transition: background .15s; white-space: nowrap; }
+        button:hover { background: #d1d5db; }
+        .btn-primary { background: #6366f1; color: white; } .btn-primary:hover { background: #4f46e5; }
+        .btn-danger { background: #dc2626; color: white; } .btn-danger:hover { background: #b91c1c; }
+        .btn-success { background: #059669; color: white; } .btn-success:hover { background: #047857; }
+        .btn-warning { background: #d97706; color: white; } .btn-warning:hover { background: #b45309; }
+        .btn-info { background: #2563eb; color: white; } .btn-info:hover { background: #1d4ed8; }
+        .btn-outline { background: transparent; border: 1px solid #cbd5e1; color: #334155; } 
+        .btn-outline:hover { background: #f1f5f9; }
+        hr { margin: 2rem 0; border: 0; border-top: 1px solid #e5e7eb; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem; }
+        
+        /* استایل‌های بدنه مودال‌ها (که داخل HTML قرار دارند) */
+        .user-profile { text-align: center; padding: 0.5rem; }
+        .user-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem; font-family: inherit; }
+        .settings-list { list-style: none; padding: 0; margin: 0; }
+        .settings-list li { padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .product-item { text-align: center; padding: 1rem; background: #f9fafb; border-radius: 0.5rem; }
+        .product-item img { width: 100%; height: 100px; object-fit: cover; border-radius: 0.375rem; background: #e5e7eb; }
+        .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .status-success { background: #d1fae5; color: #065f46; }
+        .status-warning { background: #fed7aa; color: #92400e; }
+        .status-error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+<div class="demo-container">
+    <h1>📦 AmbMsg · مودال‌های با بدنه از پیش تعریف شده</h1>
+    <div class="subtitle">✅ کلیه بدنه‌ها در HTML قرار دارند · فقط با جاوااسکریپت باز می‌شوند</div>
+
+    <!-- دکمه‌های کنترل -->
+    <div class="example-grid">
+        <div class="example-card">
+            <h3>👤 پروفایل کاربر</h3>
+            <p>بدنه شامل اطلاعات پروفایل، آواتار و جزئیات</p>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="AmbMsg.open('profileModal')">نمایش پروفایل</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>📝 فرم ثبت‌نام</h3>
+            <p>فرم کامل با فیلدهای ورودی، در HTML تعریف شده</p>
+            <div class="btn-group">
+                <button class="btn-success" onclick="AmbMsg.open('registerModal')">فرم ثبت‌نام</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>⚙️ تنظیمات پیشرفته</h3>
+            <p>لیست تنظیمات با سوئیچ‌ها و گزینه‌ها</p>
+            <div class="btn-group">
+                <button class="btn-warning" onclick="AmbMsg.open('settingsModal')">تنظیمات</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>🛒 سبد خرید</h3>
+            <p>نمایش محصولات و جمع کل (محتوای ایستا)</p>
+            <div class="btn-group">
+                <button class="btn-info" onclick="AmbMsg.open('cartModal')">سبد خرید</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>📊 وضعیت سیستم</h3>
+            <p>گزارش وضعیت با بدنه پیش‌فرض HTML</p>
+            <div class="btn-group">
+                <button class="btn-danger" onclick="AmbMsg.open('statusModal')">وضعیت</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>🎨 گالری تصاویر</h3>
+            <p>شبکه محصولات با استایل آماده</p>
+            <div class="btn-group">
+                <button class="btn-outline" onclick="AmbMsg.open('galleryModal')">گالری</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="subtitle">🔥 مودال‌های تو در تو (Stack) + دکمه‌های تعاملی در بدنه</div>
+    <div class="example-grid">
+        <div class="example-card">
+            <h3>📚 استک مودال</h3>
+            <p>باز کردن مودال جدید از داخل مودال</p>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="openStackModal()">باز کردن استک والد</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>🎯 مودال با انیمیشن سفارشی</h3>
+            <p>از طریق attribute data-amb-anim-open</p>
+            <div class="btn-group">
+                <button class="btn-info" onclick="AmbMsg.open('animatedModal')">انیمیشن Bounce</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>🖱️ قابل درگ (Draggable)</h3>
+            <p>با فعال کردن data-amb-draggable</p>
+            <div class="btn-group">
+                <button class="btn-success" onclick="AmbMsg.open('draggableModal')">درگ کن!</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="subtitle">🧪 تست jLoad برای بررسی تکرار نشدن id/class/attribute در بدنه مودال</div>
+    <div class="example-grid">
+        <div class="example-card">
+            <h3>jLoad Test A</h3>
+            <p>باز شدن مودال با بدنه داینامیک و لاگ شمارش در کنسول</p>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="runJLoadDuplicateCheck('caseA')">اجرای تست A</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>jLoad Test B</h3>
+            <p>بررسی id و class اختصاصی بدنه مودال</p>
+            <div class="btn-group">
+                <button class="btn-success" onclick="runJLoadDuplicateCheck('caseB')">اجرای تست B</button>
+            </div>
+        </div>
+        <div class="example-card">
+            <h3>jLoad Test C</h3>
+            <p>بررسی یکتا بودن data attribute در صفحه</p>
+            <div class="btn-group">
+                <button class="btn-info" onclick="runJLoadDuplicateCheck('caseC')">اجرای تست C</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================== بدنه مودال‌ها (همگی در HTML) ======================== -->
+
+<!-- 1. مودال پروفایل کاربر -->
+<div id="profileModal" style="display: none;" data-amb-title="👤 پروفایل کاربر" data-amb-size="md" data-amb-position="center">
+    <div class="user-profile">
+        <div class="user-avatar">AR</div>
+        <h3 style="margin: 0 0 0.25rem;">احمد رضایی</h3>
+        <p style="color: #6b7280; margin: 0 0 1rem;">توسعه‌دهنده ارشد فرانت‌اند</p>
+        <div style="text-align: right; background: #f9fafb; padding: 1rem; border-radius: 0.5rem;">
+            <p><strong>📧 ایمیل:</strong> ahmad.rezaei@example.com</p>
+            <p><strong>📱 تلفن:</strong> ۰۹۱۲۱۲۳۴۵۶۷</p>
+            <p><strong>📍 موقعیت:</strong> تهران، ایران</p>
+            <p><strong>🏢 شرکت:</strong> نوین‌افزار</p>
+        </div>
+    </div>
+</div>
+
+<!-- 2. مودال فرم ثبت‌نام (بدنه کامل) -->
+<div id="registerModal" style="display: none;" data-amb-title="📝 فرم ثبت‌نام کاربر جدید" data-amb-size="md">
+    <form id="registerFormInner">
+        <div class="form-group">
+            <label>نام و نام خانوادگی *</label>
+            <input type="text" placeholder="مثال: سارا حسینی" id="fullName">
+        </div>
+        <div class="form-group">
+            <label>آدرس ایمیل *</label>
+            <input type="email" placeholder="sara@example.com" id="emailField">
+        </div>
+        <div class="form-group">
+            <label>شماره همراه</label>
+            <input type="tel" placeholder="۰۹۱۲۲۲۲۲۲۲">
+        </div>
+        <div class="form-group">
+            <label>نقش کاربری</label>
+            <select>
+                <option>کاربر عادی</option>
+                <option>مدیر پروژه</option>
+                <option>توسعه‌دهنده</option>
+            </select>
+        </div>
+        <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem;">
+            <button type="button" class="btn-outline" data-amb-dismiss="modal">انصراف</button>
+            <button type="button" class="btn-primary" onclick="alert('ثبت موقت! داده‌ها ذخیره شد.')">ثبت نام</button>
+        </div>
+    </form>
+</div>
+
+<!-- 3. مودال تنظیمات (لیست تنظیمات) -->
+<div id="settingsModal" style="display: none;" data-amb-title="⚙️ تنظیمات برنامه" data-amb-size="lg" data-amb-position="center">
+    <ul class="settings-list">
+        <li>
+            <span>🔔 اعلان‌های سیستم</span>
+            <span class="status-badge status-success">فعال</span>
+        </li>
+        <li>
+            <span>🌙 حالت شب</span>
+            <span class="status-badge status-warning">غیرفعال</span>
+        </li>
+        <li>
+            <span>🔒 تایید دو مرحله‌ای</span>
+            <span class="status-badge status-success">فعال</span>
+        </li>
+        <li>
+            <span>📧 دریافت خبرنامه</span>
+            <span class="status-badge status-error">لغو شده</span>
+        </li>
+        <li>
+            <span>💾 پشتیبان‌گیری خودکار</span>
+            <span class="status-badge status-success">هر روز</span>
+        </li>
+    </ul>
+    <div style="text-align: left; margin-top: 1rem;">
+        <button class="btn-primary" data-amb-dismiss="modal">ذخیره تغییرات</button>
+    </div>
+</div>
+
+<!-- 4. مودال سبد خرید -->
+<div id="cartModal" style="display: none;" data-amb-title="🛒 سبد خرید شما" data-amb-size="md">
+    <div class="product-grid" style="grid-template-columns: 1fr;">
+        <div class="product-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>📱 گوشی موبایل شیائومی</div>
+            <div>۱۲,۵۰۰,۰۰۰ تومان</div>
+        </div>
+        <div class="product-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>🎧 هدفون بلوتوثی سونی</div>
+            <div>۳,۲۰۰,۰۰۰ تومان</div>
+        </div>
+        <div class="product-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>⌚ ساعت هوشمند اپل</div>
+            <div>۲۵,۸۰۰,۰۰۰ تومان</div>
+        </div>
+    </div>
+    <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; margin-top: 1rem; display: flex; justify-content: space-between; font-weight: bold;">
+        <span>جمع کل:</span>
+        <span>۴۱,۵۰۰,۰۰۰ تومان</span>
+    </div>
+    <div style="margin-top: 1rem; text-align: left;">
+        <button class="btn-success" data-amb-dismiss="modal">تایید و پرداخت</button>
+    </div>
+</div>
+
+<!-- 5. مودال وضعیت سیستم -->
+<div id="statusModal" style="display: none;" data-amb-title="📊 مانیتورینگ سیستم" data-amb-size="sm">
+    <div>
+        <p><strong>وضعیت سرور:</strong> <span class="status-badge status-success">عملیاتی</span></p>
+        <p><strong>مصرف RAM:</strong> ۴۲٪</p>
+        <p><strong>CPU Load:</strong> ۱۲٪</p>
+        <p><strong>آخرین بروزرسانی:</strong> ۱۴۰۳/۰۲/۲۰</p>
+        <progress value="42" max="100" style="width:100%; height:8px; border-radius:4px;"></progress>
+    </div>
+</div>
+
+<!-- 6. مودال گالری تصاویر و محصولات -->
+<div id="galleryModal" style="display: none;" data-amb-title="🎨 محصولات ویژه" data-amb-size="lg">
+    <div class="product-grid">
+        <div class="product-item">
+            <div style="background:#eef2ff; height:100px; border-radius:8px; display:flex; align-items:center; justify-content:center;">📷 محصول ۱</div>
+            <p>کیف چرمی</p>
+            <span>۶۹۹,۰۰۰ تومان</span>
+        </div>
+        <div class="product-item">
+            <div style="background:#eef2ff; height:100px; border-radius:8px; display:flex; align-items:center; justify-content:center;">📷 محصول ۲</div>
+            <p>عینک آفتابی</p>
+            <span>۴۵۰,۰۰۰ تومان</span>
+        </div>
+        <div class="product-item">
+            <div style="background:#eef2ff; height:100px; border-radius:8px; display:flex; align-items:center; justify-content:center;">📷 محصول ۳</div>
+            <p>کفش ورزشی</p>
+            <span>۱,۲۸۰,۰۰۰ تومان</span>
+        </div>
+    </div>
+</div>
+
+<!-- 7. مودال استک (برای باز کردن مودال جدید از داخل) -->
+<div id="parentStackModal" style="display: none;" data-amb-title="📂 پنل اصلی" data-amb-size="md">
+    <div style="text-align: center; padding: 0.5rem;">
+        <p>این مودال والد است. از دکمه زیر یک مودال فرزند باز کنید.</p>
+        <button class="btn-primary" onclick="AmbMsg.open('childStackModal')">باز کردن مودال فرزند</button>
+        <button class="btn-outline" style="margin-right: 0.5rem;" data-amb-dismiss="modal">بستن</button>
+    </div>
+</div>
+
+<!-- مودال فرزند برای استک -->
+<div id="childStackModal" style="display: none;" data-amb-title="🧸 مودال فرزند (استک)" data-amb-size="sm">
+    <p>✅ این مودال روی مودال قبلی باز شده. با ESC فقط همین مودال بسته می‌شود (تست استک).</p>
+    <button class="btn-danger" data-amb-dismiss="modal">بستن</button>
+</div>
+
+<!-- 8. مودال انیمیشن سفارشی (Bounce) -->
+<div id="animatedModal" style="display: none;" data-amb-title="🎭 انیمیشن پرش" data-amb-anim-open="bounce" data-amb-anim-close="zoom-out" data-amb-size="sm">
+    <p>این مودال با انیمیشن <strong>bounce</strong> باز می‌شود. خاصیت data-amb-anim-open="bounce"</p>
+    <button class="btn-primary" data-amb-dismiss="modal">باشه</button>
+</div>
+
+<!-- 9. مودال درگ‌پذیر (Draggable) -->
+<div id="draggableModal" style="display: none;" data-amb-title="🖱️ پنجره قابل جابجایی" data-amb-draggable="true" data-amb-size="md">
+    <div style="padding: 0.5rem;">
+        <p>✨ این مودال قابلیت drag & drop دارد. هدر را بگیرید و بکشید.</p>
+        <p>📌 بدون تداخل با انیمیشن - تجربه کاربری حرفه‌ای</p>
+        <button class="btn-success" data-amb-dismiss="modal">فهمیدم</button>
+    </div>
+</div>
+
+<!-- مودال اضافه: کانتینر دمو برای مودال با دکمه‌های داخل بدنه که اکشن می‌دهند -->
+<div id="interactiveModal" style="display: none;" data-amb-title="🔘 دکمه‌های تعاملی" data-amb-size="sm">
+    <p>دکمه زیر یک Toast نمایش می‌دهد (تست هماهنگی AmbMsg)</p>
+    <button class="btn-info" onclick="AmbToast.success('این یک نوتیفیکیشن از داخل مودال است!')">نمایش توست</button>
+</div>
+
+<script src="./ambmsg.js"></script>
+<script>
+    // تابع برای باز کردن استک والد
+    function openStackModal() {
+        AmbMsg.open('parentStackModal');
+    }
+
+    // همچنین می‌توانیم مودال interactive رو از طریق دکمه فراخوانی کنیم (اختیاری)
+    document.addEventListener('DOMContentLoaded', function() {
+        const jLoadTests = {
+            caseA: {
+                modalId: 'jload-modal-case-a',
+                bodyId: 'jload-body-case-a',
+                bodyClass: 'jload-body-case-a',
+                marker: 'jload-marker-case-a',
+                title: 'jLoad Test A'
+            },
+            caseB: {
+                modalId: 'jload-modal-case-b',
+                bodyId: 'jload-body-case-b',
+                bodyClass: 'jload-body-case-b',
+                marker: 'jload-marker-case-b',
+                title: 'jLoad Test B'
+            },
+            caseC: {
+                modalId: 'jload-modal-case-c',
+                bodyId: 'jload-body-case-c',
+                bodyClass: 'jload-body-case-c',
+                marker: 'jload-marker-case-c',
+                title: 'jLoad Test C'
+            }
+        };
+
+        function getJLoadBodyHTML(test) {
+            return `
+                <div id="${test.bodyId}" class="${test.bodyClass}" data-jload-marker="${test.marker}">
+                    <p style="margin:0;">✅ این بدنه به صورت jLoad-style ساخته شد.</p>
+                    <small style="color:#6b7280;">id=${test.bodyId} | class=${test.bodyClass}</small>
+                </div>
+            `;
+        }
+
+        window.runJLoadDuplicateCheck = function(caseKey) {
+            const test = jLoadTests[caseKey];
+            if (!test) {
+                console.warn('[AmbMsg][jLoad Duplicate Test] Invalid case key | Received:', caseKey, '| Expected one of: caseA, caseB, or caseC');
+                return;
+            }
+
+            AmbMsg.destroy(test.modalId);
+            AmbMsg.open(test.modalId, {
+                title: test.title,
+                body: getJLoadBodyHTML(test),
+                size: 'sm',
+                animOpen: 'zoom-in',
+                animClose: 'zoom-out',
+                footer: '<button class="btn-outline" data-amb-dismiss="modal">بستن</button>',
+                afterload: function() {
+                    const idSelector = `#${test.bodyId}`;
+                    const classSelector = `.${test.bodyClass}`;
+                    const attrSelector = `[data-jload-marker="${test.marker}"]`;
+
+                    const idCount = document.querySelectorAll(idSelector).length;
+                    const classCount = document.querySelectorAll(classSelector).length;
+                    const attrCount = document.querySelectorAll(attrSelector).length;
+
+                    console.log(`[AmbMsg][jLoad Duplicate Test][${caseKey}]`, {
+                        idSelector,
+                        classSelector,
+                        attrSelector,
+                        idCount,
+                        classCount,
+                        attrCount,
+                        idIsUnique: idCount === 1,
+                        classIsUnique: classCount === 1,
+                        attributeIsUnique: attrCount === 1
+                    });
+
+                    if (idCount !== 1 || classCount !== 1 || attrCount !== 1) {
+                        console.error(`[AmbMsg][jLoad Duplicate Test][${caseKey}] Uniqueness constraint violated`, {
+                            idCount,
+                            classCount,
+                            attrCount
+                        });
+                    }
+                }
+            });
+        };
+
+        // ثبت یک دکمه نمونه در صورت نیاز - نمونه dynamic بدون نوشتن بدنه جدید در JS
+        // ایجاد یک دکمه شناور برای تست بیشتر (اختیاری)
+        let extraBtn = document.createElement('button');
+        extraBtn.textContent = '📌 مودال تعاملی (Toasts)';
+        extraBtn.className = 'btn-outline';
+        extraBtn.style.margin = '1rem auto';
+        extraBtn.onclick = () => AmbMsg.open('interactiveModal');
+        document.querySelector('.demo-container').appendChild(extraBtn);
+        
+        // همچنین پشتیبانی از بستن خودکار توسط دکمه‌های داخل مودال
+        console.log('✅ AmbMsg آماده است، تمام مودال‌های دارای ID در صفحه قابل فراخوانی با AmbMsg.open() می‌باشند');
+    });
+
+    // برای راحتی، متدهای جایگزین برای استفاده از Toast و نمونه‌های ترکیبی
+    window.showCustomMsg = function() {
+        AmbToast.info('💡 از هر جایی می‌توان توست فراخوانی کرد.');
+    };
+    
+    // اضافه کردن امکانات: نمایش مودال با داده attribute به صورت خودکار با هر کلیک روی دکمه‌های مخصوص (در صورت نیاز)
+    // توجه: فایل AmbMsg به صورت خودکار data-amb-toggle را هندل می‌کند.
+    // اما برای مثال بیشتر می‌توانید از روش زیر استفاده کنید (اختیاری)
+    document.querySelectorAll('[data-open-modal]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            let targetId = btn.getAttribute('data-open-modal');
+            if(targetId && document.getElementById(targetId)) AmbMsg.open(targetId);
+        });
+    });
+</script>
+
+<!-- توضیح نهایی: تمام بدنه مودال‌ها داخل HTML تعریف شده و نیاز به تولید بدنه در JS نیست -->
+</body>
+</html>

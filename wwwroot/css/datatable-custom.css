@@ -1,0 +1,662 @@
+/* =============================================
+   DataTable Custom Styles - Polished & Responsive
+   با پشتیبانی کامل از تم تاریک و روشن
+   ============================================= */
+
+/* --- Base Wrapper --- */
+.dataTables_wrapper {
+    direction: rtl;
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    padding: 0.5rem 0.5rem 0.75rem;
+}
+
+/* Clearfix */
+.dataTables_wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* =============================================
+   TABLE
+   ============================================= */
+.dataTable {
+    width: 100% !important;
+    border-collapse: separate;
+    border-spacing: 0;
+   
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+/* Table Header - Light Mode (default) */
+thead th {
+    padding: 0.875rem 1rem;
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--color-gray-50);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+
+}
+
+/* Table Body Cells */
+tbody td {
+    padding: 0.75rem 1rem;
+    text-align: right;
+    font-size: 0.8195rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-primary);
+}
+
+/* Table Rows Striping - Light Mode */
+tbody tr:nth-child(odd) td {
+    background: var(--bg-primary);
+}
+
+tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--color-gray-800) 5%, var(--bg-primary));
+}
+
+/* Hover Effect */
+tbody tr:hover td {
+    background: color-mix(in srgb, var(--color-primary) 8%, var(--bg-secondary));
+    transition: all 0.2s ease;
+}
+
+/* Last row bottom border removal */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Empty State */
+.dataTables_empty {
+    padding: 3rem 1rem !important;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+}
+
+/* =============================================
+   SORTING
+   ============================================= */
+thead th.sorting,
+thead th.sorting_asc,
+thead th.sorting_desc {
+    cursor: pointer;
+    position: relative;
+    padding-left: 2rem;
+    transition: background-color 0.2s ease;
+}
+
+thead th.sorting:hover,
+thead th.sorting_asc:hover,
+thead th.sorting_desc:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--bg-secondary));
+}
+
+thead th.sorting::before,
+thead th.sorting_asc::before,
+thead th.sorting_desc::before,
+thead th.sorting::after,
+thead th.sorting_asc::after,
+thead th.sorting_desc::after {
+    position: absolute;
+    left: 0.75rem;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    font-family: monospace;
+}
+
+thead th.sorting::before {
+    content: "▲";
+    top: 35%;
+    transform: translateY(-50%);
+}
+
+thead th.sorting::after {
+    content: "▼";
+    top: 65%;
+    transform: translateY(-50%);
+}
+
+thead th.sorting_asc::before {
+    content: "▲";
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+thead th.sorting_desc::after {
+    content: "▼";
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* =============================================
+   CONTROLS (Search, Length, Info, Pagination)
+   ============================================= */
+
+/* --- Search --- */
+.dt-search {
+    float: left;
+    margin-bottom: 1.25rem;
+    margin-left: 0.5rem;
+}
+
+.dt-search label {
+    display: none;
+}
+
+.dt-search input {
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: var(--font-primary);
+    outline: none;
+    transition: all 0.2s ease;
+    min-width: 250px;
+    direction: rtl;
+}
+
+.dt-search input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.dt-search input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+/* --- Page Length --- */
+.dt-length {
+    float: right;
+    margin-bottom: 1.25rem;
+    padding: 0 0.5rem;
+}
+
+.dt-length label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin: 0;
+}
+
+.dt-length select {
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: var(--font-primary);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 0.75rem center;
+    background-size: 0.875rem;
+    direction: rtl;
+}
+
+.dt-length select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+/* --- Info --- */
+.dt-info {
+    float: right;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* --- Pagination --- */
+.dt-paging {
+    float: left;
+    padding: 0.25rem 0.25rem;
+}
+
+.dt-paging nav {
+    display: flex;
+    align-items: center;
+}
+
+.dt-paging .pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dt-paging .page-item {
+    display: inline-flex;
+}
+
+.dt-paging .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-family: var(--font-primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.dt-paging .page-link:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--bg-secondary));
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.dt-paging .page-item.active .page-link {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: 0 2px 4px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.dt-paging .page-item.disabled .page-link {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.dt-paging .page-link.previous,
+.dt-paging .page-link.next {
+    min-width: auto;
+    padding: 0 0.875rem;
+    font-weight: 500;
+}
+
+/* =============================================
+   ACTION BUTTONS
+   ============================================= */
+.table-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    white-space: nowrap;
+}
+
+.table-action-btn.primary {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.table-action-btn.primary:hover {
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.table-action-btn.secondary {
+    background: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.table-action-btn.secondary:hover {
+    background: color-mix(in srgb, var(--color-gray-400) 15%, transparent);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+.table-action-btn.danger {
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    color: var(--color-danger);
+    border: 1px solid color-mix(in srgb, var(--color-danger) 20%, transparent);
+}
+
+.table-action-btn.danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    border-color: var(--color-danger);
+    transform: translateY(-1px);
+}
+
+/* =============================================
+   DARK MODE SPECIFIC OVERRIDES
+   ============================================= */
+
+/* Dark Mode - Table Header */
+.dark thead th {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Dark Mode - Sorting hover */
+.dark thead th.sorting:hover,
+.dark thead th.sorting_asc:hover,
+.dark thead th.sorting_desc:hover {
+    background: color-mix(in srgb, var(--color-primary) 15%, var(--bg-tertiary));
+}
+
+/* Dark Mode - Table Body */
+.dark .dataTable {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--color-gray-600) 15%, var(--bg-primary));
+}
+
+.dark tbody tr:hover td {
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--bg-secondary));
+}
+
+/* Dark Mode - Pagination */
+.dark .dt-paging .page-link:hover {
+    background: color-mix(in srgb, var(--color-primary) 15%, var(--bg-secondary));
+}
+
+.dark .dt-paging .page-item.active .page-link {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Dark Mode - Action Buttons */
+.dark .table-action-btn.primary {
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.dark .table-action-btn.primary:hover {
+    background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.dark .table-action-btn.secondary {
+    background: color-mix(in srgb, var(--color-gray-600) 15%, transparent);
+}
+
+.dark .table-action-btn.secondary:hover {
+    background: color-mix(in srgb, var(--color-gray-600) 25%, transparent);
+}
+
+.dark .table-action-btn.danger {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+}
+
+.dark .table-action-btn.danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 25%, transparent);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+/* Tablet & Small Desktop */
+@media (min-width: 768px) {
+    .dataTables_wrapper {
+        padding: 0.75rem 1.25rem 1rem;
+    }
+
+    .dt-search {
+        margin-left: 1rem;
+    }
+
+    .dt-length {
+        margin-right: 1rem;
+    }
+
+    .dt-info {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .dataTables_wrapper {
+        padding: 0.5rem 0.75rem 1rem;
+    }
+
+    .dt-search,
+    .dt-length,
+    .dt-info,
+    .dt-paging {
+        float: none !important;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .dt-search label,
+    .dt-length label {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .dt-search {
+        padding: 0 0.5rem;
+    }
+
+    .dt-search input {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .dt-length select {
+        min-width: 120px;
+    }
+
+    .dt-paging {
+        margin-top: 0.75rem;
+        margin-bottom: 1.25rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dt-paging .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .dt-paging .page-link {
+        min-width: 2rem;
+        height: 2rem;
+        font-size: 0.75rem;
+    }
+
+    .dataTable {
+        font-size: 0.75rem;
+    }
+
+    thead th,
+    tbody td {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* =============================================
+   DROPDOWN MENU
+   ============================================= */
+.table .dropdown-menu {
+    position: absolute !important;
+    right: auto !important;
+    left: 0 !important;
+    z-index: 9999 !important;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* =============================================
+   HIDE STUCK PROCESSING INDICATOR
+   ============================================= */
+#courses-table_processing.dt-processing {
+    display: none !important;
+}
+
+/* =============================================
+   SCROLLBAR FOR TABLE
+   ============================================= */
+.dataTables_scrollBody::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+/* =============================================
+   DARK MODE SPECIFIC OVERRIDES
+   ============================================= */
+
+/* Dark Mode - Table Header */
+.dark thead th {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-secondary) !important;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Dark Mode - Sorting hover for header */
+.dark thead th.sorting:hover,
+.dark thead th.sorting_asc:hover,
+.dark thead th.sorting_desc:hover {
+    background: color-mix(in srgb, var(--color-primary) 15%, var(--bg-tertiary)) !important;
+}
+
+/* Dark Mode - Table Body */
+.dark .dataTable {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--color-gray-600) 15%, var(--bg-primary));
+}
+
+.dark tbody tr:hover td {
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--bg-secondary));
+}
+
+/* Dark Mode - Pagination */
+.dark .dt-paging .page-link:hover {
+    background: color-mix(in srgb, var(--color-primary) 15%, var(--bg-secondary));
+}
+
+.dark .dt-paging .page-item.active .page-link {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Dark Mode - Action Buttons */
+.dark .table-action-btn.primary {
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+.dark .table-action-btn.primary:hover {
+    background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.dark .table-action-btn.secondary {
+    background: color-mix(in srgb, var(--color-gray-600) 15%, transparent);
+}
+
+.dark .table-action-btn.secondary:hover {
+    background: color-mix(in srgb, var(--color-gray-600) 25%, transparent);
+}
+
+.dark .table-action-btn.danger {
+    background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+}
+
+.dark .table-action-btn.danger:hover {
+    background: color-mix(in srgb, var(--color-danger) 25%, transparent);
+}
+
+/* Dark Mode - Search Input */
+.dark .dt-search input {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.dark .dt-search input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+/* Dark Mode - Select Dropdown */
+.dark .dt-length select {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.dark .dt-length select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+/* Dark Mode - Info Text */
+.dark .dt-info {
+    color: var(--text-secondary);
+}
+
+/* Dark Mode - Empty State */
+.dark .dataTables_empty {
+    color: var(--text-secondary);
+}
+
+/* Dark Mode - Dropdown Menu */
+.dark .table .dropdown-menu {
+    background: var(--bg-primary);
+    border-color: var(--border-color);
+}

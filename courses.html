@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دروس من - پورتال دانشجویی</title>
+    
+    <!-- Tailwind CSS -->
+   <!--<link rel="stylesheet" href="./wwwroot/css/output.css" />     --> 
+     <link rel="stylesheet" href="./wwwroot/css/admin.css" />
+    <!-- Persian Font -->
+    <link href="./wwwroot/fonts/set-font-site.css" rel="stylesheet" type="text/css" />
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" href="./wwwroot/css/datatable-custom.css" />
+     <link rel="stylesheet" href="./wwwroot/shared/secondary-menu.css" />
+<style>
+/* ========================================
+   سیستم منوی آبشاری حرفه‌ای (CSS-Only) - نسخه نهایی RTL
+   ======================================== */
+
+/* Sidebar Styles */
+
+
+</style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <!-- Desktop Navigation Bar (hidden on mobile) -->
+    <nav class="hidden md:block bg-[var(--bg-primary)] border-b border-[var(--border-color)] sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and University Name -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-base font-bold text-[var(--text-primary)]">دانشگاه علوم پزشکی</h1>
+                        <p class="text-xs text-[var(--text-secondary)]">پورتال دانشجویی</p>
+                    </div>
+                </div>
+
+    
+
+                <!-- Right Side: Theme Toggle & User Profile -->
+                <div class="flex items-center gap-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" 
+                            class="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors focus-visible-ring"
+                            aria-label="تغییر تم">
+                        <svg class="sun-icon w-5 h-5 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg class="moon-icon w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+
+                    <!-- User Profile Dropdown -->
+                    <div class="relative">
+                        <button id="user-menu-button" 
+                                class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors focus-visible-ring"
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                            <div class="w-8 h-8 bg-[var(--color-primary)] rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs font-medium text-[var(--text-primary)] leading-tight">علی احمدی</p>
+                                <p class="text-xs text-[var(--text-secondary)] leading-tight">دانشجو</p>
+                            </div>
+                            <svg class="w-4 h-4 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- User Dropdown Menu -->
+                        <div id="user-menu" 
+                             class="hidden absolute left-0 w-48 bg-[var(--bg-primary)] rounded-lg shadow-lg border border-[var(--border-color)] py-2 z-50 top-full mt-2"
+                             aria-hidden="true"
+                             role="menu">
+                            <a href="./profile.html" 
+                               class="block px-4 py-2 text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors"
+                               role="menuitem">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    <span>پروفایل کاربری</span>
+                                </div>
+                            </a>
+                            <hr class="my-2 border-[var(--border-color)]">
+                            <button onclick="handleLogout()" 
+                                    class="w-full text-right block px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                                    role="menuitem">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span>خروج</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Secondary Menu (Desktop Only - Below Navbar) -->
+    <!-- Secondary Menu (Desktop Only - Below Navbar) - Redesigned with all principles -->
+    <div class="hidden md:block bg-[var(--bg-primary)] border-b border-[var(--border-color)] shadow-sm sticky top-16 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
+            <!-- 
+                منوی شماره‌گذاری شده با استفاده از <ol>
+                پیاده‌سازی CSS-only برای hover
+                بدون نیاز به JavaScript
+            -->
+            <ol class="multi-level-menu flex items-center gap-1 list-none m-0 p-0">
+                <!-- ==================== آیتم ۱: دروس من ==================== -->
+                <li class="menu-item relative list-none m-0 px-1">
+                    <button class="menu-button flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all duration-200 whitespace-nowrap focus-visible-ring">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span>دروس من</span>
+                        <!-- آیکون پیکان برای نشان دادن زیرمنو (اصل ۹) -->
+                        <svg class="w-4 h-4 transition-transform duration-200 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <!-- زیرمنوی سطح اول -->
+                    <div class="submenu absolute right-0 top-full pt-2 z-50 invisible opacity-0 transition-all duration-200">
+                        <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[200px]">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                                <span>لیست دروس</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                                <span>افزودن درس</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                <span>برنامه هفتگی</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- ==================== آیتم ۲: آزمون‌ها و تکالیف (دارای زیرمنوهای چندسطحی) ==================== -->
+                <li class="menu-item relative list-none m-0 px-1">
+                    <button class="menu-button flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all duration-200 whitespace-nowrap focus-visible-ring">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        <span>آزمون‌ها و تکالیف</span>
+                        <svg class="w-4 h-4 transition-transform duration-200 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <!-- زیرمنوی سطح اول -->
+                    <div class="submenu absolute right-0 top-full pt-2 z-50 invisible opacity-0 transition-all duration-200">
+                        <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[220px]">
+                            
+                            <!-- زیرآیتم: آزمون‌ها (دارای زیرمنوی سطح دوم) -->
+                            <div class="relative submenu-parent">
+                                <button class="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors focus-visible-ring">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                        <span>آزمون‌ها</span>
+                                    </div>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <!-- زیرمنوی سطح دوم (عمودی) -->
+                                <div class="submenu-level2 absolute right-full top-0 mr-1 z-50 invisible opacity-0 transition-all duration-200">
+                                    <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[160px]">
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">آزمون‌های فعال</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">آزمون‌های گذشته</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">نتایج آزمون‌ها</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- زیرآیتم: تکالیف (دارای زیرمنوی سطح دوم) -->
+                            <div class="relative submenu-parent">
+                                <button class="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors focus-visible-ring">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                        <span>تکالیف</span>
+                                    </div>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <!-- زیرمنوی سطح دوم -->
+                                <div class="submenu-level2 absolute right-full top-0 mr-1 z-50 invisible opacity-0 transition-all duration-200">
+                                    <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[180px]">
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">تکالیف جاری</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">تکالیف تحویل داده شده</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">نمرات تکالیف</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-2 border-[var(--border-color)]">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                                <span>گزارش عملکرد</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- ==================== آیتم ۳: منابع آموزشی ==================== -->
+                <li class="menu-item relative list-none m-0 px-1">
+                    <button class="menu-button flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all duration-200 whitespace-nowrap focus-visible-ring">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span>منابع آموزشی</span>
+                        <svg class="w-4 h-4 transition-transform duration-200 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="submenu absolute right-0 top-full pt-2 z-50 invisible opacity-0 transition-all duration-200">
+                        <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[200px]">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                                <span>فایل‌های درسی</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                <span>ویدیوهای آموزشی</span>
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                                <span>کتابخانه دیجیتال</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- ==================== آیتم ۴: ارتباطات ==================== -->
+                <li class="menu-item relative list-none m-0 px-1">
+                    <button class="menu-button flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all duration-200 whitespace-nowrap focus-visible-ring">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                        <span>ارتباطات</span>
+                        <svg class="w-4 h-4 transition-transform duration-200 arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="submenu absolute right-0 top-full pt-2 z-50 invisible opacity-0 transition-all duration-200">
+                        <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[220px]">
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                <span>پیام‌ها</span>
+                                <span class="mr-auto bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">۳</span>
+                            </a>
+                            <div class="relative submenu-parent">
+                                <button class="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>
+                                        <span>انجمن‌ها</span>
+                                    </div>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
+                                <div class="submenu-level2 absolute right-full top-0 mr-1 z-50 invisible opacity-0 transition-all duration-200">
+                                    <div class="bg-[var(--bg-primary)] rounded-lg shadow-xl border border-[var(--border-color)] py-2 min-w-[160px]">
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">انجمن علمی</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">انجمن دانشجویی</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">گفتگوهای عمومی</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-colors">
+                                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                <span>اساتید</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Bar (fixed at bottom) -->
+
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] z-50 shadow-lg safe-area-bottom">
+        <div class="flex justify-around items-center h-16 px-2">
+            <!-- Menu Button -->
+            <button id="mobile-menu-button" 
+                    class="flex flex-col items-center justify-center gap-0.5 p-1.5 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors focus-visible-ring min-w-[60px]"
+                    aria-label="منو">
+                <svg class="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <span class="text-[10px] text-[var(--text-secondary)]">منو</span>
+            </button>
+
+            <!-- Courses Button -->
+            <a href="./courses.html" 
+               class="flex flex-col items-center justify-center gap-0.5 p-1.5 rounded-lg transition-colors min-w-[60px]">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span class="text-[10px] text-primary font-medium">دروس</span>
+            </a>
+
+            <!-- Profile Button -->
+            <button id="mobile-profile-button"
+               class="flex flex-col items-center justify-center gap-0.5 p-1.5 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors min-w-[60px]">
+                <svg class="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span class="text-[10px] text-[var(--text-secondary)]">پروفایل</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40" aria-hidden="true"></div>
+    
+    <!-- Mobile Profile Panel -->
+    <div id="mobile-profile-panel" 
+         class="md:hidden fixed bottom-16 left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] z-40 transform translate-y-full transition-transform duration-300 max-h-[70vh] overflow-y-auto"
+         aria-hidden="true">
+        <div class="p-4 space-y-4">
+            <!-- User Info -->
+            <div class="flex flex-col items-center text-center p-4 bg-[var(--bg-secondary)] rounded-lg">
+                <div class="w-20 h-20 bg-[var(--color-primary)] rounded-full flex items-center justify-center mb-3">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-[var(--text-primary)]">علی احمدی</h3>
+                <p class="text-sm text-[var(--text-secondary)]">دانشجو</p>
+                <p class="text-xs text-[var(--text-secondary)] mt-1">شماره دانشجویی: ۴۰۰۱۲۳۴۵۶</p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="space-y-2">
+                <a href="./profile.html" 
+                   class="w-full flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-secondary)] hover:bg-primary-lighter/30 transition-colors text-right">
+                    <svg class="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="text-sm text-[var(--text-primary)]">مشاهده پروفایل</span>
+                </a>
+                <a href="./change-password.html" 
+                   class="w-full flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-secondary)] hover:bg-primary-lighter/30 transition-colors text-right">
+                    <svg class="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                    </svg>
+                    <span class="text-sm text-[var(--text-primary)]">تغییر رمز عبور</span>
+                </a>
+            </div>
+
+            <hr class="border-[var(--border-color)]">
+
+            <!-- Logout -->
+            <button onclick="handleLogout()" 
+                    class="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors text-red-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span class="text-sm font-medium">خروج از حساب کاربری</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel" 
+         class="md:hidden fixed bottom-16 left-0 right-0 bg-[var(--bg-primary)] border-t border-[var(--border-color)] z-40 transform translate-y-full transition-transform duration-300 max-h-[70vh] overflow-y-auto"
+         aria-hidden="true">
+        <div class="p-4 space-y-2">
+            <!-- User Info -->
+            <div class="flex items-center gap-3 p-3 bg-[var(--bg-secondary)] rounded-lg mb-4">
+                <div class="w-10 h-10 bg-[var(--color-primary)] rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-[var(--text-prima راry)]">علی احمدی</p>
+                    <p class="text-xs text-[var(--text-secondary)]">دانشجو</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="space-y-1 mb-2">
+                <a href="./courses.html" 
+                   class="w-full flex items-center gap-3 p-3 rounded-lg bg-primary-lighter/30 text-primary transition-colors text-right">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span class="text-sm font-medium">دروس من</span>
+                </a>
+                <a href="./profile.html" 
+                   class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors text-right">
+                    <svg class="w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="text-sm text-[var(--text-primary)]">پروفایل کاربری</span>
+                </a>
+            </div>
+
+            <hr class="border-[var(--border-color)]">
+
+            <!-- Theme Toggle -->
+            <button id="mobile-theme-toggle" 
+                    class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors text-right">
+                <svg class="mobile-sun-icon w-5 h-5 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="mobile-moon-icon w-5 h-5 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <span class="text-sm text-[var(--text-primary)]">تغییر تم</span>
+            </button>
+
+            <hr class="border-[var(--border-color)]">
+
+            <!-- Logout -->
+            <button onclick="handleLogout()" 
+                    class="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-right text-red-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span class="text-sm">خروج</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-2 sm:px-4 md:px-6 lg:px-8 py-4 md:py-8 pb-20 md:pb-8">
+        <div class="space-y-6">
+            <!-- Page Header -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-[var(--text-primary)]">دروس من</h1>
+                    <p class="text-[var(--text-secondary)] mt-1">لیست دروس ثبت‌نام شده در ترم جاری</p>
+                </div>
+  
+            </div>
+
+            <!-- Help Text - Moved to top on desktop -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <div class="flex gap-3">
+                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div class="text-sm text-blue-800 dark:text-blue-200">
+                        <p class="font-medium mb-1">راهنما:</p>
+                        <ul class="list-disc list-inside space-y-1 text-blue-700 dark:text-blue-300">
+                            <li>برای ورود به کلاس مجازی، روی دکمه "ورود به کلاس" کلیک کنید</li>
+                            <li>برای مشاهده آزمون‌ها و تکالیف، روی دکمه "آزمون‌ها" کلیک کنید</li>
+                            <li>می‌توانید با استفاده از جستجو، درس مورد نظر خود را پیدا کنید</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Table Card -->
+       <!-- Courses Table Card -->
+<div class="card !p-0 md:!p-4 overflow-hidden">
+    <div class="table-container">
+        <table id="courses-table" class="table min-w-full">
+            <thead>
+                <tr>
+                    <th>کد درس</th>
+                    <th>نام درس</th>
+                    <th class="hidden md:table-cell">نام استاد</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DataTable will populate this -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <div style="padding: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+  
+  <!-- OUTLINE VARIANTS (رنگ‌های مختلف حاشیه‌ای) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">دکمه‌های Outline با رنگ‌های مختلف</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-outline">Outline Primary</button>
+      <button class="btn btn-outline-success">Outline Success</button>
+      <button class="btn btn-outline-danger">Outline Danger</button>
+      <button class="btn btn-outline-warning">Outline Warning</button>
+      <button class="btn btn-outline-info">Outline Info</button>
+    </div>
+  </div>
+
+  <!-- OUTLINE WITH SIZES (سایزهای مختلف) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">سایزهای مختلف Outline</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-outline-success btn-lg">Large Outline</button>
+      <button class="btn btn-outline-success">Normal Outline</button>
+      <button class="btn btn-outline-success btn-sm">Small Outline</button>
+      <button class="btn btn-outline-success btn-xs">XS Outline</button>
+    </div>
+  </div>
+
+  <!-- ALL OUTLINE COLORS (تمام رنگ‌های Outline) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">تمامی رنگ‌های Outline</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-outline">Primary</button>
+      <button class="btn btn-outline-success">Success</button>
+      <button class="btn btn-outline-danger">Danger</button>
+      <button class="btn btn-outline-warning">Warning</button>
+      <button class="btn btn-outline-info">Info</button>
+    </div>
+  </div>
+
+  <!-- DISABLED OUTLINE BUTTONS (دکمه‌های غیرفعال outline) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">دکمه‌های Outline غیرفعال</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-outline" disabled>Disabled Outline</button>
+      <button class="btn btn-outline-success" disabled>Disabled Success</button>
+      <button class="btn btn-outline-danger" disabled>Disabled Danger</button>
+      <button class="btn btn-outline-warning" disabled>Disabled Warning</button>
+      <button class="btn btn-outline-info" disabled>Disabled Info</button>
+    </div>
+  </div>
+
+  <!-- COMBINATIONS OUTLINE + SIZES (ترکیبات) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">ترکیبات Outline با سایزهای مختلف</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-outline-danger btn-lg">Large Danger</button>
+      <button class="btn btn-outline-warning btn-sm">Small Warning</button>
+      <button class="btn btn-outline-info btn-xs">XS Info</button>
+      <button class="btn btn-outline-success btn-lg">Large Success</button>
+      <button class="btn btn-outline btn-sm">Small Primary</button>
+    </div>
+  </div>
+
+  <!-- COMPARISON: FILL VS OUTLINE (مقایسه دکمه‌های پر و حاشیه‌ای) -->
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <h3 style="color: var(--text-primary); margin: 0;">مقایسه دکمه‌های پر (Solid) و حاشیه‌ای (Outline)</h3>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <button class="btn btn-primary">Solid Primary</button>
+      <button class="btn btn-outline">Outline Primary</button>
+      <button class="btn btn-success">Solid Success</button>
+      <button class="btn btn-outline-success">Outline Success</button>
+      <button class="btn btn-danger">Solid Danger</button>
+      <button class="btn btn-outline-danger">Outline Danger</button>
+    </div>
+  </div>
+
+</div>
+<div style="padding: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+  
+  <!-- PRIMARY BUTTONS -->
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-outline">Outline</button>
+    <button class="btn btn-secondary">Secondary</button>
+  </div>
+
+  <!-- COLOR VARIANTS -->
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button class="btn btn-success">Success</button>
+    <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-warning">Warning</button>
+    <button class="btn btn-info">Info</button>
+    <button class="btn btn-ghost">Ghost</button>
+  </div>
+
+  <!-- SIZES -->
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button class="btn btn-primary btn-lg">Large</button>
+    <button class="btn btn-primary">Normal</button>
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-primary btn-xs">Extra Small</button>
+  </div>
+
+  <!-- DISABLED STATE -->
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button class="btn btn-primary" disabled>Disabled Primary</button>
+    <button class="btn btn-success" disabled>Disabled Success</button>
+    <button class="btn btn-outline" disabled>Disabled Outline</button>
+  </div>
+
+  <!-- COMBINATIONS -->
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+    <button class="btn btn-success btn-lg">Large Success</button>
+    <button class="btn btn-danger btn-sm">Small Danger</button>
+    <button class="btn btn-warning btn-xs">XS Warning</button>
+    <button class="btn btn-info btn-lg">Large Info</button>
+    <button class="btn btn-ghost btn-sm">Small Ghost</button>
+  </div>
+
+</div>
+        </div>
+    </main>
+<!-- ==================== فوتر فروشگاهی حرفه‌ای ==================== -->
+<!-- فوتر چندستونه حرفه‌ای فروشگاهی با Tailwind CSS -->
+<footer class="relative border-t border-[var(--border-color)] overflow-hidden  mt-4 py-4" style="background-color: #aaaaaa !important;" >
+
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-2  pb-20 md:pb-8  ">
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+
+      <!-- Brand -->
+      <div class="md:col-span-6 space-y-5">
+
+        <div class="flex items-center gap-4">
+
+          <div class="w-14 h-14 rounded-xl bg-[var(--bg-tertiary)] border border-[var(--border-color)]
+                      flex items-center justify-center text-lg font-semibold text-[var(--text-primary)]">
+            د
+          </div>
+
+          <div>
+            <!-- BIGGER TITLE -->
+            <h2 class="text-2xl font-semibold text-[var(--text-primary)] leading-tight">
+              دانا
+            </h2>
+
+            <p class="text-sm text-[var(--text-secondary)] mt-1">
+              سامانه آموزش آنلاین دانشگاه آزاد اسلامی مشهد
+            </p>
+          </div>
+
+        </div>
+
+        <p class="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] max-w-xl">
+          سامانه یکپارچه برگزاری آزمون‌های الکترونیکی، کلاس‌های مجازی و مدیریت آموزشی با زیرساخت پایدار و امن.
+        </p>
+
+        <p class="text-xs text-[var(--text-secondary)]">
+          زیرساخت آموزشی: سامانه مشکات
+        </p>
+
+      </div>
+
+      <!-- Services -->
+      <div class="md:col-span-3 space-y-4">
+
+        <!-- HEADER BIGGER THAN ITEMS -->
+        <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-4">
+          خدمات اصلی
+        </h3>
+
+        <ul class="space-y-3 text-sm text-[var(--text-secondary)]">
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">کلاس‌های آنلاین</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">آزمون‌های الکترونیکی</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">نمرات و کارنامه</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">ثبت‌نام دروس</a></li>
+        </ul>
+
+      </div>
+
+      <!-- Links -->
+      <div class="md:col-span-3 space-y-4">
+
+        <h3 class="text-lg font-semibold text-[var(--text-primary)] mb-4">
+          لینک‌های مهم
+        </h3>
+
+        <ul class="space-y-3 text-sm text-[var(--text-secondary)]">
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">دانشگاه آزاد اسلامی</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">سامانه آموزشی مشکات</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">پرتال دانشجویی</a></li>
+          <li><a class="hover:text-[var(--text-primary)] transition" href="#">پشتیبانی</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="my-12 border-t border-[var(--border-color)]"></div>
+
+    <!-- Bottom -->
+    <div class="flex flex-col md:flex-row gap-5 md:items-center md:justify-between">
+
+      <div class="text-sm text-[var(--text-secondary)]">
+        © 2026 دانا – دانشگاه آزاد اسلامی مشهد
+      </div>
+
+      <div class="flex gap-6 text-sm text-[var(--text-secondary)]">
+        <a href="#" class="hover:text-[var(--text-primary)] transition">قوانین</a>
+        <a href="#" class="hover:text-[var(--text-primary)] transition">حریم خصوصی</a>
+        <a href="#" class="hover:text-[var(--text-primary)] transition">تماس با ما</a>
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+    <!-- Scripts -->
+    <script src="./wwwroot/shared/utils.js"></script>
+    <script src="./wwwroot/shared/theme.js"></script>
+    <script src="./wwwroot/shared/navbar.js"></script>
+    <script src="./wwwroot/libs/jquery/jquery.min.js"></script>
+    <script src="./wwwroot/libs/datatable/datatables.min.js"></script>
+    <script src="./wwwroot/js/courses.js"></script>
+    <script>
+        // Logout handler
+        function handleLogout() {
+            if (confirm('آیا مطمئن هستید که می‌خواهید خارج شوید؟')) {
+                alert('خروج از سیستم');
+            }
+        }
+    </script>
+</body>
+</html>
