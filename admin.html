@@ -374,7 +374,7 @@
             <button title="طبیعت تاریک" style="width:14px;height:14px;border-radius:3px;border:1px solid var(--border-color);background:linear-gradient(45deg,#14532d,#0b1720);" onclick="setTheme('nature-dark', this)"></button>
           </div>
         </div>
-        <button id="darkToggle" class="btn btn-ghost" title="تاریک/روشن" onclick="toggleDarkMode()">🌙</button>
+        <button id="darkToggle" class="btn btn-ghost" title="تاریک/روشن" onclick="(window.themeManager && window.themeManager.toggleTheme) ? window.themeManager.toggleTheme() : toggleDarkMode()">🌙</button>
         <div class="admin-avatar">سم</div>
       </div>
     </header>
@@ -827,6 +827,7 @@
   </main>
 </div>
 
+<script src="wwwroot/shared/theme.js"></script>
 <script>
 // ===== Theme Management =====
 var THEME_NAMES = {
@@ -893,26 +894,28 @@ var COMPONENT_VARS = [
 ];
 
 function setTheme(theme, dotEl) {
-  document.documentElement.setAttribute('data-theme', theme);
-
-  // Update active dot
-  var dots = document.querySelectorAll('.theme-dot');
-  for (var i = 0; i < dots.length; i++) {
-    dots[i].classList.remove('active');
-  }
-  if (dotEl) {
-    dotEl.classList.add('active');
+  // If shared theme manager is present, delegate to it to keep behavior consistent
+  if (window.themeManager && typeof window.themeManager.applyTheme === 'function') {
+    try {
+      window.themeManager.applyTheme(theme);
+    } catch (e) {}
   } else {
-    // Find dot by data-theme
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('active-theme', theme); } catch(e) {}
+  }
+
+  // Update active dot UI locally
+  var dots = document.querySelectorAll('.theme-dot');
+  for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
+  if (dotEl) dotEl.classList.add('active');
+  else {
     var targetDot = document.querySelector('.theme-dot[data-theme="' + theme + '"]');
     if (targetDot) targetDot.classList.add('active');
   }
 
-  // Save to localStorage
-  try { localStorage.setItem('active-theme', theme); } catch(e) {}
-
-  // Update theme settings if visible
+  // Update theme settings UI
   updateThemeInfo();
+  if (typeof updateDarkToggle === 'function') updateDarkToggle();
 }
 
 function setThemeByName(theme) {
