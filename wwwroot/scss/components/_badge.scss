@@ -63,7 +63,7 @@
 
 .badge-success {
   background: color-mix(in srgb, var(--color-success) 7%, transparent);
-  color: color-mix(in srgb, var(--color-success) 78%, #000);
+  color: color-mix(in srgb, var(--color-success) 78%, var(--color-gray-900));
 }
 
 .badge-danger {
@@ -73,12 +73,12 @@
 
 .badge-warning {
   background: color-mix(in srgb, var(--color-warning) 7%, transparent);
-  color: color-mix(in srgb, var(--color-warning) 78%, #000);
+  color: color-mix(in srgb, var(--color-warning) 78%, var(--color-gray-900));
 }
 
 .badge-info {
   background: color-mix(in srgb, var(--color-info) 7%, transparent);
-  color: color-mix(in srgb, var(--color-info) 78%, #000);
+  color: color-mix(in srgb, var(--color-info) 78%, var(--color-gray-900));
 }
 
 .badge-accent {
@@ -153,8 +153,8 @@
 
 .badge-outline-warning {
   background: transparent;
-  color: color-mix(in srgb, var(--color-warning) 78%, #000);
-  border: 1px solid color-mix(in srgb, var(--color-warning) 78%, #000);
+  color: color-mix(in srgb, var(--color-warning) 78%, var(--color-gray-900));
+  border: 1px solid color-mix(in srgb, var(--color-warning) 78%, var(--color-gray-900));
 }
 
 .badge-outline-info {

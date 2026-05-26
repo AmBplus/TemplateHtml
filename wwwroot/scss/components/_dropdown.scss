@@ -1,0 +1,151 @@
+// ============================================================================
+// DROPDOWN COMPONENT
+//
+// Positioning logic:
+//   RTL (default): menu opens to the LEFT  → right: 0  (menu extends left)
+//   LTR:           menu opens to the RIGHT → left: 0   (menu extends right)
+//   .dropdown-open-r : force RIGHT, always → left: 0
+//   .dropdown-open-l : force LEFT,  always → right: 0
+//   JS adds .dropdown-flip-to-right / .dropdown-flip-to-left when viewport
+//   space is insufficient.
+//
+// Triggers:
+//   hover  (default)     — JS mouseenter/mouseleave
+//   click                — add data-trigger="click" on .dropdown
+//
+// Open state: JS adds .is-open to .dropdown
+// ============================================================================
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  // ---- Menu panel ----
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + #{$spacing-1});
+    min-width: 11rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: 1000;
+    padding: $spacing-1 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition:
+      opacity $transition-base,
+      transform $transition-base,
+      visibility $transition-base;
+
+    // RTL default: right edge of menu = right edge of trigger → extends LEFT
+    right: 0;
+    left: auto;
+  }
+
+  // LTR context: left edge of menu = left edge of trigger → extends RIGHT
+  &[dir='ltr'] > .dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+
+  // ---- Open state ----
+  &.is-open > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  // ---- Force direction classes (highest priority) ----
+  &.dropdown-open-r > .dropdown-menu {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  &.dropdown-open-l > .dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  // ---- Auto-flip classes (added by JS when space is insufficient) ----
+  &.dropdown-flip-to-right > .dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+
+  &.dropdown-flip-to-left > .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+
+  // ---- Items ----
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    font-size: $text-sm;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: inherit;
+    white-space: nowrap;
+    font-family: var(--font-primary);
+    transition:
+      background-color $transition-fast,
+      color $transition-fast;
+
+    &:hover {
+      background: var(--bg-secondary);
+      color: var(--color-primary);
+    }
+
+    &.item-danger:hover {
+      background: color-mix(in srgb, var(--color-danger) 8%, transparent);
+      color: var(--color-danger);
+    }
+
+    &.item-success:hover {
+      background: color-mix(in srgb, var(--color-success) 8%, transparent);
+      color: var(--color-success);
+    }
+
+    &.disabled,
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    // Icon inside item
+    .item-icon {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
+  }
+
+  // ---- Divider ----
+  .dropdown-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: $spacing-1 0;
+  }
+
+  // ---- Section header ----
+  .dropdown-header {
+    padding: $spacing-2 $spacing-3 $spacing-1;
+    font-size: $text-xs;
+    font-weight: $font-semibold;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+}

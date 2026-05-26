@@ -6,10 +6,10 @@
 
 [data-theme="moon"] {
   // ---- Primary Colors ----
-  --color-primary: #C0C6CC; /* silver primary */
-  --color-primary-light: #DCE1E5;
-  --color-primary-dark: #8F979D;
-  --color-primary-lighter: rgba(192, 198, 204, 0.12);
+  --color-primary: #7EB3FF; /* blue adapted for dark mode */
+  --color-primary-light: #A5C8FF;
+  --color-primary-dark: #5590E8;
+  --color-primary-lighter: rgba(126, 179, 255, 0.12);
 
   // ---- Secondary Colors (Cool Cyan accent) ----
   --color-secondary: #67E8F9;
@@ -84,13 +84,13 @@
   --color-lime-dark: #65a30d;
   --color-lime-bg: #365314;
 
-  --color-green-dark: #15803d;
-  --color-blue-dark: #1e3a8a;
-  --color-orange: #f97316;
+  --color-green-dark: #34D399;
+  --color-blue-dark: #60A5FA;
+  --color-orange: #FB923C;
 
   // ---- Social / Brand Colors ----
-  --color-github: #24292e;
-  --color-youtube: red;
+  --color-github: #9CA3AF;
+  --color-youtube: #F87171;
   --color-twitter: #1da1f2;
   --color-instagram: #e4405f;
   --color-facebook: #1877f2;
@@ -141,11 +141,11 @@
 
   // Buttons
   --btn-primary-bg: color-mix(in srgb, var(--color-primary) 15%, transparent);
-  --btn-primary-color: #0f172a;
-  --btn-primary-hover-bg: color-mix(in srgb, var(--color-primary) 25%, transparent);
-  --btn-primary-hover-color: #0f172a;
+  --btn-primary-color: var(--color-primary);
+  --btn-primary-hover-bg: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  --btn-primary-hover-color: var(--color-primary-light);
   --btn-primary-active-bg: color-mix(in srgb, var(--color-primary) 30%, transparent);
-  --btn-primary-border: rgba(148, 163, 184, 0.25);
+  --btn-primary-border: color-mix(in srgb, var(--color-primary) 30%, transparent);
 
   --btn-outline-color: var(--color-primary);
   --btn-outline-hover-bg: color-mix(in srgb, var(--color-primary) 12%, transparent);

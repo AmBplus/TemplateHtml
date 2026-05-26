@@ -651,6 +651,88 @@
           </div>
         </div>
 
+        <!-- Dropdown -->
+        <div class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <div class="admin-section-title">دراپ‌داون</div>
+              <div class="admin-section-desc">منوی کشویی با تشخیص خودکار جهت و قابلیت اجبار سمت باز شدن</div>
+            </div>
+          </div>
+
+          <!-- Hover trigger -->
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:0.75rem;">هاور (پیش‌فرض — باز شدن به چپ در RTL):</div>
+          <div class="comp-row" style="padding-bottom:10rem;">
+
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-trigger">
+                گزینه‌ها
+                <svg style="width:0.9rem;height:0.9rem;margin-right:0.25rem;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-header">مدیریت کاربر</div>
+                <a href="#" class="dropdown-item">
+                  <svg class="item-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
+                  پروفایل
+                </a>
+                <a href="#" class="dropdown-item">
+                  <svg class="item-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+                  تنظیمات
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item item-danger">
+                  <svg class="item-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/></svg>
+                  خروج
+                </a>
+              </div>
+            </div>
+
+            <!-- Click trigger -->
+            <div class="dropdown" data-trigger="click">
+              <button class="btn btn-outline-primary dropdown-trigger">
+                کلیک کن
+                <svg style="width:0.9rem;height:0.9rem;margin-right:0.25rem;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">مشاهده گزارش</a>
+                <a href="#" class="dropdown-item">دانلود فایل</a>
+                <a href="#" class="dropdown-item disabled">آرشیو (غیرفعال)</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item item-danger">حذف</a>
+              </div>
+            </div>
+
+            <!-- Force open to the right -->
+            <div class="dropdown dropdown-open-r" data-trigger="click">
+              <button class="btn btn-success dropdown-trigger">
+                اجبار به راست
+                <svg style="width:0.9rem;height:0.9rem;margin-right:0.25rem;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-header">کلاس: dropdown-open-r</div>
+                <a href="#" class="dropdown-item item-success">همیشه سمت راست باز می‌شود</a>
+                <a href="#" class="dropdown-item">گزینه دوم</a>
+                <a href="#" class="dropdown-item">گزینه سوم</a>
+              </div>
+            </div>
+
+            <!-- Force open to the left -->
+            <div class="dropdown dropdown-open-l" data-trigger="click">
+              <button class="btn btn-warning dropdown-trigger">
+                اجبار به چپ
+                <svg style="width:0.9rem;height:0.9rem;margin-right:0.25rem;" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-header">کلاس: dropdown-open-l</div>
+                <a href="#" class="dropdown-item">همیشه سمت چپ باز می‌شود</a>
+                <a href="#" class="dropdown-item">گزینه دوم</a>
+                <a href="#" class="dropdown-item">گزینه سوم</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div><!-- /section-components -->
 
       <!-- ===== THEME SETTINGS SECTION ===== -->
@@ -980,6 +1062,7 @@ function closeSidebar() {
   } catch(e) {}
 })();
 </script>
+<script src="wwwroot/js/dropdown.js"></script>
 
 </body>
 </html>

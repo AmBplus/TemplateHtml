@@ -72,9 +72,9 @@
   border-color: var(--btn-primary-border);
 
   &:hover {
-    /* on hover, present the solid (non-muted) variant */
-    background: var(--solid-primary, var(--btn-primary-hover-bg));
-    color: #fff;
+    background: var(--btn-primary-hover-bg);
+    color: var(--btn-primary-color);
+    border-color: color-mix(in srgb, var(--btn-primary-color) 28%, transparent);
   }
 
   &:active {
@@ -149,7 +149,7 @@
 // ============================================================================
 .btn-success {
   background: color-mix(in srgb, var(--color-success) 8%, transparent);
-  color: color-mix(in srgb, var(--color-success) 80%, #000);
+  color: color-mix(in srgb, var(--color-success) 80%, var(--color-gray-900));
   border-color: color-mix(in srgb, var(--color-success) 20%, transparent);
 
   &:hover {
@@ -187,7 +187,7 @@
 
 .btn-warning {
   background: color-mix(in srgb, var(--color-warning) 8%, transparent);
-  color: color-mix(in srgb, var(--color-warning) 80%, #000);
+  color: color-mix(in srgb, var(--color-warning) 80%, var(--color-gray-900));
   border-color: color-mix(in srgb, var(--color-warning) 20%, transparent);
 
   &:hover {
@@ -206,7 +206,7 @@
 
 .btn-info {
   background: color-mix(in srgb, var(--color-info) 8%, transparent);
-  color: color-mix(in srgb, var(--color-info) 80%, #000);
+  color: color-mix(in srgb, var(--color-info) 80%, var(--color-gray-900));
   border-color: color-mix(in srgb, var(--color-info) 20%, transparent);
 
   &:hover {
@@ -424,7 +424,7 @@
 
 .btn-whatsapp {
   background: color-mix(in srgb, var(--color-whatsapp) 8%, transparent);
-  color: color-mix(in srgb, var(--color-whatsapp) 78%, #000);
+  color: color-mix(in srgb, var(--color-whatsapp) 78%, var(--color-gray-900));
   border-color: color-mix(in srgb, var(--color-whatsapp) 20%, transparent);
 
   &:hover {
@@ -1178,8 +1178,8 @@
 
 .btn-outline-whatsapp {
   background: transparent;
-  color: color-mix(in srgb, var(--color-whatsapp) 78%, #000);
-  border: 1px solid color-mix(in srgb, var(--color-whatsapp) 78%, #000);
+  color: color-mix(in srgb, var(--color-whatsapp) 78%, var(--color-gray-900));
+  border: 1px solid color-mix(in srgb, var(--color-whatsapp) 78%, var(--color-gray-900));
 
   &:hover {
     background: color-mix(in srgb, var(--color-whatsapp) 10%, transparent);
