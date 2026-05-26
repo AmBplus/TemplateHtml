@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "npm run watch:css",
     "build": "npm run build:css",
-    "build:css": "sass ./wwwroot/scss/admin.scss ./wwwroot/css/admin-compiled.css --no-source-map && npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/admin.css --minify && node -e \"const fs=require('fs');fs.appendFileSync('wwwroot/css/admin.css', fs.readFileSync('wwwroot/css/admin-compiled.css'));fs.unlinkSync('wwwroot/css/admin-compiled.css');\"",
-    "watch:css": "npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/admin.css --watch",
+    "build:css": "sass --style=compressed ./wwwroot/scss/admin.scss ./wwwroot/css/output-compiled.css --no-source-map && npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --minify && node -e \"const fs=require('fs');fs.appendFileSync('wwwroot/css/output.css', fs.readFileSync('wwwroot/css/output-compiled.css'));fs.unlinkSync('wwwroot/css/output-compiled.css');\"",
+    "watch:css": "npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

@@ -66,12 +66,15 @@
 // 2. .btn-primary  (tinted style – the "brand" button)
 // ============================================================================
 .btn-primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-color);
+  /* Use a muted background by default and solid color on hover/active */
+  background: var(--muted-primary, var(--btn-primary-bg));
+  color: var(--btn-primary-color, var(--solid-primary));
   border-color: var(--btn-primary-border);
 
   &:hover {
-    background: var(--btn-primary-hover-bg);
+    /* on hover, present the solid (non-muted) variant */
+    background: var(--solid-primary, var(--btn-primary-hover-bg));
+    color: #fff;
   }
 
   &:active {
@@ -87,12 +90,13 @@
 // 3. .btn-secondary
 // ============================================================================
 .btn-secondary {
-  background: var(--btn-secondary-bg);
+  /* Secondary uses muted-secondary by default */
+  background: var(--muted-secondary, var(--btn-secondary-bg));
   color: var(--text-primary);
   border-color: color-mix(in srgb, var(--color-gray-400) 20%, transparent);
 
   &:hover {
-    background: var(--btn-secondary-hover-bg);
+    background: var(--solid-secondary, var(--btn-secondary-hover-bg));
   }
 
   &:active {
@@ -141,9 +145,374 @@
 }
 
 // ============================================================================
-// 6. Semantic Buttons — SOLID background (default)
+// 6. Semantic Buttons — SOFT background (default: tinted bg + colored text)
 // ============================================================================
 .btn-success {
+  background: color-mix(in srgb, var(--color-success) 12%, transparent);
+  color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-success) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-success) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-success) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 20%, transparent);
+  }
+}
+
+.btn-danger {
+  background: color-mix(in srgb, var(--color-danger) 12%, transparent);
+  color: var(--color-danger);
+  border-color: color-mix(in srgb, var(--color-danger) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-danger) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 20%, transparent);
+  }
+}
+
+.btn-warning {
+  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
+  color: var(--color-warning);
+  border-color: color-mix(in srgb, var(--color-warning) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-warning) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-warning) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-warning) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-warning) 20%, transparent);
+  }
+}
+
+.btn-info {
+  background: color-mix(in srgb, var(--color-info) 12%, transparent);
+  color: var(--color-info);
+  border-color: color-mix(in srgb, var(--color-info) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-info) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-info) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-info) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-info) 20%, transparent);
+  }
+}
+
+// ============================================================================
+// 7. Extra Color Buttons — SOFT background
+// ============================================================================
+.btn-pink {
+  background: color-mix(in srgb, var(--color-pink) 12%, transparent);
+  color: var(--color-pink);
+  border-color: color-mix(in srgb, var(--color-pink) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-pink) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-pink) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-pink) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pink) 20%, transparent);
+  }
+}
+
+.btn-purple {
+  background: color-mix(in srgb, var(--color-purple) 12%, transparent);
+  color: var(--color-purple);
+  border-color: color-mix(in srgb, var(--color-purple) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-purple) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-purple) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-purple) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-purple) 20%, transparent);
+  }
+}
+
+.btn-orange {
+  background: color-mix(in srgb, var(--color-orange) 12%, transparent);
+  color: var(--color-orange);
+  border-color: color-mix(in srgb, var(--color-orange) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-orange) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-orange) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-orange) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-orange) 20%, transparent);
+  }
+}
+
+.btn-green-dark {
+  background: color-mix(in srgb, var(--color-green-dark) 12%, transparent);
+  color: var(--color-green-dark);
+  border-color: color-mix(in srgb, var(--color-green-dark) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-green-dark) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-green-dark) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-green-dark) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-green-dark) 20%, transparent);
+  }
+}
+
+.btn-blue-dark {
+  background: color-mix(in srgb, var(--color-blue-dark) 12%, transparent);
+  color: var(--color-blue-dark);
+  border-color: color-mix(in srgb, var(--color-blue-dark) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-blue-dark) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-blue-dark) 35%, transparent);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--color-blue-dark) 28%, transparent);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue-dark) 20%, transparent);
+  }
+}
+
+// ============================================================================
+// 8. Social Brand Buttons — SOFT background
+// ============================================================================
+.btn-github {
+  background: color-mix(in srgb, var(--color-github) 12%, transparent);
+  color: var(--color-github);
+  border-color: color-mix(in srgb, var(--color-github) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-github) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-github) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-github) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-github) 20%, transparent); }
+}
+
+.btn-youtube {
+  background: color-mix(in srgb, var(--color-youtube) 12%, transparent);
+  color: var(--color-youtube);
+  border-color: color-mix(in srgb, var(--color-youtube) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-youtube) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-youtube) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-youtube) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-youtube) 20%, transparent); }
+}
+
+.btn-twitter {
+  background: color-mix(in srgb, var(--color-twitter) 12%, transparent);
+  color: var(--color-twitter);
+  border-color: color-mix(in srgb, var(--color-twitter) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-twitter) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-twitter) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-twitter) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-twitter) 20%, transparent); }
+}
+
+.btn-instagram {
+  background: color-mix(in srgb, var(--color-instagram) 12%, transparent);
+  color: var(--color-instagram);
+  border-color: color-mix(in srgb, var(--color-instagram) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-instagram) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-instagram) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-instagram) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-instagram) 20%, transparent); }
+}
+
+.btn-facebook {
+  background: color-mix(in srgb, var(--color-facebook) 12%, transparent);
+  color: var(--color-facebook);
+  border-color: color-mix(in srgb, var(--color-facebook) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-facebook) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-facebook) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-facebook) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-facebook) 20%, transparent); }
+}
+
+.btn-telegram {
+  background: color-mix(in srgb, var(--color-telegram) 12%, transparent);
+  color: var(--color-telegram);
+  border-color: color-mix(in srgb, var(--color-telegram) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-telegram) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-telegram) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-telegram) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-telegram) 20%, transparent); }
+}
+
+.btn-linkedin {
+  background: color-mix(in srgb, var(--color-linkedin) 12%, transparent);
+  color: var(--color-linkedin);
+  border-color: color-mix(in srgb, var(--color-linkedin) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-linkedin) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-linkedin) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-linkedin) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-linkedin) 20%, transparent); }
+}
+
+.btn-whatsapp {
+  background: color-mix(in srgb, var(--color-whatsapp) 12%, transparent);
+  color: var(--color-whatsapp);
+  border-color: color-mix(in srgb, var(--color-whatsapp) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-whatsapp) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-whatsapp) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-whatsapp) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-whatsapp) 20%, transparent); }
+}
+
+.btn-pinterest {
+  background: color-mix(in srgb, var(--color-pinterest) 12%, transparent);
+  color: var(--color-pinterest);
+  border-color: color-mix(in srgb, var(--color-pinterest) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-pinterest) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-pinterest) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-pinterest) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pinterest) 20%, transparent); }
+}
+
+.btn-snapchat {
+  background: color-mix(in srgb, var(--color-snapchat) 12%, transparent);
+  color: color-mix(in srgb, var(--color-snapchat) 60%, #1a1a1a);
+  border-color: color-mix(in srgb, var(--color-snapchat) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-snapchat) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-snapchat) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-snapchat) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-snapchat) 20%, transparent); }
+}
+
+.btn-tiktok {
+  background: color-mix(in srgb, var(--color-tiktok) 12%, transparent);
+  color: var(--color-tiktok);
+  border-color: color-mix(in srgb, var(--color-tiktok) 20%, transparent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-tiktok) 20%, transparent);
+    border-color: color-mix(in srgb, var(--color-tiktok) 35%, transparent);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-tiktok) 28%, transparent); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-tiktok) 20%, transparent); }
+}
+
+// ============================================================================
+// 9. Fill Variants — SOLID background (پر/توپر), white text
+//    Use .btn-fill-* when you need full-color solid buttons
+// ============================================================================
+.btn-fill-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+
+  &:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    transform: translateY(-2px);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-primary-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent); }
+}
+
+.btn-fill-secondary {
+  background: var(--color-secondary);
+  color: #fff;
+  border-color: var(--color-secondary);
+
+  &:hover {
+    background: var(--color-secondary-dark);
+    border-color: var(--color-secondary-dark);
+  }
+
+  &:active { background: color-mix(in srgb, var(--color-secondary-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-secondary) 30%, transparent); }
+}
+
+.btn-fill-success {
   background: var(--color-success);
   color: #fff;
   border-color: var(--color-success);
@@ -153,17 +522,11 @@
     border-color: var(--color-success-dark);
   }
 
-  &:active {
-    background: color-mix(in srgb, var(--color-success-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-success-dark) 85%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 30%, transparent);
-  }
+  &:active { background: color-mix(in srgb, var(--color-success-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 30%, transparent); }
 }
 
-.btn-danger {
+.btn-fill-danger {
   background: var(--color-danger);
   color: #fff;
   border-color: var(--color-danger);
@@ -173,17 +536,11 @@
     border-color: var(--color-danger-dark);
   }
 
-  &:active {
-    background: color-mix(in srgb, var(--color-danger-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-danger-dark) 85%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 30%, transparent);
-  }
+  &:active { background: color-mix(in srgb, var(--color-danger-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 30%, transparent); }
 }
 
-.btn-warning {
+.btn-fill-warning {
   background: var(--color-warning);
   color: #fff;
   border-color: var(--color-warning);
@@ -193,17 +550,11 @@
     border-color: var(--color-warning-dark);
   }
 
-  &:active {
-    background: color-mix(in srgb, var(--color-warning-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-warning-dark) 85%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-warning) 30%, transparent);
-  }
+  &:active { background: color-mix(in srgb, var(--color-warning-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-warning) 30%, transparent); }
 }
 
-.btn-info {
+.btn-fill-info {
   background: var(--color-info);
   color: #fff;
   border-color: var(--color-info);
@@ -213,344 +564,139 @@
     border-color: var(--color-info-dark);
   }
 
-  &:active {
-    background: color-mix(in srgb, var(--color-info-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-info-dark) 85%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-info) 30%, transparent);
-  }
+  &:active { background: color-mix(in srgb, var(--color-info-dark) 85%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-info) 30%, transparent); }
 }
 
-// ============================================================================
-// 7. Extra Color Buttons — SOLID background
-// ============================================================================
-.btn-pink {
+.btn-fill-pink {
   background: var(--color-pink);
   color: #fff;
   border-color: var(--color-pink);
 
-  &:hover {
-    background: var(--color-pink-dark);
-    border-color: var(--color-pink-dark);
-  }
-
-  &:active {
-    background: color-mix(in srgb, var(--color-pink) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-pink) 75%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pink) 30%, transparent);
-  }
+  &:hover { background: var(--color-pink-dark); border-color: var(--color-pink-dark); }
+  &:active { background: color-mix(in srgb, var(--color-pink) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pink) 30%, transparent); }
 }
 
-.btn-purple {
+.btn-fill-purple {
   background: var(--color-purple);
   color: #fff;
   border-color: var(--color-purple);
 
-  &:hover {
-    background: color-mix(in srgb, var(--color-purple) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-purple) 85%, #000);
-  }
-
-  &:active {
-    background: color-mix(in srgb, var(--color-purple) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-purple) 75%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-purple) 30%, transparent);
-  }
+  &:hover { background: color-mix(in srgb, var(--color-purple) 85%, #000); border-color: color-mix(in srgb, var(--color-purple) 85%, #000); }
+  &:active { background: color-mix(in srgb, var(--color-purple) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-purple) 30%, transparent); }
 }
 
-.btn-orange {
+.btn-fill-orange {
   background: var(--color-orange);
   color: #fff;
   border-color: var(--color-orange);
 
-  &:hover {
-    background: color-mix(in srgb, var(--color-orange) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-orange) 85%, #000);
-  }
-
-  &:active {
-    background: color-mix(in srgb, var(--color-orange) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-orange) 75%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-orange) 30%, transparent);
-  }
+  &:hover { background: color-mix(in srgb, var(--color-orange) 85%, #000); border-color: color-mix(in srgb, var(--color-orange) 85%, #000); }
+  &:active { background: color-mix(in srgb, var(--color-orange) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-orange) 30%, transparent); }
 }
 
-.btn-green-dark {
+.btn-fill-green-dark {
   background: var(--color-green-dark);
   color: #fff;
   border-color: var(--color-green-dark);
 
-  &:hover {
-    background: color-mix(in srgb, var(--color-green-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-green-dark) 85%, #000);
-  }
-
-  &:active {
-    background: color-mix(in srgb, var(--color-green-dark) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-green-dark) 75%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-green-dark) 30%, transparent);
-  }
+  &:hover { background: color-mix(in srgb, var(--color-green-dark) 85%, #000); border-color: color-mix(in srgb, var(--color-green-dark) 85%, #000); }
+  &:active { background: color-mix(in srgb, var(--color-green-dark) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-green-dark) 30%, transparent); }
 }
 
-.btn-blue-dark {
+.btn-fill-blue-dark {
   background: var(--color-blue-dark);
   color: #fff;
   border-color: var(--color-blue-dark);
 
-  &:hover {
-    background: color-mix(in srgb, var(--color-blue-dark) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-blue-dark) 85%, #000);
-  }
+  &:hover { background: color-mix(in srgb, var(--color-blue-dark) 85%, #000); border-color: color-mix(in srgb, var(--color-blue-dark) 85%, #000); }
+  &:active { background: color-mix(in srgb, var(--color-blue-dark) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue-dark) 30%, transparent); }
+}
 
-  &:active {
-    background: color-mix(in srgb, var(--color-blue-dark) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-blue-dark) 75%, #000);
-  }
+.btn-fill-github {
+  background: var(--color-github); color: #fff; border-color: var(--color-github);
+  &:hover { background: #3a3f46; border-color: #3a3f46; }
+  &:active { background: #1b1f23; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-github) 30%, transparent); }
+}
 
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue-dark) 30%, transparent);
-  }
+.btn-fill-youtube {
+  background: var(--color-youtube); color: #fff; border-color: var(--color-youtube);
+  &:hover { background: #cc0000; border-color: #cc0000; }
+  &:active { background: #990000; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-youtube) 30%, transparent); }
+}
+
+.btn-fill-twitter {
+  background: var(--color-twitter); color: #fff; border-color: var(--color-twitter);
+  &:hover { background: #0d8bd9; border-color: #0d8bd9; }
+  &:active { background: #0a6fb3; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-twitter) 30%, transparent); }
+}
+
+.btn-fill-instagram {
+  background: var(--color-instagram); color: #fff; border-color: var(--color-instagram);
+  &:hover { background: color-mix(in srgb, var(--color-instagram) 85%, #000); }
+  &:active { background: color-mix(in srgb, var(--color-instagram) 75%, #000); }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-instagram) 30%, transparent); }
+}
+
+.btn-fill-facebook {
+  background: var(--color-facebook); color: #fff; border-color: var(--color-facebook);
+  &:hover { background: #1565d8; border-color: #1565d8; }
+  &:active { background: #0d4fb8; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-facebook) 30%, transparent); }
+}
+
+.btn-fill-telegram {
+  background: var(--color-telegram); color: #fff; border-color: var(--color-telegram);
+  &:hover { background: #0077b3; border-color: #0077b3; }
+  &:active { background: #005f91; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-telegram) 30%, transparent); }
+}
+
+.btn-fill-linkedin {
+  background: var(--color-linkedin); color: #fff; border-color: var(--color-linkedin);
+  &:hover { background: #0857a6; border-color: #0857a6; }
+  &:active { background: #064480; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-linkedin) 30%, transparent); }
+}
+
+.btn-fill-whatsapp {
+  background: var(--color-whatsapp); color: #fff; border-color: var(--color-whatsapp);
+  &:hover { background: #1ebe57; border-color: #1ebe57; }
+  &:active { background: #16a34a; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-whatsapp) 30%, transparent); }
+}
+
+.btn-fill-pinterest {
+  background: var(--color-pinterest); color: #fff; border-color: var(--color-pinterest);
+  &:hover { background: #a70000; border-color: #a70000; }
+  &:active { background: #800000; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pinterest) 30%, transparent); }
+}
+
+.btn-fill-snapchat {
+  background: var(--color-snapchat); color: #1a1a1a; border-color: var(--color-snapchat);
+  &:hover { background: #e6e300; border-color: #e6e300; }
+  &:active { background: #cccc00; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-snapchat) 30%, transparent); }
+}
+
+.btn-fill-tiktok {
+  background: var(--color-tiktok); color: #fff; border-color: var(--color-tiktok);
+  &:hover { background: #1a1a1a; border-color: #1a1a1a; }
+  &:active { background: #333; }
+  &:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-tiktok) 30%, transparent); }
 }
 
 // ============================================================================
-// 8. Social Brand Buttons — SOLID background
-// ============================================================================
-.btn-github {
-  background: var(--color-github);
-  color: #fff;
-  border-color: var(--color-github);
-
-  &:hover {
-    background: #3a3f46;
-    border-color: #3a3f46;
-  }
-
-  &:active {
-    background: #1b1f23;
-    border-color: #1b1f23;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-github) 30%, transparent);
-  }
-}
-
-.btn-youtube {
-  background: var(--color-youtube);
-  color: #fff;
-  border-color: var(--color-youtube);
-
-  &:hover {
-    background: #cc0000;
-    border-color: #cc0000;
-  }
-
-  &:active {
-    background: #990000;
-    border-color: #990000;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-youtube) 30%, transparent);
-  }
-}
-
-.btn-twitter {
-  background: var(--color-twitter);
-  color: #fff;
-  border-color: var(--color-twitter);
-
-  &:hover {
-    background: #0d8bd9;
-    border-color: #0d8bd9;
-  }
-
-  &:active {
-    background: #0a6fb3;
-    border-color: #0a6fb3;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-twitter) 30%, transparent);
-  }
-}
-
-.btn-instagram {
-  background: var(--color-instagram);
-  color: #fff;
-  border-color: var(--color-instagram);
-
-  &:hover {
-    background: color-mix(in srgb, var(--color-instagram) 85%, #000);
-    border-color: color-mix(in srgb, var(--color-instagram) 85%, #000);
-  }
-
-  &:active {
-    background: color-mix(in srgb, var(--color-instagram) 75%, #000);
-    border-color: color-mix(in srgb, var(--color-instagram) 75%, #000);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-instagram) 30%, transparent);
-  }
-}
-
-.btn-facebook {
-  background: var(--color-facebook);
-  color: #fff;
-  border-color: var(--color-facebook);
-
-  &:hover {
-    background: #1565d8;
-    border-color: #1565d8;
-  }
-
-  &:active {
-    background: #0d4fb8;
-    border-color: #0d4fb8;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-facebook) 30%, transparent);
-  }
-}
-
-.btn-telegram {
-  background: var(--color-telegram);
-  color: #fff;
-  border-color: var(--color-telegram);
-
-  &:hover {
-    background: #0077b3;
-    border-color: #0077b3;
-  }
-
-  &:active {
-    background: #005f91;
-    border-color: #005f91;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-telegram) 30%, transparent);
-  }
-}
-
-.btn-linkedin {
-  background: var(--color-linkedin);
-  color: #fff;
-  border-color: var(--color-linkedin);
-
-  &:hover {
-    background: #0857a6;
-    border-color: #0857a6;
-  }
-
-  &:active {
-    background: #064480;
-    border-color: #064480;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-linkedin) 30%, transparent);
-  }
-}
-
-.btn-whatsapp {
-  background: var(--color-whatsapp);
-  color: #fff;
-  border-color: var(--color-whatsapp);
-
-  &:hover {
-    background: #1ebe57;
-    border-color: #1ebe57;
-  }
-
-  &:active {
-    background: #16a34a;
-    border-color: #16a34a;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-whatsapp) 30%, transparent);
-  }
-}
-
-.btn-pinterest {
-  background: var(--color-pinterest);
-  color: #fff;
-  border-color: var(--color-pinterest);
-
-  &:hover {
-    background: #a70000;
-    border-color: #a70000;
-  }
-
-  &:active {
-    background: #800000;
-    border-color: #800000;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-pinterest) 30%, transparent);
-  }
-}
-
-.btn-snapchat {
-  background: var(--color-snapchat);
-  color: #1a1a1a;
-  border-color: var(--color-snapchat);
-
-  &:hover {
-    background: #e6e300;
-    border-color: #e6e300;
-  }
-
-  &:active {
-    background: #cccc00;
-    border-color: #cccc00;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-snapchat) 30%, transparent);
-  }
-}
-
-.btn-tiktok {
-  background: var(--color-tiktok);
-  color: #fff;
-  border-color: var(--color-tiktok);
-
-  &:hover {
-    background: #1a1a1a;
-    border-color: #1a1a1a;
-  }
-
-  &:active {
-    background: #333;
-    border-color: #333;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-tiktok) 30%, transparent);
-  }
-}
-
-// ============================================================================
-// 9. Light Variants — tinted background, colored text (subtle style)
+// 10. Light Variants — alias for soft (kept for backwards compatibility)
 // ============================================================================
 .btn-light-success {
   background: color-mix(in srgb, var(--color-success) 12%, transparent);

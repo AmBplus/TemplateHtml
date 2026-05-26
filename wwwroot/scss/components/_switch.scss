@@ -27,7 +27,8 @@
     display: inline-block;
     width: $switch-width;
     height: $switch-height;
-    background: var(--switch-bg);
+    /* use a muted track color by default, solid when checked */
+    background: var(--muted-primary, var(--switch-bg));
     border-radius: $radius-full;
     transition: background-color $transition-base, box-shadow $transition-base;
     flex-shrink: 0;
@@ -56,7 +57,7 @@
 
   // ---- Checked State ----
   .switch-input:checked ~ .switch-track {
-    background: var(--switch-checked-bg);
+    background: var(--solid-primary, var(--switch-checked-bg));
 
     .switch-thumb {
       transform: translateY(-50%) translateX(calc(-1 * (#{$switch-width} - #{$switch-thumb-size} - 6px)));
@@ -82,23 +83,23 @@
 
   // ---- Color Variants ----
   &.switch-success .switch-input:checked ~ .switch-track {
-    background: var(--color-success);
+    background: var(--solid-success, var(--color-success));
   }
 
   &.switch-danger .switch-input:checked ~ .switch-track {
-    background: var(--color-danger);
+    background: var(--solid-danger, var(--color-danger));
   }
 
   &.switch-warning .switch-input:checked ~ .switch-track {
-    background: var(--color-warning);
+    background: var(--solid-warning, var(--color-warning));
   }
 
   &.switch-info .switch-input:checked ~ .switch-track {
-    background: var(--color-info);
+    background: var(--solid-info, var(--color-info));
   }
 
   &.switch-secondary .switch-input:checked ~ .switch-track {
-    background: var(--color-secondary);
+    background: var(--solid-secondary, var(--color-secondary));
   }
 
   // ---- Size Variants ----

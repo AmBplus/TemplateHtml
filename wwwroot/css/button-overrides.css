@@ -1,0 +1,68 @@
+/* button-overrides.css — intentionally empty.
+   All button styles are now defined in _button.scss:
+   - .btn-*       = soft / muted (tinted background, colored text)
+   - .btn-fill-*  = solid / filled (full color background, white text)
+*/
+
+.btn-secondary{ background: var(--color-secondary, #6b7280); color: #fff; border:1px solid transparent }
+.btn-secondary:hover{ background: var(--color-secondary-dark, color-mix(in srgb,var(--color-secondary) 85%, black 8%)); }
+
+.btn-success{ background: var(--color-success); color: #fff; border:1px solid transparent }
+.btn-success:hover{ background: var(--color-success-dark, color-mix(in srgb,var(--color-success) 85%, black 8%)); }
+
+.btn-danger{ background: var(--color-danger); color: #fff; border:1px solid transparent }
+.btn-danger:hover{ background: var(--color-danger-dark, color-mix(in srgb,var(--color-danger) 85%, black 8%)); }
+
+.btn-warning{ background: var(--color-warning); color: #fff; border:1px solid transparent }
+.btn-warning:hover{ background: var(--color-warning-dark, color-mix(in srgb,var(--color-warning) 85%, black 8%)); }
+
+.btn-info{ background: var(--color-info); color: #fff; border:1px solid transparent }
+.btn-info:hover{ background: var(--color-info-dark, color-mix(in srgb,var(--color-info) 85%, black 8%)); }
+
+/* Make "fill" buttons use a soft (badge-like) style instead of full solid fills */
+.btn-fill-primary{background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);border:1px solid color-mix(in srgb,var(--color-primary) 20%,transparent)}
+.btn-fill-primary:hover{background:color-mix(in srgb,var(--color-primary) 18%,transparent);color:var(--color-primary)}
+
+.btn-fill-success{background:color-mix(in srgb,var(--color-success) 12%,transparent);color:var(--color-success);border:1px solid color-mix(in srgb,var(--color-success) 20%,transparent)}
+.btn-fill-success:hover{background:color-mix(in srgb,var(--color-success) 18%,transparent);color:var(--color-success)}
+
+.btn-fill-danger{background:color-mix(in srgb,var(--color-danger) 12%,transparent);color:var(--color-danger);border:1px solid color-mix(in srgb,var(--color-danger) 20%,transparent)}
+.btn-fill-danger:hover{background:color-mix(in srgb,var(--color-danger) 18%,transparent);color:var(--color-danger)}
+
+.btn-fill-warning{background:color-mix(in srgb,var(--color-warning) 12%,transparent);color:var(--color-warning);border:1px solid color-mix(in srgb,var(--color-warning) 20%,transparent)}
+.btn-fill-warning:hover{background:color-mix(in srgb,var(--color-warning) 18%,transparent);color:var(--color-warning)}
+
+.btn-fill-info{background:color-mix(in srgb,var(--color-info) 12%,transparent);color:var(--color-info);border:1px solid color-mix(in srgb,var(--color-info) 20%,transparent)}
+.btn-fill-info:hover{background:color-mix(in srgb,var(--color-info) 18%,transparent);color:var(--color-info)}
+
+.btn-fill-pink{background:color-mix(in srgb,var(--color-pink) 12%,transparent);color:var(--color-pink);border:1px solid color-mix(in srgb,var(--color-pink) 20%,transparent)}
+.btn-fill-pink:hover{background:color-mix(in srgb,var(--color-pink) 18%,transparent);color:var(--color-pink)}
+
+.btn-fill-purple{background:color-mix(in srgb,var(--color-purple) 12%,transparent);color:var(--color-purple);border:1px solid color-mix(in srgb,var(--color-purple) 20%,transparent)}
+.btn-fill-purple:hover{background:color-mix(in srgb,var(--color-purple) 18%,transparent);color:var(--color-purple)}
+
+.btn-fill-orange{background:color-mix(in srgb,var(--color-orange) 12%,transparent);color:var(--color-orange);border:1px solid color-mix(in srgb,var(--color-orange) 20%,transparent)}
+.btn-fill-orange:hover{background:color-mix(in srgb,var(--color-orange) 18%,transparent);color:var(--color-orange)}
+
+.btn-fill-green-dark{background:color-mix(in srgb,var(--color-green-dark) 12%,transparent);color:var(--color-green-dark);border:1px solid color-mix(in srgb,var(--color-green-dark) 20%,transparent)}
+.btn-fill-green-dark:hover{background:color-mix(in srgb,var(--color-green-dark) 18%,transparent);color:var(--color-green-dark)}
+
+.btn-fill-blue-dark{background:color-mix(in srgb,var(--color-blue-dark) 12%,transparent);color:var(--color-blue-dark);border:1px solid color-mix(in srgb,var(--color-blue-dark) 20%,transparent)}
+.btn-fill-blue-dark:hover{background:color-mix(in srgb,var(--color-blue-dark) 18%,transparent);color:var(--color-blue-dark)}
+
+/* Social / brand fills (soft variants) */
+.btn-fill-telegram{background:color-mix(in srgb,var(--color-telegram) 12%,transparent);color:var(--color-telegram);border:1px solid color-mix(in srgb,var(--color-telegram) 20%,transparent)}
+.btn-fill-telegram:hover{background:color-mix(in srgb,var(--color-telegram) 18%,transparent)}
+.btn-fill-instagram{background:color-mix(in srgb,var(--color-instagram) 12%,transparent);color:var(--color-instagram);border:1px solid color-mix(in srgb,var(--color-instagram) 20%,transparent)}
+.btn-fill-instagram:hover{background:color-mix(in srgb,var(--color-instagram) 18%,transparent)}
+.btn-fill-whatsapp{background:color-mix(in srgb,var(--color-whatsapp) 12%,transparent);color:var(--color-whatsapp);border:1px solid color-mix(in srgb,var(--color-whatsapp) 20%,transparent)}
+.btn-fill-whatsapp:hover{background:color-mix(in srgb,var(--color-whatsapp) 18%,transparent)}
+.btn-fill-linkedin{background:color-mix(in srgb,var(--color-linkedin) 12%,transparent);color:var(--color-linkedin);border:1px solid color-mix(in srgb,var(--color-linkedin) 20%,transparent)}
+.btn-fill-linkedin:hover{background:color-mix(in srgb,var(--color-linkedin) 18%,transparent)}
+.btn-fill-github{background:color-mix(in srgb,var(--color-github) 12%,transparent);color:var(--color-github);border:1px solid color-mix(in srgb,var(--color-github) 20%,transparent)}
+.btn-fill-github:hover{background:color-mix(in srgb,var(--color-github) 18%,transparent)}
+.btn-fill-facebook{background:color-mix(in srgb,var(--color-facebook) 12%,transparent);color:var(--color-facebook);border:1px solid color-mix(in srgb,var(--color-facebook) 20%,transparent)}
+.btn-fill-facebook:hover{background:color-mix(in srgb,var(--color-facebook) 18%,transparent)}
+
+/* Keep disabled state clear */
+.btn-fill-primary:disabled, .btn-fill-success:disabled, .btn-fill-danger:disabled {opacity:.5;cursor:not-allowed}
