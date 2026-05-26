@@ -92,9 +92,9 @@ $switch-width: 2.75rem;
 $switch-height: 1.5rem;
 $switch-thumb-size: 1.125rem;
 
-$menu-min-width: 12rem;
-$menu-item-padding-y: 0.5rem;
-$menu-item-padding-x: 0.75rem;
+$menu-min-width: 8.75rem; // 140px - compact dropdown/menu min width
+$menu-item-padding-y: 0.375rem; // compact dropdown/menu items
+$menu-item-padding-x: 0.5rem;
 
 $select-padding-y: 0.5rem;
 $select-padding-x: 0.75rem;

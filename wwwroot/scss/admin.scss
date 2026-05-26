@@ -12,11 +12,7 @@
 @import 'base/reset';
 @import 'base/typography';
 
-// 3. Themes (default first, then theme overrides)
-@import 'themes/default';
-@import 'themes/moon';
-@import 'themes/royal';
-@import 'themes/nature';
+// 3. Themes are compiled separately as overrides (see admin-themes.scss)
 
 // 4. Components
 @import 'components/button';

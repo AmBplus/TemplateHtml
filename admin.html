@@ -12,7 +12,6 @@
 
   <!-- Admin Panel Styles -->
   <link rel="stylesheet" href="/wwwroot/css/output.css" />
-  <link rel="stylesheet" href="/wwwroot/css/button-overrides.css" />
 
   <style>
     /* ===== Admin-specific layout & theme switcher ===== */
@@ -832,6 +831,8 @@
 // ===== Theme Management =====
 var THEME_NAMES = {
   'default': 'آبی سازمانی (روشن)',
+  'default-light': 'آبی سازمانی (روشن)',
+  'default-dark': 'آبی سازمانی (تاریک)',
   'moon': 'ماه (تاریک)',
   'moon-light': 'ماه (روشن)',
   'royal': 'سلطنتی (تاریک)',
@@ -921,11 +922,31 @@ function setThemeByName(theme) {
 // Toggle dark mode between 'default' and 'moon'
 function toggleDarkMode() {
   var current = document.documentElement.getAttribute('data-theme') || 'default';
-  var darkModes = ['moon', 'royal'];
-  var isDark = darkModes.indexOf(current) !== -1;
-  var target = isDark ? 'default' : 'moon';
+  var base = current.split('-')[0];
+  var darkDefault = new Set(['moon', 'royal']);
+
+  var isDark;
+  if (current.endsWith('-light')) isDark = false;
+  else if (current.endsWith('-dark')) isDark = true;
+  else isDark = darkDefault.has(base);
+
+  var darkCandidate = base + '-dark';
+  var lightCandidate = (base === 'default') ? 'default' : base + '-light';
+
+  var target;
+  if (isDark) {
+    // switch to light variant (prefer explicit light key, fall back to base)
+    if (THEME_NAMES[lightCandidate]) target = lightCandidate;
+    else if (THEME_NAMES[base]) target = base;
+    else target = base; // fallback
+  } else {
+    // switch to dark variant (prefer explicit dark key, else if base itself is a dark-default use base)
+    if (THEME_NAMES[darkCandidate]) target = darkCandidate;
+    else if (darkDefault.has(base)) target = base;
+    else target = darkCandidate; // fallback
+  }
+
   setTheme(target, null);
-  // Update toggle icon/state
   updateDarkToggle();
 }
 
@@ -933,8 +954,14 @@ function updateDarkToggle() {
   var btn = document.getElementById('darkToggle');
   if (!btn) return;
   var current = document.documentElement.getAttribute('data-theme') || 'default';
-  var darkModes = ['moon', 'royal'];
-  var isDark = darkModes.indexOf(current) !== -1;
+  var base = current.split('-')[0];
+  var darkDefault = new Set(['moon', 'royal']);
+
+  var isDark;
+  if (current.endsWith('-light')) isDark = false;
+  else if (current.endsWith('-dark')) isDark = true;
+  else isDark = darkDefault.has(base);
+
   btn.textContent = isDark ? '☀️' : '🌙';
   if (isDark) btn.classList.add('active'); else btn.classList.remove('active');
 }

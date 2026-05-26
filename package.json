@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run watch:css",
     "build": "npm run build:css",
-    "build:css": "sass --style=compressed ./wwwroot/scss/admin.scss ./wwwroot/css/output-compiled.css --no-source-map && npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --minify && node -e \"const fs=require('fs');fs.appendFileSync('wwwroot/css/output.css', fs.readFileSync('wwwroot/css/output-compiled.css'));fs.unlinkSync('wwwroot/css/output-compiled.css');\"",
+    "build:css": "sass --style=compressed ./wwwroot/scss/admin.scss ./wwwroot/css/output-compiled.css --no-source-map && sass --style=compressed ./wwwroot/scss/themes/default.scss ./wwwroot/css/themes-default.css --no-source-map && sass --style=compressed ./wwwroot/scss/themes/moon.scss ./wwwroot/css/themes-moon.css --no-source-map && sass --style=compressed ./wwwroot/scss/themes/royal.scss ./wwwroot/css/themes-royal.css --no-source-map && sass --style=compressed ./wwwroot/scss/themes/nature.scss ./wwwroot/css/themes-nature.css --no-source-map && npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --minify && node -e \"const fs=require('fs');fs.appendFileSync('wwwroot/css/output.css', fs.readFileSync('wwwroot/css/output-compiled.css'));fs.appendFileSync('wwwroot/css/output.css', fs.readFileSync('wwwroot/css/themes-default.css'));fs.appendFileSync('wwwroot/css/output.css', fs.readFileSync('wwwroot/css/button-overrides.css'));fs.unlinkSync('wwwroot/css/output-compiled.css');\"",
     "watch:css": "npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

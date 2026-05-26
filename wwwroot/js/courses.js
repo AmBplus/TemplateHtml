@@ -41,10 +41,18 @@ $(function () {
         {
           targets: -1,
           render: (data, type, full) => `
-            <div class="flex gap-1">
+            <div class="flex gap-1 items-center">
               <button onclick="enterClass(${full.id}, '${full.name}')" class="btn btn-outline btn-sm">ورود به کلاس</button>
               <button onclick="viewExams(${full.id}, '${full.name}')" class="btn btn-primary btn-sm">آزمون‌ها</button>
-                <button onclick="viewExams(${full.id}, '${full.name}')" class="btn btn-outline btn-sm">لیست‌ جلسات</button>
+              <div class="dropdown dropdown-open-r" data-trigger="both" style="display:inline-block;">
+                <button class="btn btn-outline btn-sm dropdown-trigger">بیشتر ▾</button>
+                <div class="dropdown-menu">
+                  <a href="#" class="dropdown-item">جزئیات</a>
+                  <a href="#" class="dropdown-item">لیست جلسات</a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#" class="dropdown-item item-danger">حذف</a>
+                </div>
+              </div>
             </div>`
         }
       ],
@@ -76,6 +84,8 @@ $(function () {
         $('.paginate_button.disabled').attr('class', 'px-3 py-1 rounded border border-gray-200 mx-0.5 opacity-50 cursor-not-allowed');
         $('.paginate_button.previous').text('قبلی');
         $('.paginate_button.next').text('بعدی');
+        // Initialize any dropdowns created inside the table rows
+        if (window.dropdownInit) window.dropdownInit();
       }
     });
   }

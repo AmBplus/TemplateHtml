@@ -133,7 +133,7 @@
   --shadow-color-strong: rgba(0, 0, 0, 0.15);
 
   // ---- Font ----
-  --font-primary: 'Vazirmatn', 'Vazirmatn-FD-NL-font-face', 'Tahoma', 'Arial', sans-serif;
+  --font-primary: 'Vazirmatn FD', 'Vazirmatn', 'Estedad-FD', Tahoma, Arial, sans-serif;
 
   // ---- Component-specific Variables ----
 
@@ -185,6 +185,96 @@
   --select-item-active-bg: color-mix(in srgb, var(--color-primary) 8%, transparent);
 
   // Overlay
+  --overlay-light: rgba(255, 255, 255, 0.8);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+}
+
+/* Dark variant for Default theme */
+[data-theme="default-dark"] {
+  --color-warning: #c09447;
+  --bg-primary: #1e293b;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #475569;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --color-danger: #c90707;
+  --color-info-bg: #082f49;
+  --color-primary: #3b82f6;
+  --color-info-border: #0369a1;
+  --color-danger-bg: #b60c0c;
+  --color-danger-border: #991b1b;
+  --color-success-bg: #064e3b;
+  --color-warning-bg: #451a03;
+  --color-error-bg: #7f1d1d;
+  --color-help-bg: #2e1065;
+  --color-pink-bg: #831843;
+  --color-indigo-bg: #312e81;
+  --color-cyan-bg: #164e63;
+  --color-rose-bg: #881337;
+  --color-lime-bg: #365314;
+  --color-info-dark: #38bdf8;
+  --color-info-darker: #7dd3fc;
+  --color-danger-dark: #f87171;
+  --color-danger-darker: #fca5a5;
+  --color-success-dark: #34d399;
+  --color-warning-dark: #fbbf24;
+  --color-error-dark: #f87171;
+  --color-help-dark: #a78bfa;
+  --color-pink-dark: #f472b6;
+  --color-indigo-dark: #818cf8;
+  --color-cyan-dark: #22d3ee;
+  --color-rose-dark: #fb7185;
+  --color-lime-dark: #a3e635;
+  --color-disabled: #64748b;
+  --color-disabled-bg: #334155;
+  --overlay-light: rgba(0, 0, 0, 0.5);
+  --overlay-dark: rgba(0, 0, 0, 0.8);
+  --btn-primary-bg: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --btn-primary-color: #93c5fd;
+  --btn-primary-hover-bg: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  --btn-primary-hover-color: #bfdbfe;
+  --btn-primary-active-bg: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  --btn-outline-color: #93c5fd;
+  --btn-outline-hover-bg: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --btn-outline-hover-color: #bfdbfe;
+  --btn-outline-active-bg: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  --btn-secondary-bg: color-mix(in srgb, var(--color-gray-400) 10%, transparent);
+  --btn-secondary-hover-bg: color-mix(in srgb, var(--color-gray-400) 16%, transparent);
+}
+
+/* Light alias for Default theme (explicit) */
+[data-theme="default-light"] {
+  /* mirror the :root / default light values */
+  --color-primary: #3964f3;
+  --color-primary-light: #1969eb;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-lighter: #DBEAFE;
+  --color-secondary: #0f766e;
+  --color-secondary-light: #14B8A6;
+  --color-secondary-dark: #0f766e;
+  --color-secondary-lighter: #CCFBF1;
+  --color-accent: #da8b03;
+  --color-accent-light: #fbbf24;
+  --color-accent-dark: #d97706;
+  --color-accent-lighter: #FEF3C7;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #F1F5F9;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
+  --font-primary: 'Vazirmatn FD', 'Vazirmatn', 'Estedad-FD', Tahoma, Arial, sans-serif;
+  --btn-primary-bg: #eef3fa;
+  --btn-primary-color: #185ee0;
+  --btn-primary-hover-bg: #dbe9ff;
+  --btn-primary-active-bg: #dbe4f1;
+  --btn-primary-border: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --input-bg: #FFFFFF;
+  --input-border: var(--border-color);
+  --input-focus-border: var(--color-primary);
+  --input-focus-ring: color-mix(in srgb, var(--color-primary) 15%, transparent);
   --overlay-light: rgba(255, 255, 255, 0.8);
   --overlay-dark: rgba(0, 0, 0, 0.5);
 }

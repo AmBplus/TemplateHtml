@@ -24,6 +24,12 @@
     text-align: right;
   }
 
+  // For vertical menus we want the hover to affect the item background
+  .menu-item:hover {
+    background: var(--menu-item-hover-bg);
+    color: var(--color-primary);
+  }
+
   @include custom-scrollbar;
 }
 
@@ -45,7 +51,9 @@
   font-family: var(--font-primary);
 
   &:hover {
-    background: var(--menu-item-hover-bg);
+    /* Base hover: only change text color. Background for vertical menus
+       is applied by the parent `.menu` so we avoid double/background
+       collisions when buttons also provide hover backgrounds. */
     color: var(--color-primary);
   }
 
@@ -182,6 +190,17 @@
       visibility: visible;
       transform: translateY(0);
     }
+  }
+
+  // Compact submenu item rules: override utility classes that add large
+  // padding (e.g., `px-4 py-2.5`) to make dropdown options denser.
+  .dropdown-menu a,
+  .dropdown-menu button,
+  .submenu > div > a,
+  .submenu > div > button {
+    padding: $menu-item-padding-y $menu-item-padding-x;
+    gap: $spacing-2;
+    font-size: $text-sm;
   }
 
   // Alignments

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Theme Demo — نمایش تنظیمات تم</title>
+  <link rel="stylesheet" href="./wwwroot/css/output.css">
+  <style>
+    body { padding: 2rem; font-family: var(--font-primary); background: var(--bg-secondary); }
+    .swatches { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem }
+    .swatch { width:10rem; padding:0.75rem; border-radius:0.5rem; border:1px solid var(--border-color); }
+    .controls { display:flex; gap:0.5rem; align-items:center }
+    .sample { margin-top:1.25rem }
+    .kbd { background:#fff; padding:0.125rem 0.5rem; border-radius:0.25rem; border:1px solid var(--border-color); }
+  </style>
+</head>
+<body data-theme="default">
+  <h1>نمایش تنظیمات تم</h1>
+  <p>این صفحه مستقلِ نمایشی است — تغییری در قالب اصلی اعمال نمی‌شود.</p>
+
+  <div class="controls">
+    <label class="kbd">تم:</label>
+    <button data-theme-name="default" class="theme-btn">Default</button>
+    <button data-theme-name="moon" class="theme-btn">Moon</button>
+    <button data-theme-name="royal" class="theme-btn">Royal</button>
+    <button data-theme-name="nature" class="theme-btn">Nature</button>
+    <button id="show-vars" class="theme-btn">نمایش متغیرها</button>
+  </div>
+
+  <div class="sample">
+    <h2>نمونهٔ اجزاء</h2>
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-success">Success</button>
+      <a class="admin-nav-item" href="#">نمونه لینک ناوبری</a>
+    </div>
+  </div>
+
+  <div class="swatches">
+    <div class="swatch" id="swatch-primary">Primary</div>
+    <div class="swatch" id="swatch-bg">Background</div>
+    <div class="swatch" id="swatch-text">Text</div>
+    <div class="swatch" id="swatch-border">Border</div>
+  </div>
+
+  <pre id="vars" style="display:none; margin-top:1rem; background:var(--bg-primary); padding:1rem; border-radius:0.5rem; border:1px solid var(--border-color);"></pre>
+
+  <script>
+    function setTheme(name){
+      document.documentElement.setAttribute('data-theme', name);
+      updateSwatches();
+    }
+    function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    function updateSwatches(){
+      document.getElementById('swatch-primary').style.background = cssVar('--color-primary');
+      document.getElementById('swatch-primary').style.color = cssVar('--text-inverse') || '#fff';
+      document.getElementById('swatch-bg').style.background = cssVar('--bg-primary');
+      document.getElementById('swatch-text').style.background = cssVar('--text-primary');
+      document.getElementById('swatch-border').style.background = cssVar('--border-color');
+    }
+    document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click', e=> setTheme(e.currentTarget.dataset.themeName)));
+    document.getElementById('show-vars').addEventListener('click', ()=>{
+      const kv = [
+        '--color-primary','--bg-primary','--bg-secondary','--text-primary','--font-primary','--border-color'
+      ].map(k=> `${k}: ${cssVar(k)}` ).join('\n');
+      const el = document.getElementById('vars'); el.textContent = kv; el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    });
+    updateSwatches();
+  </script>
+</body>
+</html>

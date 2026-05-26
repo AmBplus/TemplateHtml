@@ -18,10 +18,11 @@
   justify-content: center;
   gap: $spacing-2;
   padding: $btn-padding-y $btn-padding-x;
-  font-family: var(--font-primary);
+  font-family: inherit;
+  font-feature-settings: inherit;
   font-size: $text-sm;
-  font-weight: $font-medium;
-  line-height: $leading-normal;
+    font-family: inherit;
+    font-feature-settings: inherit;
   border-radius: $radius-md;
   border: 1px solid var(--border-color);
   background: var(--bg-primary);

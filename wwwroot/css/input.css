@@ -112,7 +112,7 @@
   --overlay-dark: rgba(0, 0, 0, 0.6);
   
   /* Font */
-  --font-primary: 'Vazirmatn', 'Vazirmatn-FD-NL-font-face', 'Tahoma', 'Arial', sans-serif;
+  --font-primary: 'Vazirmatn FD', 'Vazirmatn', 'Estedad-FD', Tahoma, Arial, sans-serif;
   
   /* Light Mode Theme */
   --bg-primary: #ffffff;
