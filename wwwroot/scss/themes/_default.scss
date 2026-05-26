@@ -199,12 +199,13 @@
   --text-secondary: #cbd5e1;
   --border-color: #475569;
   --shadow: rgba(0, 0, 0, 0.3);
-  --color-danger: #c90707;
+  --color-danger: #dc2626;
   --color-info-bg: #082f49;
   --color-primary: #3b82f6;
   --color-info-border: #0369a1;
-  --color-danger-bg: #b60c0c;
+  --color-danger-bg: color-mix(in srgb, var(--color-danger) 14%, transparent);
   --color-danger-border: #991b1b;
+  --badge-danger-text: #ffffff;
   --color-success-bg: #064e3b;
   --color-warning-bg: #451a03;
   --color-error-bg: #7f1d1d;
