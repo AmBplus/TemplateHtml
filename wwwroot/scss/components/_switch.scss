@@ -27,10 +27,10 @@
     display: inline-block;
     width: $switch-width;
     height: $switch-height;
-    /* use a muted track color by default, solid when checked */
-    background: var(--muted-primary, var(--switch-bg));
+    background: var(--switch-bg);
+    border: 1px solid transparent;
     border-radius: $radius-full;
-    transition: background-color $transition-base, box-shadow $transition-base;
+    transition: background-color $transition-base, border-color $transition-base, box-shadow $transition-base;
     flex-shrink: 0;
   }
 
@@ -55,11 +55,13 @@
     transition: color $transition-theme;
   }
 
-  // ---- Checked State ----
+  // ---- Checked State (soft default) ----
   .switch-input:checked ~ .switch-track {
-    background: var(--solid-primary, var(--switch-checked-bg));
+    background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
 
     .switch-thumb {
+      background: var(--color-primary);
       transform: translateY(-50%) translateX(calc(-1 * (#{$switch-width} - #{$switch-thumb-size} - 6px)));
     }
   }
@@ -81,25 +83,66 @@
     cursor: not-allowed;
   }
 
-  // ---- Color Variants ----
+  // ---- Soft Color Variants (default) ----
   &.switch-success .switch-input:checked ~ .switch-track {
-    background: var(--solid-success, var(--color-success));
+    background: color-mix(in srgb, var(--color-success) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
+    .switch-thumb { background: var(--color-success); }
   }
 
   &.switch-danger .switch-input:checked ~ .switch-track {
-    background: var(--solid-danger, var(--color-danger));
+    background: color-mix(in srgb, var(--color-danger) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-danger) 40%, transparent);
+    .switch-thumb { background: var(--color-danger); }
   }
 
   &.switch-warning .switch-input:checked ~ .switch-track {
-    background: var(--solid-warning, var(--color-warning));
+    background: color-mix(in srgb, var(--color-warning) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-warning) 40%, transparent);
+    .switch-thumb { background: var(--color-warning); }
   }
 
   &.switch-info .switch-input:checked ~ .switch-track {
-    background: var(--solid-info, var(--color-info));
+    background: color-mix(in srgb, var(--color-info) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-info) 40%, transparent);
+    .switch-thumb { background: var(--color-info); }
   }
 
   &.switch-secondary .switch-input:checked ~ .switch-track {
-    background: var(--solid-secondary, var(--color-secondary));
+    background: color-mix(in srgb, var(--color-secondary) 18%, transparent);
+    border-color: color-mix(in srgb, var(--color-secondary) 40%, transparent);
+    .switch-thumb { background: var(--color-secondary); }
+  }
+
+  // ---- Solid Variants ----
+  &.switch-solid .switch-input:checked ~ .switch-track {
+    background: var(--color-primary);
+    border-color: transparent;
+    .switch-thumb { background: #fff; }
+  }
+
+  &.switch-solid-success .switch-input:checked ~ .switch-track {
+    background: var(--color-success);
+    border-color: transparent;
+    .switch-thumb { background: #fff; }
+  }
+
+  &.switch-solid-danger .switch-input:checked ~ .switch-track {
+    background: var(--color-danger);
+    border-color: transparent;
+    .switch-thumb { background: #fff; }
+  }
+
+  &.switch-solid-warning .switch-input:checked ~ .switch-track {
+    background: var(--color-warning);
+    border-color: transparent;
+    .switch-thumb { background: #fff; }
+  }
+
+  &.switch-solid-info .switch-input:checked ~ .switch-track {
+    background: var(--color-info);
+    border-color: transparent;
+    .switch-thumb { background: #fff; }
   }
 
   // ---- Size Variants ----
