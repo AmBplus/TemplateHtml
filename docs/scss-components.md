@@ -122,3 +122,51 @@
 - برای لیست کامل متغیرها و مقادیر پیش‌فرض به `wwwroot/scss/config/_variables.scss` مراجعه کنید.
 
 اگر مایل باشی من این فایل را به صورت یک جدول دقیق‌تر (کلاس | شرح | متغیرها | مثال) تبدیل کنم یا نمونه HTML کامل برای هر کامپوننت اضافه کنم، اعلام کن تا انجام دهم.
+
+---
+
+**Tailwind & build notes**
+
+- **نسخه توصیه‌شده Tailwind:** Tailwind CSS v3.x — پیشنهاد می‌شود از `v3.4+` استفاده کنید. این کامپوننت‌ها از قابلیت‌هایی مانند مقدار دلخواه (arbitrary values) و کلاس‌های `text-[var(...)]` استفاده می‌کنند که در Tailwind v3 پشتیبانی می‌شود.
+- **ترتیب بیلد پیشنهادی:**
+  1. کامپایل SCSS -> CSS با Dart Sass (`sass`).
+  2. اجرای PostCSS + Tailwind برای اعمال utilityها و پاک‌سازی کلاس‌های استفاده‌نشده.
+  3. مینیمایز/بهینه‌سازی خروجی و قرار دادن در `wwwroot/css/`.
+
+نمونه `tailwind.config.js` (مقداری و قابل گسترش):
+```js
+module.exports = {
+  content: [
+    './**/*.html',
+    './wwwroot/js/**/*.js',
+    './wwwroot/scss/**/*.scss'
+  ],
+  darkMode: 'class',
+  theme: { extend: {} },
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
+}
+```
+
+نمونه اسکریپت‌های `package.json` برای خط بیلد CSS:
+```json
+{
+  "scripts": {
+    "build:sass": "sass wwwroot/scss/admin.scss:wwwroot/css/admin.css --no-source-map",
+    "build:postcss": "postcss wwwroot/css/admin.css -o wwwroot/css/admin.css",
+    "build:css": "npm run build:sass && npm run build:postcss"
+  }
+}
+```
+
+نکات عملی:
+- متغیرهای SCSS (مثل `--btn-primary-bg`, `--badge-primary`) در partialها استفاده می‌شوند؛ overrideهای تم را در `wwwroot/scss/themes/` قرار دهید.
+- برای آیکون‌های SVG از `fill-current` استفاده کنید تا رنگ آنها از رنگ متن/بدج به ارث برسد (نمونه در `student-exams.html`).
+- ترتیب بیلد: ابتدا SCSS کامپایل شود سپس PostCSS/Tailwind اجرا شود تا PostCSS سعی نکند SCSS خام را پارس کند.
+- اگر کلاس‌هایی به صورت داینامیک در JS تولید می‌کنید، آنها را در `safelist` در `tailwind.config.js` قرار دهید یا به صورت string مستقیم در قالب‌ها بنویسید تا Purge آن‌ها را حذف نکند.
+
+نمونه‌های سریع استفاده:
+- Badge: `<span class="badge badge-success">موفقیت</span>`
+- Button (کوچک): `<button class="btn btn-success btn-sm">شرکت</button>`
+- Link: `<a class="link link-info" href="#">مشاهده</a>`
+
+می‌خواهی من همین حالا این تغییر را کامیت و پوش کنم؟
